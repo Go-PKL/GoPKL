@@ -10,10 +10,10 @@ class Perusahaan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama', 'jurusan_id', 'alamat', 'gambar'];
+    protected $fillable = ['user_id','nama', 'jurusan', 'alamat', 'image'];
 
-    public function jurusan()
+    public function user()
     {
-        return $this->belongsTo(Jurusan::class, 'jurusan_id', 'id');
+        return $this->belongsTo(User::class);
     }
 }

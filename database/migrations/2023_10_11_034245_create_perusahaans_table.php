@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('perusahaans', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('nama');
-            $table->unsignedBigInteger('jurusan_id');
-            $table->foreign('jurusan_id')->references('id')->on('jurusans');
+            $table->string('jurusan');
             $table->string('alamat');
             $table->string('image');
             $table->timestamps();

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
 use App\Models\Perusahaan;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PerusahaanController extends Controller
 {
@@ -15,8 +17,9 @@ class PerusahaanController extends Controller
      */
     public function index()
     {
+        $users = User::all();
         $perusahaans = Perusahaan::all();
-        return view('pages.perusahaan.index', compact('perusahaans'));
+        return view('pages.perusahaan.index', compact('users','perusahaans'));
     }
 
     /**
@@ -26,8 +29,7 @@ class PerusahaanController extends Controller
      */
     public function create()
     {
-        $jurusans = Jurusan::all();
-        return view('pages.perusahaan.create', compact('jurusans'));
+        return view('pages.perusahaan.create');
     }
 
     /**
@@ -39,24 +41,25 @@ class PerusahaanController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama' => 'required',
-            'jurusan_id' => 'required',
-            'alamat' => 'required',
-            'image' => 'image|file|',
+            'nama' => 'required|string|max:255',
+            'jurusan' => 'required',
+            'alamat' => 'required|string',
+            'image' => 'image|file',
         ]);
-
+    
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('image-post');
         }
-        // Perusahaan::create([
-        //     'nama' => $validatedData['nama'],
-        //     'jurusan_id' => $validatedData['jurusan'],
-        //     'alamat' => $validatedData['alamat'],
-        //     'gambar' => $validatedData['gambar'],
-        // ]);
-        Perusahaan::create($validatedData);
-        dd($validatedData);
-        return redirect()->to('/dashboard/siswa')->with('success', 'Data anda berhasil disimpan.');
+
+        Perusahaan::create([
+            'nama' => $validatedData['nama'],
+            'jurusan' => implode(', ', $request->jurusan),
+            'alamat' => $validatedData['alamat'],
+            'image' => $validatedData['image'],
+            'user_id' => Auth::user()->id,
+        ]);
+    
+        return redirect()->to('siswa/dashboard')->with('success', 'Data anda berhasil disimpan.');
     }
 
     /**

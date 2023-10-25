@@ -11,13 +11,8 @@ class Jurusan extends Model
     
     protected $fillable = ['nama'];
 
-    public function siswas()
+    public function siswa()
     {
         return $this->hasMany(Siswa::class);
-    }
-
-    public function perusahaans()
-    {
-        return $this->hasMany(Perusahaan::class);
     }
 }
