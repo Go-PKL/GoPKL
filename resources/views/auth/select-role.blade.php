@@ -1,28 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>select role</title>
-    @vite('resources/css/app.css')
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,500;6..12,600;6..12,700;6..12,800;6..12,900;6..12,1000&display=swap"
-        rel="stylesheet">
-    <style>
-        * {
-            font-family: 'Nunito Sans', sans-serif;
-        }
-    </style>
-
-</head>
-
-<body>
+<title>Select Role</title>
+@extends('layouts.template')
+@section('content')
+{{-- @dd(Auth::user()) --}}
     <section class="flex items-center justify-center min-h-screen">
-        <div class="flex flex-col items-center max-w-3xl bg-white shadow-lg md:bg-slate-200 md:flex md:flex-row rounded-2xl">
+        <div class="flex flex-col items-center max-w-3xl bg-white shadow-2xl md:flex md:flex-row rounded-2xl">
             <div class="flex flex-col p-4 md:hidden">
                 <img class="h-56 w-52 rounded-2xl" src="/assets/images/background.jpg">
             </div>
@@ -45,6 +26,4 @@
             </div>
         </div>
     </section>
-</body>
-
-</html>
+@endsection

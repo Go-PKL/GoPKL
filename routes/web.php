@@ -4,10 +4,7 @@ use App\Http\Controllers\GuruController;
 use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiswaController;
-use App\Http\Controllers\AdminController;
-use App\Models\Guru;
 use Illuminate\Support\Facades\Route;
-use PHPUnit\TextUI\XmlConfiguration\Group;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,10 +25,6 @@ Route::get('/select-role', function () {
     return view('auth.select-role');
 });
 
-// Route::get('/test', function () {
-//     return view('layouts.backend.main');
-// });
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -43,68 +36,62 @@ require __DIR__ . '/auth.php';
 
 
 // siswa
-// Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
-// Route::get('/siswa/create', [SiswaController::class, 'create'])->name('siswa.create');
-// Route::get('/siswa/{id}/show', [SiswaController::class, 'show'])->name('siswa.show');
-// Route::get('/siswa/{id}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
-// Route::patch('/siswa/{id}', [SiswaController::class, 'update'])->name('siswa.update');
-// Route::post('/siswa/store', [SiswaController::class, 'store'])->name('siswa.store');
-// Route::delete('/siswa/destroy/{id}', [SiswaController::class, 'destroy'])->name('siswa.destroy');
-
-// metode group routes
-Route::controller(SiswaController::class)->group(function () {
-    Route::get('/siswa', 'index')->name('siswa.index');
-    Route::get('/siswa/create', 'create')->name('siswa.create');
-    Route::get('/siswa/{id}/show', 'show')->name('siswa.show');
-    Route::get('/siswa/{id}/edit', 'edit')->name('siswa.edit');
-    Route::patch('/siswa/{id}', 'update')->name('siswa.update');
-    Route::post('/siswa/store', 'store')->name('siswa.store');
-    Route::patch('/siswa/destroy', 'destroy')->name('siswa.destroy');
-});
-
-Route::get('/dashboard/siswa', function () {
+Route::get('/siswa/dashboard', function () {
     return view('pages.siswa.dashboard-siswa');
-})->middleware(['auth', 'verified'])->name('dashboard-siswa');
+})->middleware(['auth', 'verified'])->name('siswa.dashboard');
 
-Route::get('/persyaratan-pkl', function () {
+Route::get('siswa/persyaratan-pkl', function () {
     return view('pages.siswa.persyaratan-pkl');
-})->middleware(['auth', 'verified'])->name('persyaratan-pkl');
+})->middleware(['auth', 'verified'])->name('siswa.persyaratan-pkl');
+
+Route::get('/siswa/pendaftaran-pkl', [SiswaController::class, 'index'])->name('siswa.index');
+Route::get('/siswa/create', [SiswaController::class, 'create'])->name('siswa.create');
+Route::get('/siswa/{id}/show', [SiswaController::class, 'show'])->name('siswa.show');
+Route::get('/siswa/{id}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
+Route::patch('/siswa/{id}', [SiswaController::class, 'update'])->name('siswa.update');
+Route::post('/siswa/store', [SiswaController::class, 'store'])->name('siswa.store');
+Route::delete('/siswa/destroy/{id}', [SiswaController::class, 'destroy'])->name('siswa.destroy');
+
 
 //guru
-Route::resource('guru', GuruController::class);
+Route::get('/guru/dashboard', function () {
+    return view('pages.guru.dashboard-guru');
+})->middleware(['auth', 'verified'])->name('guru.dashboard');
+
+Route::get('guru/persyaratan-pkl', function () {
+    return view('pages.guru.persyaratan-pkl');
+})->middleware(['auth', 'verified'])->name('guru.persyaratan-pkl');
+
+Route::get('guru/hasil-pendaftaran', function () {
+    return view('pages.guru.hasil-pendaftaran');
+})->middleware(['auth', 'verified'])->name('guru.hasil-pendaftaran');
+
+Route::get('/guru/pendaftaran-pkl', [GuruController::class, 'index'])->name('guru.index');
+Route::get('/guru/create', [GuruController::class, 'create'])->name('guru.create');
+Route::get('/guru/{id}/show', [GuruController::class, 'show'])->name('guru.show');
+Route::get('/guru/{id}/edit', [GuruController::class, 'edit'])->name('guru.edit');
+Route::patch('/guru/{id}', [GuruController::class, 'update'])->name('guru.update');
+Route::post('/guru/store', [GuruController::class, 'store'])->name('guru.store');
+Route::delete('/guru/destroy/{id}', [GuruController::class, 'destroy'])->name('guru.destroy');
+
 
 //perusahaan
-Route::resource('perusahaan', PerusahaanController::class);
+Route::get('/perusahaan/dashboard', function () {
+    return view('pages.perusahaan.dashboard-perusahaan');
+})->middleware(['auth', 'verified'])->name('perusahaan.dashboard');
 
-//admin
+Route::get('perusahaan/persyaratan-pkl', function () {
+    return view('pages.perusahaan.persyaratan-pkl');
+})->middleware(['auth', 'verified'])->name('perusahaan.persyaratan-pkl');
 
-Route::controller(AdminController::class)->group(function () {
-    Route::get('/VerifSiswa', 'index')->name('VerifSiswa');
-    Route::get('/VerifGuru', 'index_VerifGuru')->name('VerifGuru');
-    Route::get('/VerifPerusahaan', 'index_VerifPerusahaan')->name('VerifPerusahaan');
-    Route::get('/siswa', 'index_siswa')->name('siswa');
-    Route::get('/guru', 'index_guru')->name('guru');
-    Route::get('/perusahaan', 'index_perusahaan')->name('perusahaan');
-});
+Route::get('perusahaan/hasil-pendaftaran', function () {
+    return view('pages.perusahaan.hasil-pendaftaran');
+})->middleware(['auth', 'verified'])->name('perusahaan.hasil-pendaftaran');
 
-// Route::get('/VerifSiswa', [AdminController::class, 'index'])->name('VerifSiswa');
-
-// Route::get('/VerifGuru', function () {
-//     return view('pages.admin.VerifGuru');
-// })->middleware(['auth', 'verified'])->name('VerifGuru');
-
-// Route::get('/VerifPerusahaan', function () {
-//     return view('pages.admin.VerifPerusahaan');
-// })->middleware(['auth', 'verified'])->name('VerifPerusahaan');
-
-// Route::get('/siswa', function () {
-//     return view('pages.admin.siswa');
-// })->middleware(['auth', 'verified'])->name('siswa');
-
-// Route::get('/guru', function () {
-//     return view('pages.admin.guru');
-// })->middleware(['auth', 'verified'])->name('guru');
-
-// Route::get('/perusahaan', function () {
-//     return view('pages.admin.perusahaan');
-// })->middleware(['auth', 'verified'])->name('perusahaan');
+Route::get('/perusahaan/pendaftaran-pkl', [PerusahaanController::class, 'index'])->name('perusahaan.index');
+Route::get('/perusahaan/create', [PerusahaanController::class, 'create'])->name('perusahaan.create');
+Route::get('/perusahaan/{id}/show', [PerusahaanController::class, 'show'])->name('perusahaan.show');
+Route::get('/perusahaan/{id}/edit', [PerusahaanController::class, 'edit'])->name('perusahaan.edit');
+Route::patch('/perusahaan/{id}', [PerusahaanController::class, 'update'])->name('perusahaan.update');
+Route::post('/perusahaan/store', [PerusahaanController::class, 'store'])->name('perusahaan.store');
+Route::delete('/perusahaan/destroy/{id}', [PerusahaanController::class, 'destroy'])->name('perusahaan.destroy');

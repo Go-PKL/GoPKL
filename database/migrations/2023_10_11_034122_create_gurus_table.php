@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('gurus', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('nama');
             $table->unsignedBigInteger('jabatan_id');
             $table->foreign('jabatan_id')->references('id')->on('jabatans');

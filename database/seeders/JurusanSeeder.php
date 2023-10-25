@@ -16,16 +16,16 @@ class JurusanSeeder extends Seeder
     public function run()
     {
         $jurusans = [
-            'Pengembangan Perangkat Lunak dan GIM',
-            'Teknik Jaringan Komputer dan Telekomunikasi',
-            'Usaha Layanan Pariwisata',
-            'Pemasaran',
-            'Akuntansi dan Keuangan Lembaga',
-            'Manajemen Perkantoran dan Layanan Bisnis',
+            'Pengembangan Perangkat Lunak dan GIM' => 'PPLG',
+            'Teknik Jaringan Komputer dan Telekomunikasi' => 'TJKT',
+            'Usaha Layanan Pariwisata' => 'ULPW',
+            'Pemasaran' => 'Pemasaran',
+            'Akuntansi dan Keuangan Lembaga' => 'AKL',
+            'Manajemen Perkantoran dan Layanan Bisnis' => 'MPLB',
         ];
 
-        foreach ($jurusans as $jurusan) {
-            Jurusan::create(['nama' => $jurusan]);
+        foreach ($jurusans as $nama => $singkatan) {
+            Jurusan::create(['nama' => $nama, 'singkatan' => $singkatan]);
         }
     }
 }

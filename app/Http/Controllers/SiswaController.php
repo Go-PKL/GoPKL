@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
 use App\Models\Perusahaan;
+use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SiswaController extends Controller
 {
@@ -15,8 +18,11 @@ class SiswaController extends Controller
      */
     public function index()
     {
+        $users = User::all();
+        $siswas = Siswa::all();
+        $jurusans = Jurusan::all();
         $perusahaans = Perusahaan::all();
-        return view('pages.siswa.index', compact('perusahaans'));
+        return view('pages.siswa.index', compact('users','siswas', 'jurusans', 'perusahaans'));
     }
 
     /**
@@ -26,7 +32,8 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        $jurusans = Jurusan::all();
+        // dd(Auth::user()->id);
+        $jurusans = Jurusan::all(); 
         return view('pages.siswa.create', compact('jurusans'));
     }
 
@@ -38,7 +45,20 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255',
+            'kelas' => 'required|string',
+            'jurusan' => 'required',
+        ]);
+
+        Siswa::create([
+            'nama' => $validatedData['nama'],
+            'kelas' => $validatedData['kelas'],
+            'jurusan_id' => $request->jurusan,
+            'user_id' => Auth::user()->id,
+        ]);
+    
+        return redirect()->to('siswa/dashboard')->with('success', 'Data anda berhasil disimpan.');
     }
 
     /**

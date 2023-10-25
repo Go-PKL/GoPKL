@@ -1,92 +1,83 @@
-<x-app-layout>
-    <div class="py-12">
-        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="grid grid-cols-3 text-sm text-gray-900 gap-x-28 gap-y-4 justify-items-center md:text-base dark:text-gray-100">
-                <div
-                    class="flex justify-center items-center gap-5 w-[150px] h-[75px] md:w-[430px] md:h-[205px] rounded-[10px] text-black border border-[#B4B4B3]">
-                    <div>
-                        <img class="w-[124.24px] h-[124.24px] rounded-[10px]" src="/assets/images/background.png">
-                    </div>
-                    <div class="flex flex-col gap-2 pb-11">
-                        <h1 class="text-xl font-bold">PT . ARG Solusi Teknologi</h1>
-                        <p>RPL, AKL, MPLB, TJKT, ULP, BDP</p>
-                        <button class="btn btn-xs font-semibold bg-[#3D655D] hover:bg-[#3D655D] hover:scale-105 duration-300 text-white"
-                            onclick="my_modal_3.showModal()">Cek Pendaftaran</button>
-                        <dialog id="my_modal_3" class="modal">
-                            <form method="dialog">
-                                <button class="absolute text-white btn btn-sm btn-circle btn-ghost right-2 top-2">✕</button>
-                            </form>
-                            <div class="text-black bg-white modal-box">
-                                <h3 class="text-lg font-bold">Hello!</h3>
-                                <p class="py-4">Selamat Datang</p>
-                            </div>
-                        </dialog>
-                    </div>
-                </div>
-                <div
-                    class="flex justify-center items-center gap-5 w-[150px] h-[75px] md:w-[430px] md:h-[205px] rounded-[10px] text-black border border-[#B4B4B3]">
-                    <div>
-                        <img class="w-[124.24px] h-[124.24px] rounded-[10px]" src="/assets/images/background.png">
-                    </div>
-                    <div class="flex flex-col gap-2 pb-11">
-                        <h1 class="text-xl font-bold">PT . ARG Solusi Teknologi</h1>
-                        <p>RPL, AKL, MPLB, TJKT, ULP, BDP</p>
-                        <button class="btn btn-xs font-semibold bg-[#3D655D] hover:bg-[#3D655D] hover:scale-105 duration-300 text-white"
-                            onclick="my_modal_3.showModal()">Cek Pendaftaran</button>
-                        <dialog id="my_modal_3" class="modal">
-                            <form method="dialog">
-                                <button class="absolute text-white btn btn-sm btn-circle btn-ghost right-2 top-2">✕</button>
-                            </form>
-                            <div class="text-black bg-white modal-box">
-                                <h3 class="text-lg font-bold">Hello!</h3>
-                                <p class="py-4">Selamat Datang</p>
-                            </div>
-                        </dialog>
-                    </div>
-                </div>
-                <div
-                    class="flex justify-center items-center gap-5 w-[150px] h-[75px] md:w-[430px] md:h-[205px] rounded-[10px] text-black border border-[#B4B4B3]">
-                    <div>
-                        <img class="w-[124.24px] h-[124.24px] rounded-[10px]" src="/assets/images/background.png">
-                    </div>
-                    <div class="flex flex-col gap-2 pb-11">
-                        <h1 class="text-xl font-bold">PT . ARG Solusi Teknologi</h1>
-                        <p>RPL, AKL, MPLB, TJKT, ULP, BDP</p>
-                        <button class="btn btn-xs font-semibold bg-[#3D655D] hover:bg-[#3D655D] hover:scale-105 duration-300 text-white"
-                            onclick="my_modal_3.showModal()">Cek Pendaftaran</button>
-                        <dialog id="my_modal_3" class="modal">
-                            <form method="dialog">
-                                <button class="absolute text-white btn btn-sm btn-circle btn-ghost right-2 top-2">✕</button>
-                            </form>
-                            <div class="text-black bg-white modal-box">
-                                <h3 class="text-lg font-bold">Hello!</h3>
-                                <p class="py-4">Selamat Datang</p>
-                            </div>
-                        </dialog>
-                    </div>
-                </div>
-                <div
-                    class="flex justify-center items-center gap-5 w-[150px] h-[75px] md:w-[430px] md:h-[205px] rounded-[10px] text-black border border-[#B4B4B3]">
-                    <div>
-                        <img class="w-[124.24px] h-[124.24px] rounded-[10px]" src="/assets/images/background.png">
-                    </div>
-                    <div class="flex flex-col gap-2 pb-11">
-                        <h1 class="text-xl font-bold">PT . ARG Solusi Teknologi</h1>
-                        <p>RPL, AKL, MPLB, TJKT, ULP, BDP</p>
-                        <button class="btn btn-xs font-semibold bg-[#3D655D] hover:bg-[#3D655D] hover:scale-105 duration-300 text-white"
-                            onclick="my_modal_3.showModal()">Cek Pendaftaran</button>
-                        <dialog id="my_modal_3" class="modal">
-                            <form method="dialog">
-                                <button class="absolute text-white btn btn-sm btn-circle btn-ghost right-2 top-2">✕</button>
-                            </form>
-                            <div class="text-black bg-white modal-box">
-                                <h3 class="text-lg font-bold">Hello!</h3>
-                                <p class="py-4">Selamat Datang</p>
-                            </div>
-                        </dialog>
-                    </div>
-                </div>
-            </div>
-        </div>
+<title>Pendaftaran PKL</title>
+@extends('layouts.user.main')
+@section('content')
+    {{-- @foreach ($siswas as $siswa) --}}
+    <div class="mx-auto overflow-x-auto w-[1300px] py-16">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Guru Pembimbing</th>
+                    <th>Nama Siswa</th>
+                    <th>Kelas</th>
+                    <th>Jurusan</th>
+                    <th>Durasi PKL</th>
+                    <th>Penerimaan</th>
+                </tr>
+            </thead>
+            <tbody class="border-none">
+                <tr class="bg-gray-200 border-none">
+                    <th>1</th>
+                    <td>Hidayati, S.Kom, M.Pd.T</td>
+                    <td>Muhammad Luthfi</td>
+                    <td>12</td>
+                    <td>PPLG</td>
+                    <td>6 Bulan</td>
+                    <td class="flex text-white gap-x-2">
+                        <a href="#" class="btn btn-sm hover:bg-[#198754] bg-[#198754]">Terima</a>
+                        <a href="#" class="btn btn-sm hover:bg-[#DC3545] bg-[#DC3545]">Tolak</a>
+                    </td>
+                </tr>
+                <tr class="border-none">
+                    <th>2</th>
+                    <td>Hidayati, S.Kom, M.Pd.T</td>
+                    <td>Husnul Fikri Averus</td>
+                    <td>12</td>
+                    <td>PPLG</td>
+                    <td>6 Bulan</td>
+                    <td class="flex text-white gap-x-2">
+                        <a href="#" class="btn btn-sm hover:bg-[#198754] bg-[#198754]">Terima</a>
+                        <a href="#" class="btn btn-sm hover:bg-[#DC3545] bg-[#DC3545]">Tolak</a>
+                    </td>
+                </tr>
+                <tr class="bg-gray-200 border-none">
+                    <th>3</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="border-none">
+                    <th>4</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="bg-gray-200 border-none">
+                    <th>5</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="border-none">
+                    <th>6</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-</x-app-layout>
+    {{-- @endforeach --}}
+@endsection

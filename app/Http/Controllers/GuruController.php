@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
 use App\Models\Jabatan;
+use App\Models\Perusahaan;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GuruController extends Controller
 {
@@ -14,7 +18,9 @@ class GuruController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        $perusahaans = Perusahaan::all(); 
+        return view('pages.guru.index', compact('users','perusahaans'));
     }
 
     /**
@@ -24,7 +30,7 @@ class GuruController extends Controller
      */
     public function create()
     {
-        $jabatans = Jabatan::all();
+        $jabatans = Jabatan::all(); 
         return view('pages.guru.create', compact('jabatans'));
     }
 
@@ -36,7 +42,18 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255',
+            'jabatan' => 'required',
+        ]);
+
+        Guru::create([
+            'nama' => $validatedData['nama'],
+            'jabatan_id' => $request->jabatan,
+            'user_id' => Auth::user()->id,
+        ]);
+    
+        return redirect()->to('siswa/dashboard')->with('success', 'Data anda berhasil disimpan.');
     }
 
     /**
