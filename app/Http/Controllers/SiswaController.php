@@ -19,7 +19,7 @@ class SiswaController extends Controller
     public function index()
     {
         $users = User::all();
-        $siswas = Siswa::all();
+        $siswas = Siswa::where('user_id', Auth::user()->id)->first();
         $jurusans = Jurusan::all();
         $perusahaans = Perusahaan::all();
         return view('pages.siswa.index', compact('users','siswas', 'jurusans', 'perusahaans'));
@@ -58,7 +58,7 @@ class SiswaController extends Controller
             'user_id' => Auth::user()->id,
         ]);
     
-        return redirect()->to('siswa/dashboard')->with('success', 'Data anda berhasil disimpan.');
+        return redirect()->to('/dashboard')->with('success', 'Data anda berhasil disimpan.');
     }
 
     /**

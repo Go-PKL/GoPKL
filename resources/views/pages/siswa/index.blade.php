@@ -62,15 +62,12 @@
 
                                                         </div>
 
-                                                        @foreach ($siswas as $siswa)
-                                                            <div class="flex flex-col justify-self-start">
-                                                                <label for="jurusan">Jurusan</label>
-                                                                <input type="text" id="jurusan" name="jurusan" readonly
-                                                                    value="{{ $siswa->jurusan->nama }}"
-                                                                    class="p-2 border w-[469px]  border-[#787A91] rounded-md focus:outline-none">
-                                                            </div>
-                                                        @endforeach
-
+                                                        <div class="flex flex-col justify-self-start">
+                                                            <label for="jurusan">Jurusan</label>
+                                                            <input type="text" id="jurusan" name="jurusan" readonly
+                                                                value="{{ $siswas->jurusan->nama }}"
+                                                                class="p-2 border w-[469px]  border-[#787A91] rounded-md focus:outline-none">
+                                                        </div>
 
                                                         <div class="flex flex-col justify-self-end">
                                                             <label for="tgl_mulai">Tanggal Mulai</label>
