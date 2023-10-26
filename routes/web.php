@@ -25,6 +25,14 @@ Route::get('/select-role', function () {
     return view('auth.select-role');
 });
 
+Route::get('/dashboard', function () {
+    return view('pages.dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/persyaratan-pkl', function () {
+    return view('pages.persyaratan-pkl');
+})->middleware(['auth', 'verified'])->name('persyaratan-pkl');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -36,14 +44,6 @@ require __DIR__ . '/auth.php';
 
 
 // siswa
-Route::get('/siswa/dashboard', function () {
-    return view('pages.siswa.dashboard-siswa');
-})->middleware(['auth', 'verified'])->name('siswa.dashboard');
-
-Route::get('siswa/persyaratan-pkl', function () {
-    return view('pages.siswa.persyaratan-pkl');
-})->middleware(['auth', 'verified'])->name('siswa.persyaratan-pkl');
-
 Route::get('/siswa/pendaftaran-pkl', [SiswaController::class, 'index'])->name('siswa.index');
 Route::get('/siswa/create', [SiswaController::class, 'create'])->name('siswa.create');
 Route::get('/siswa/{id}/show', [SiswaController::class, 'show'])->name('siswa.show');
@@ -54,14 +54,6 @@ Route::delete('/siswa/destroy/{id}', [SiswaController::class, 'destroy'])->name(
 
 
 //guru
-Route::get('/guru/dashboard', function () {
-    return view('pages.guru.dashboard-guru');
-})->middleware(['auth', 'verified'])->name('guru.dashboard');
-
-Route::get('guru/persyaratan-pkl', function () {
-    return view('pages.guru.persyaratan-pkl');
-})->middleware(['auth', 'verified'])->name('guru.persyaratan-pkl');
-
 Route::get('guru/hasil-pendaftaran', function () {
     return view('pages.guru.hasil-pendaftaran');
 })->middleware(['auth', 'verified'])->name('guru.hasil-pendaftaran');
@@ -76,14 +68,6 @@ Route::delete('/guru/destroy/{id}', [GuruController::class, 'destroy'])->name('g
 
 
 //perusahaan
-Route::get('/perusahaan/dashboard', function () {
-    return view('pages.perusahaan.dashboard-perusahaan');
-})->middleware(['auth', 'verified'])->name('perusahaan.dashboard');
-
-Route::get('perusahaan/persyaratan-pkl', function () {
-    return view('pages.perusahaan.persyaratan-pkl');
-})->middleware(['auth', 'verified'])->name('perusahaan.persyaratan-pkl');
-
 Route::get('perusahaan/hasil-pendaftaran', function () {
     return view('pages.perusahaan.hasil-pendaftaran');
 })->middleware(['auth', 'verified'])->name('perusahaan.hasil-pendaftaran');
