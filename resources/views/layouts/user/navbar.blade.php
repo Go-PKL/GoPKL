@@ -61,6 +61,12 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
+                            @can('admin')
+                                <x-dropdown-link :href="route('VerifSiswa')">
+                                    {{ __('Administration') }}
+                                </x-dropdown-link>
+                            @endcan
+
                             <x-dropdown-link :href="route('logout')"
                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();">
@@ -122,6 +128,12 @@
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
+
+                    @can('admin')
+                        <x-dropdown-link :href="route('VerifSiswa')">
+                            {{ __('Administration') }}
+                        </x-dropdown-link>
+                    @endcan
 
                     <x-responsive-nav-link :href="route('logout')"
                         onclick="event.preventDefault();

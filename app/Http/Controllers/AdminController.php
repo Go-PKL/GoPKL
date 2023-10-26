@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
+use App\Models\User;
+use App\Models\Siswa;
+use App\Models\Jurusan;
+use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -13,32 +18,38 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view("pages.admin.VerifSiswa");
+        $siswas = Siswa::all();
+        return view('pages.admin.VerifSiswa', compact('siswas'));
     }
 
     public function index_VerifGuru()
     {
-        return view("pages.admin.VerifGuru");
+        $gurus = Guru::all();
+        return view('pages.admin.VerifGuru', compact('gurus'));
     }
 
     public function index_VerifPerusahaan()
     {
-        return view("pages.admin.VerifPerusahaan");
+        $perusahaans = Perusahaan::all();
+        return view('pages.admin.VerifPerusahaan', compact('perusahaans'));
     }
 
     public function index_siswa()
     {
-        return view("pages.admin.siswa");
+        $siswas = Siswa::all();
+        return view('pages.admin.siswa', compact('siswas'));
     }
 
     public function index_guru()
     {
-        return view("pages.admin.guru");
+        $gurus = Guru::all();
+        return view('pages.admin.guru', compact('gurus'));
     }
 
     public function index_perusahaan()
     {
-        return view("pages.admin.perusahaan");
+        $perusahaans = Perusahaan::all();
+        return view('pages.admin.perusahaan', compact('perusahaans'));
     }
 
     /**

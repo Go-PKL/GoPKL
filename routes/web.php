@@ -1,9 +1,11 @@
 <?php
 
+// use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('pages.siswa.dashboard-siswa');
+    return view('pages.dashboard');
 })->middleware(['auth', 'verified']);
 
 Route::get('/select-role', function () {
@@ -79,3 +81,13 @@ Route::get('/perusahaan/{id}/edit', [PerusahaanController::class, 'edit'])->name
 Route::patch('/perusahaan/{id}', [PerusahaanController::class, 'update'])->name('perusahaan.update');
 Route::post('/perusahaan/store', [PerusahaanController::class, 'store'])->name('perusahaan.store');
 Route::delete('/perusahaan/destroy/{id}', [PerusahaanController::class, 'destroy'])->name('perusahaan.destroy');
+
+
+Route::controller(AdminController::class)->group(function () {
+    Route::get('/VerifSiswa', 'index')->name('VerifSiswa');
+    Route::get('/VerifGuru', 'index_VerifGuru')->name('VerifGuru');
+    Route::get('/VerifPerusahaan', 'index_VerifPerusahaan')->name('VerifPerusahaan');
+    Route::get('/siswa', 'index_siswa')->name('siswa');
+    Route::get('/guru', 'index_guru')->name('guru');
+    Route::get('/perusahaan', 'index_perusahaan')->name('perusahaan');
+})->middleware('admin');

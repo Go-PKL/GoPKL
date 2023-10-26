@@ -2,12 +2,11 @@
 
 @section('content')
     <div>
-        <div class="form-control w-full p-7 grid justify-items-end">
+        <div class="form-control p-7 grid justify-end">
             <label class="label">
                 <span class="label-text text-black">Cari Siswa :</span>
             </label>
-            <input type="text" placeholder="Masukkan data yang ingin anda cari"
-                class="input input-bordered w-full max-w-xs text-sm" />
+            <input type="text" placeholder="Masukkan data yang ingin anda cari" class="input input-bordered w-72 text-sm" />
         </div>
         <div class="overflow-x-auto p-7">
             <table class="table table-zebra">
@@ -25,31 +24,20 @@
                 </thead>
                 <tbody>
                     <!-- row 1 -->
-                    <tr>
-                        <th>1</th>
-                        <td>fikriaverus23@gmail.com</td>
-                        <td>Husnul Fikri Averus</td>
-                        <td>12</td>
-                        <td>PPLG</td>
-                        <td>6 Bulan</td>
-                        <td class="">
-                            <button class="btn btn-success btn-sm">Terima</button>
-                            <button class="btn btn-error btn-sm">Tolak</button>
-                        </td>
-                    </tr>
-                    <!-- row 2 -->
-                    <tr>
-                        <th>1</th>
-                        <td>fikriaverus23@gmail.com</td>
-                        <td>Husnul Fikri Averus</td>
-                        <td>12</td>
-                        <td>PPLG</td>
-                        <td>6 Bulan</td>
-                        <td><button class="btn btn-success btn-sm">Terima</button>
-                            <button class="btn btn-error btn-sm">Tolak</button>
-                        </td>
-                    </tr>
-
+                    @foreach ($siswas as $siswa)
+                        <tr>
+                            <th>{{ $loop->iteration }}</th>
+                            <td>{{ $siswa->user->email }}</td>
+                            <td>{{ $siswa->nama }}</td>
+                            <td>{{ $siswa->kelas }}</td>
+                            <td>{{ $siswa->jurusan->singkatan }}</td>
+                            <td>6 Bulan</td>
+                            <td class="">
+                                <button class="btn btn-success btn-sm">Terima</button>
+                                <button class="btn btn-error btn-sm">Tolak</button>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
