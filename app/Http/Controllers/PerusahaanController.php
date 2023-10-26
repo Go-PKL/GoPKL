@@ -59,7 +59,7 @@ class PerusahaanController extends Controller
             'user_id' => Auth::user()->id,
         ]);
     
-        return redirect()->to('/dashboard')->with('success', 'Data anda berhasil disimpan.');
+        return redirect()->to('siswa/dashboard')->with('success', 'Data anda berhasil disimpan.');
     }
 
     /**

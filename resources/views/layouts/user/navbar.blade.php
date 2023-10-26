@@ -5,19 +5,19 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex items-center shrink-0">
-                    <a href="{{ route('dashboard') }}" class="text-xl font-bold">
+                    <a href="{{ route('siswa.dashboard') }}" class="text-xl font-bold">
                         Go PKL
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('siswa.dashboard')" :active="request()->routeIs('siswa.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('persyaratan-pkl')" :active="request()->routeIs('persyaratan-pkl')">
+                    <x-nav-link :href="route('siswa.persyaratan-pkl')" :active="request()->routeIs('siswa.persyaratan-pkl')">
                         {{ __('Persyaratan PKL') }}
                     </x-nav-link>
                 </div>
@@ -90,11 +90,11 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('siswa.dashboard')" :active="request()->routeIs('siswa/dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('persyaratan-pkl')" :active="request()->routeIs('persyaratan-pkl')">
+            <x-responsive-nav-link :href="route('siswa.persyaratan-pkl')" :active="request()->routeIs('siswa/persyaratan-pkl')">
                 {{ __('Persyaratan PKL') }}
             </x-responsive-nav-link>
 
@@ -102,7 +102,7 @@
                 {{ __('Pendaftaran PKL') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('siswa.dashboard')" :active="request()->routeIs('siswa/dashboard')">
                 {{ __('Hasil Pendaftaran') }}
             </x-responsive-nav-link>
         </div>
