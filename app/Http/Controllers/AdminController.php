@@ -56,7 +56,7 @@ class AdminController extends Controller
     {
         $user = User::where('id', $request->id_user)->first();
         $user->assignRole("siswa");
-        return 'berhasil';
+        return redirect()->to('/VerifSiswa')->with('success', 'Data anda berhasil disimpan.');
     }
 
 

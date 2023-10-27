@@ -21,7 +21,16 @@
             @include('layouts.admin.sidebar')
 
             <div class="w-full">
-
+                @if (Session::has('success'))
+                    <div class="p-3">
+                        <div class="text-white rounded-md alert bg-primary">
+                            {{ Session::get('success') }}
+                        </div>
+                    </div>
+                    <?php
+                    header('refresh: 3');
+                    ?>
+                @endif
                 <!-- Page Content -->
                 @yield('content')
 
