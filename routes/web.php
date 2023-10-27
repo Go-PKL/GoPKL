@@ -92,4 +92,5 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/guru', 'index_guru')->name('guru');
     Route::get('/perusahaan', 'index_perusahaan')->name('perusahaan');
     Route::post('/verifsiswa', 'verifsiswa')->name('verifsiswa');
+    Route::delete('/hapussiswa', 'hapussiswa')->name('hapussiswa');
 })->middleware('admin');

@@ -125,4 +125,14 @@ class AdminController extends Controller
     {
         //
     }
+
+    public function hapussiswa(Request $request)
+    {
+        $user = User::where('id', $request->id_user)->first();
+        // dd($user);
+        $user->delete();
+
+        // return view('pages.admin.siswa');
+        return redirect()->to('/siswa')->with('success', 'Data anda berhasil dihapus.');
+    }
 }

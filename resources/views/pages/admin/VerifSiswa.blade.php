@@ -32,12 +32,19 @@
                             <td>{{ $siswa->kelas }}</td>
                             <td>{{ $siswa->jurusan->singkatan }}</td>
                             <td>6 Bulan</td>
-                            <td class="">
+                            <td class="flex gap-4">
                                 <form action="{{ route('verifsiswa') }}" method="post">
                                     @csrf
                                     <input type="hidden" value="{{ $siswa->user->id }}" name="id_user">
-                                    <button name="terima" value="terima" class="btn btn-success btn-sm capitalize">terima</button>
-                                    <button class="btn btn-error btn-sm">Tolak</button>
+                                    <button name="terima" value="terima" class="btn btn-success btn-sm">terima</button>
+                                    {{-- <button class="btn btn-error btn-sm">Tolak</button> --}}
+                                </form>
+                                <form action="{{ route('hapussiswa') }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    {{-- <input type="hidden"> --}}
+                                    <button class="btn btn-error btn-sm type="submit" value="{{ $siswa->user->id }}"
+                                        name="id_user" onclick="return confirm('Yakin?')">Tolak</button>
                                 </form>
                             </td>
                         </tr>
