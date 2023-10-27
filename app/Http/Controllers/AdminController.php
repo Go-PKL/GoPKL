@@ -18,8 +18,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $siswas = Siswa::all();
-        return view('pages.admin.VerifSiswa', compact('siswas'));
+
+        $data =  Siswa::all();
+        return view('pages.admin.VerifSiswa', compact('data'));
     }
 
     public function index_VerifGuru()
@@ -56,7 +57,7 @@ class AdminController extends Controller
     {
         $user = User::where('id', $request->id_user)->first();
         $user->assignRole("siswa");
-        return redirect()->to('/VerifSiswa')->with('success', 'Data anda berhasil disimpan.');
+        return redirect()->to('/siswa')->with('success', 'Data anda berhasil disimpan.');
     }
 
 
@@ -133,6 +134,6 @@ class AdminController extends Controller
         $user->delete();
 
         // return view('pages.admin.siswa');
-        return redirect()->to('/siswa')->with('success', 'Data anda berhasil dihapus.');
+        return redirect()->to('/VerifSiswa')->with('success', 'Data anda berhasil dihapus.');
     }
 }

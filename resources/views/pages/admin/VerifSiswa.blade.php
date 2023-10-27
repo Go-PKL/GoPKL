@@ -1,5 +1,10 @@
 @extends('layouts.admin.main')
 
+@php
+    $counter = 0;
+@endphp
+
+
 @section('content')
     <div>
         <div class="form-control p-7 grid justify-end">
@@ -9,6 +14,7 @@
             <input type="text" placeholder="Masukkan data yang ingin anda cari" class="input input-bordered w-72 text-sm" />
         </div>
         <div class="overflow-x-auto p-7">
+            <h1>siswa</h1>
             <table class="table table-zebra">
                 <!-- head -->
                 <thead>
@@ -23,31 +29,47 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- row 1 -->
-                    @foreach ($siswas as $siswa)
-                        <tr>
-                            <th>{{ $loop->iteration }}</th>
-                            <td>{{ $siswa->user->email }}</td>
-                            <td>{{ $siswa->nama }}</td>
-                            <td>{{ $siswa->kelas }}</td>
-                            <td>{{ $siswa->jurusan->singkatan }}</td>
-                            <td>6 Bulan</td>
-                            <td class="flex gap-4">
-                                <form action="{{ route('verifsiswa') }}" method="post">
-                                    @csrf
-                                    <input type="hidden" value="{{ $siswa->user->id }}" name="id_user">
-                                    <button name="terima" value="terima" class="btn btn-success btn-sm">terima</button>
-                                    {{-- <button class="btn btn-error btn-sm">Tolak</button> --}}
-                                </form>
-                                <form action="{{ route('hapussiswa') }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    {{-- <input type="hidden"> --}}
-                                    <button class="btn btn-error btn-sm type="submit" value="{{ $siswa->user->id }}"
-                                        name="id_user" onclick="return confirm('Yakin?')">Tolak</button>
-                                </form>
-                            </td>
-                        </tr>
+
+
+
+                    @foreach ($data as $item)
+                        @php
+                            $counter = $counter + 1;
+                        @endphp
+
+                        {{-- jika siswa --}}
+                        @if ($item->user->hasRole('siswa'))
+                            @php
+                                $counter = $counter - 1;
+                            @endphp
+
+
+                            {{-- jika tidak siswa --}}
+                        @else
+                            <tr>
+                                <td>{{ $counter }}</td>
+                                <td>{{ $item->user->email }}</td>
+                                <td>{{ $item->nama }}</td>
+                                <td>{{ $item->kelas }}</td>
+                                <td>{{ $item->jurusan->singkatan }}</td>
+                                <td>6 Bulan</td>
+                                <td class="flex gap-4">
+                                    <form action="{{ route('verifsiswa') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" value="{{ $item->user->id }}" name="id_user">
+                                        <button name="terima" value="terima" class="btn btn-success btn-sm">terima</button>
+                                        {{-- <button class="btn btn-error btn-sm">Tolak</button> --}}
+                                    </form>
+                                    <form action="{{ route('hapussiswa') }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        {{-- <input type="hidden"> --}}
+                                        <button class="btn btn-error btn-sm type="submit" value="{{ $item->user->id }}"
+                                            name="id_user" onclick="return confirm('Yakin?')">Tolak</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>

@@ -21,16 +21,18 @@
                 </thead>
                 <tbody>
                     @foreach ($siswas as $siswa)
-                        <tr>
-                            <th>{{ $loop->iteration }}</th>
-                            <td>{{ $siswa->user->email }}</td>
-                            <td>{{ $siswa->nama }}</td>
-                            <td class="">
-                                <button class="btn btn-primary btn-sm">info</button>
-                                <button class="btn btn-warning btn-sm">edit</button>
-                                <button class="btn btn-error btn-sm">hapus</button>
-                            </td>
-                        </tr>
+                        @if ($siswa->user->hasRole('siswa'))
+                            <tr>
+                                <th>{{ $loop->iteration }}</th>
+                                <td>{{ $siswa->user->email }}</td>
+                                <td>{{ $siswa->nama }}</td>
+                                <td class="">
+                                    <button class="btn btn-primary btn-sm">info</button>
+                                    <button class="btn btn-warning btn-sm">edit</button>
+                                    <button class="btn btn-error btn-sm">hapus</button>
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>
