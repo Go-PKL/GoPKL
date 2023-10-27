@@ -33,8 +33,12 @@
                             <td>{{ $siswa->jurusan->singkatan }}</td>
                             <td>6 Bulan</td>
                             <td class="">
-                                <button class="btn btn-success btn-sm">Terima</button>
-                                <button class="btn btn-error btn-sm">Tolak</button>
+                                <form action="{{ route('verifsiswa') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" value="{{ $siswa->user->id }}" name="id_user">
+                                    <button name="terima" value="terima" class="btn btn-success btn-sm capitalize">terima</button>
+                                    <button class="btn btn-error btn-sm">Tolak</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

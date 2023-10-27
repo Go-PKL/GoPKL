@@ -52,6 +52,14 @@ class AdminController extends Controller
         return view('pages.admin.perusahaan', compact('perusahaans'));
     }
 
+    public function verifsiswa(Request $request)
+    {
+        $user = User::where('id', $request->id_user)->first();
+        $user->assignRole("siswa");
+        return 'berhasil';
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *

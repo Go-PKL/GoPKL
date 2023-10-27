@@ -62,8 +62,8 @@
                         <div class="w-full h-52 border-x border-t rounded-t-[15px] border-[#00000080]">
                             <img class="w-full h-full img-preview rounded-t-[15px]">
                         </div>
-                        <input type="file" id="image" name="image" onchange="previewImage()"
-                            class="file-input file-input-sm text-sm rounded-b-[15px] rounded-t-none w-full bg-white" />
+                        <input type="file" id="image" name="image" onchange="previewImage()" required
+                            class="file-input file-input-sm file-input-bordered text-sm rounded-b-[15px] rounded-t-none w-full bg-white" />
                     </div>
 
                     <button type="submit"

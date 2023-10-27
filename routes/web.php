@@ -83,6 +83,7 @@ Route::post('/perusahaan/store', [PerusahaanController::class, 'store'])->name('
 Route::delete('/perusahaan/destroy/{id}', [PerusahaanController::class, 'destroy'])->name('perusahaan.destroy');
 
 
+//admin
 Route::controller(AdminController::class)->group(function () {
     Route::get('/VerifSiswa', 'index')->name('VerifSiswa');
     Route::get('/VerifGuru', 'index_VerifGuru')->name('VerifGuru');
@@ -90,4 +91,5 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/siswa', 'index_siswa')->name('siswa');
     Route::get('/guru', 'index_guru')->name('guru');
     Route::get('/perusahaan', 'index_perusahaan')->name('perusahaan');
+    Route::post('/verifsiswa', 'verifsiswa')->name('verifsiswa');
 })->middleware('admin');

@@ -8,6 +8,7 @@ use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class SiswaController extends Controller
 {
@@ -22,7 +23,7 @@ class SiswaController extends Controller
         $siswas = Siswa::where('user_id', Auth::user()->id)->first();
         $jurusans = Jurusan::all();
         $perusahaans = Perusahaan::all();
-        return view('pages.siswa.index', compact('users','siswas', 'jurusans', 'perusahaans'));
+        return view('pages.siswa.index', compact('users', 'siswas', 'jurusans', 'perusahaans'));
     }
 
     /**
@@ -33,7 +34,7 @@ class SiswaController extends Controller
     public function create()
     {
         // dd(Auth::user()->id);
-        $jurusans = Jurusan::all(); 
+        $jurusans = Jurusan::all();
         return view('pages.siswa.create', compact('jurusans'));
     }
 
@@ -57,7 +58,7 @@ class SiswaController extends Controller
             'jurusan_id' => $request->jurusan,
             'user_id' => Auth::user()->id,
         ]);
-    
+
         return redirect()->to('/dashboard')->with('success', 'Data anda berhasil disimpan.');
     }
 

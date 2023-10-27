@@ -1,4 +1,4 @@
-<title>Dashboard Siswa</title>
+<title>Dashboard</title>
 @extends('layouts.user.main')
 @section('content')
     <div class="py-12">
