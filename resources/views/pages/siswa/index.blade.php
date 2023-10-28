@@ -57,7 +57,7 @@
                                                         <div class="flex flex-col justify-self-end">
                                                             <label for="nama">Nama Siswa</label>
                                                             <input type="text" id="nama" name="nama"
-                                                                value="{{ Auth::user()->name }}" readonly
+                                                                value="{{ $siswas->nama }}" readonly
                                                                 class="p-2 border w-[469px] border-[#787A91] rounded-md focus:outline-none">
 
                                                         </div>

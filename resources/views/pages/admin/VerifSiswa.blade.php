@@ -1,24 +1,24 @@
+<title>Verifikasi Siswa</title>
 @extends('layouts.admin.main')
 
 @php
     $counter = 0;
 @endphp
 
-
 @section('content')
     <div>
-        <div class="form-control p-7 grid justify-end">
+        <div class="grid justify-end form-control p-7">
             <label class="label">
-                <span class="label-text text-black">Cari Siswa :</span>
+                <span class="text-black label-text">Cari Siswa :</span>
             </label>
-            <input type="text" placeholder="Masukkan data yang ingin anda cari" class="input input-bordered w-72 text-sm" />
+            <input type="text" placeholder="Masukkan data yang ingin anda cari" class="text-sm input input-bordered w-72" />
         </div>
         <div class="overflow-x-auto p-7">
             <h1>siswa</h1>
             <table class="table table-zebra">
                 <!-- head -->
                 <thead>
-                    <tr class="border-b-2 border-black text-sm text-black">
+                    <tr class="text-sm text-black border-b-2 border-black">
                         <th></th>
                         <th>Email</th>
                         <th>Nama</th>
@@ -29,9 +29,6 @@
                     </tr>
                 </thead>
                 <tbody>
-
-
-
                     @foreach ($data as $item)
                         @php
                             $counter = $counter + 1;
@@ -42,7 +39,6 @@
                             @php
                                 $counter = $counter - 1;
                             @endphp
-
 
                             {{-- jika tidak siswa --}}
                         @else
@@ -58,12 +54,10 @@
                                         @csrf
                                         <input type="hidden" value="{{ $item->user->id }}" name="id_user">
                                         <button name="terima" value="terima" class="btn btn-success btn-sm">terima</button>
-                                        {{-- <button class="btn btn-error btn-sm">Tolak</button> --}}
                                     </form>
                                     <form action="{{ route('hapussiswa') }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        {{-- <input type="hidden"> --}}
                                         <button class="btn btn-error btn-sm type="submit" value="{{ $item->user->id }}"
                                             name="id_user" onclick="return confirm('Yakin?')">Tolak</button>
                                     </form>

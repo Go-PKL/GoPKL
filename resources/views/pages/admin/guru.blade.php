@@ -1,18 +1,23 @@
+<title>Guru</title>
 @extends('layouts.admin.main')
+
+@php
+    $counter = 0;
+@endphp
 
 @section('content')
     <div>
-        <div class="form-control p-7 grid justify-end">
+        <div class="grid justify-end form-control p-7">
             <label class="label">
-                <span class="label-text text-black">Cari guru :</span>
+                <span class="text-black label-text">Cari guru :</span>
             </label>
-            <input type="text" placeholder="Masukkan data yang ingin anda cari" class="input input-bordered w-72 text-sm" />
+            <input type="text" placeholder="Masukkan data yang ingin anda cari" class="text-sm input input-bordered w-72" />
         </div>
         <div class="overflow-x-auto p-7">
             <table class="table table-zebra">
                 <!-- head -->
                 <thead>
-                    <tr class="border-b border-black text-sm text-black">
+                    <tr class="text-sm text-black border-b border-black">
                         <th></th>
                         <th>Email</th>
                         <th>Nama</th>
@@ -21,6 +26,9 @@
                 </thead>
                 <tbody>
                     @foreach ($gurus as $guru)
+                        @php
+                            $counter = $counter + 1;
+                        @endphp
                         @if ($guru->user->hasRole('guru'))
                             <tr>
                                 <th>{{ $loop->iteration }}</th>
@@ -32,6 +40,10 @@
                                     <button class="btn btn-error btn-sm">hapus</button>
                                 </td>
                             </tr>
+                        @else
+                            @php
+                                $counter = $counter - 1;
+                            @endphp
                         @endif
                     @endforeach
                 </tbody>

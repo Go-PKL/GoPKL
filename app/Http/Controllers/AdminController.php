@@ -60,6 +60,20 @@ class AdminController extends Controller
         return redirect()->to('/siswa')->with('success', 'Data anda berhasil disimpan.');
     }
 
+    public function verifguru(Request $request)
+    {
+        $user = User::where('id', $request->id_user)->first();
+        $user->assignRole("guru");
+        return redirect()->to('/guru')->with('success', 'Data anda berhasil disimpan.');
+    }
+
+    public function verifperusahaan(Request $request)
+    {
+        $user = User::where('id', $request->id_user)->first();
+        $user->assignRole("perusahaan");
+        return redirect()->to('/perusahaan')->with('success', 'Data anda berhasil disimpan.');
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -133,7 +147,24 @@ class AdminController extends Controller
         // dd($user);
         $user->delete();
 
-        // return view('pages.admin.siswa');
         return redirect()->to('/VerifSiswa')->with('success', 'Data anda berhasil dihapus.');
+    }
+
+    public function hapusguru(Request $request)
+    {
+        $user = User::where('id', $request->id_user)->first();
+        // dd($user);
+        $user->delete();
+
+        return redirect()->to('/VerifGuru')->with('success', 'Data anda berhasil dihapus.');
+    }
+
+    public function hapusperusahaan(Request $request)
+    {
+        $user = User::where('id', $request->id_user)->first();
+        // dd($user);
+        $user->delete();
+
+        return redirect()->to('/VerifPerusahaan')->with('success', 'Data anda berhasil dihapus.');
     }
 }

@@ -1,18 +1,23 @@
+<title>Verifikasi Perusahaan</title>
 @extends('layouts.admin.main')
+
+@php
+    $counter = 0;
+@endphp
 
 @section('content')
     <div>
-        <div class="form-control p-7 grid justify-end">
+        <div class="grid justify-end form-control p-7">
             <label class="label">
-                <span class="label-text text-black">Cari Perusahaan :</span>
+                <span class="text-black label-text">Cari Perusahaan :</span>
             </label>
-            <input type="text" placeholder="Masukkan data yang ingin anda cari" class="input input-bordered w-72 text-sm" />
+            <input type="text" placeholder="Masukkan data yang ingin anda cari" class="text-sm input input-bordered w-72" />
         </div>
         <div class="overflow-x-auto p-7">
             <table class="table table-zebra">
                 <!-- head -->
                 <thead>
-                    <tr class="border-b-2 border-black text-sm text-black">
+                    <tr class="text-sm text-black border-b-2 border-black">
                         <th></th>
                         <th>Email</th>
                         <th>Nama Perusahaan</th>
@@ -21,18 +26,41 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- row 1 -->
                     @foreach ($perusahaans as $perusahaan)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $perusahaan->user->email }}</td>
-                            <td>{{ $perusahaan->nama }}</td>
-                            <td>{{ $perusahaan->alamat }}</td>
-                            <td class="">
-                                <button class="btn btn-success btn-sm">Terima</button>
-                                <button class="btn btn-error btn-sm">Tolak</button>
-                            </td>
-                        </tr>
+                        @php
+                            $counter = $counter + 1;
+                        @endphp
+
+                        {{-- jika perusahaan --}}
+                        @if ($perusahaan->user->hasRole('perusahaan'))
+                            @php
+                                $counter = $counter - 1;
+                            @endphp
+
+                            {{-- jika tidak perusahaan --}}
+                        @else
+                            <tr>
+                                <td>{{ $counter }}</td>
+                                <td>{{ $perusahaan->user->email }}</td>
+                                <td>{{ $perusahaan->nama }}</td>
+                                <td>{{ $perusahaan->alamat }}</td>
+                                <td>6 Bulan</td>
+                                <td class="flex gap-4">
+                                    <form action="{{ route('verifperusahaan') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" value="{{ $perusahaan->user->id }}" name="id_user">
+                                        <button name="terima" value="terima" class="btn btn-success btn-sm">terima</button>
+                                    </form>
+                                    <form action="{{ route('hapusperusahaan') }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-error btn-sm type="submit"
+                                            value="{{ $perusahaan->user->id }}" name="id_user"
+                                            onclick="return confirm('Yakin?')">Tolak</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>
