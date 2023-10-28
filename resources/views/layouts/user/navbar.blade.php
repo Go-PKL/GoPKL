@@ -21,11 +21,13 @@
                         {{ __('Persyaratan PKL') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('siswa.index')" :active="request()->routeIs('siswa.index')">
-                        {{ __('Pendaftaran PKL') }}
-                    </x-nav-link>
-                </div>
+                @role('siswa')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('siswa.index')" :active="request()->routeIs('siswa.index')">
+                            {{ __('Pendaftaran PKL') }}
+                        </x-nav-link>
+                    </div>
+                @endrole
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link>
                         {{ __('Hasil Pendaftaran') }}
@@ -61,11 +63,11 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            @can('admin')
+                            @role('admin')
                                 <x-dropdown-link :href="route('VerifSiswa')">
                                     {{ __('Administration') }}
                                 </x-dropdown-link>
-                            @endcan
+                            @endrole
 
                             <x-dropdown-link :href="route('logout')"
                                 onclick="event.preventDefault();
@@ -129,11 +131,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    @can('admin')
-                        <x-dropdown-link :href="route('VerifSiswa')">
-                            {{ __('Administration') }}
-                        </x-dropdown-link>
-                    @endcan
+
 
                     <x-responsive-nav-link :href="route('logout')"
                         onclick="event.preventDefault();
