@@ -54,10 +54,10 @@
                                                         </h1>
                                                         {{-- @foreach ($siswas as $siswa) --}}
                                                             <div class="col-span-2 justify-self-center w-[1030px]">
-                                                                <table class="table">
+                                                                <table class="table table-zebra">
                                                                     <!-- head -->
                                                                     <thead>
-                                                                        <tr>
+                                                                        <tr class="text-black border-b border-black">
                                                                             <th></th>
                                                                             <th>Nama</th>
                                                                             <th>Kelas</th>

@@ -15,10 +15,8 @@ return new class extends Migration
     {
         Schema::create('pembimbings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('siswa_id');
-            $table->foreign('siswa_id')->references('id')->on('siswas');
-            $table->unsignedBigInteger('guru_id');
-            $table->foreign('guru_id')->references('id')->on('gurus');
+            $table->foreignId('siswa_id')->constrained('siswas', 'id')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('guru_id')->constrained('gurus', 'id')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->timestamps();
         });
     }

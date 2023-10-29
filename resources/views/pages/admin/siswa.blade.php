@@ -1,21 +1,26 @@
+<title>Siswa</title>
 @extends('layouts.admin.main')
+
+@php
+    $counter = 0;
+@endphp
 
 @section('content')
     <div>
-        <div class="form-control p-7 grid justify-end">
+        <div class="grid justify-end form-control p-7">
             <label class="label">
-                <span class="label-text text-black">Cari Siswa :</span>
+                <span class="text-black label-text">Cari Siswa :</span>
             </label>
             <form action="{{ route('siswa') }}" method="GET">
                 <input type="text" placeholder="Masukkan data yang ingin anda cari"
-                    class="input input-bordered w-72 text-sm" name="search" value="{{ old('cari') }}" />
+                    class="text-sm input input-bordered w-72" name="search" value="{{ old('cari') }}" />
             </form>
         </div>
         <div class="overflow-x-auto p-7">
             <table class="table table-zebra">
                 <!-- head -->
                 <thead>
-                    <tr class="border-b border-black text-sm text-black">
+                    <tr class="text-sm text-black border-b border-black">
                         <th></th>
                         <th>Email</th>
                         <th>Nama</th>
@@ -24,9 +29,12 @@
                 </thead>
                 <tbody>
                     @foreach ($siswas as $siswa)
+                        @php
+                            $counter = $counter + 1;
+                        @endphp
                         @if ($siswa->user->hasRole('siswa'))
                             <tr>
-                                <th>{{ $loop->iteration }}</th>
+                                <th>{{ $counter }}</th>
                                 <td>{{ $siswa->user->email }}</td>
                                 <td>{{ $siswa->nama }}</td>
                                 <td class="">
@@ -35,6 +43,10 @@
                                     <button class="btn btn-error btn-sm">hapus</button>
                                 </td>
                             </tr>
+                        @else
+                            @php
+                                $counter = $counter - 1;
+                            @endphp
                         @endif
                     @endforeach
                 </tbody>
