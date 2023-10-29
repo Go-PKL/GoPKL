@@ -31,7 +31,7 @@
                         @endphp
                         @if ($perusahaan->user->hasRole('perusahaan'))
                             <tr>
-                                <th>{{ $loop->iteration }}</th>
+                                <th>{{ $counter }}</th>
                                 <td>{{ $perusahaan->user->email }}</td>
                                 <td>{{ $perusahaan->nama }}</td>
                                 <td class="">

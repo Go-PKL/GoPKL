@@ -2,10 +2,10 @@
 @extends('layouts.user.main')
 @section('content')
     {{-- @foreach ($siswas as $siswa) --}}
-    <div class="mx-auto overflow-x-auto w-[1300px] py-16">
-        <table class="table">
+    <div class="py-16 overflow-x-auto px-7">
+        <table class="table table-zebra">
             <thead>
-                <tr>
+                <tr class="text-black border-b border-black">
                     <th></th>
                     <th>Guru Pembimbing</th>
                     <th>Nama Siswa</th>
@@ -15,8 +15,8 @@
                     <th>Penerimaan</th>
                 </tr>
             </thead>
-            <tbody class="border-none">
-                <tr class="bg-gray-200 border-none">
+            <tbody>
+                <tr>
                     <th>1</th>
                     <td>Hidayati, S.Kom, M.Pd.T</td>
                     <td>Muhammad Luthfi</td>
@@ -24,7 +24,6 @@
                     <td>PPLG</td>
                     <td>6 Bulan</td>
                     <td class="flex text-white gap-x-2">
-                        {{-- <a href="#" class="btn btn-sm hover:bg-[#3C79F5] bg-[#3C79F5]">Info</a> --}}
                         <div class="relative z-50 ">
                             <div x-data="{ fullscreenModal: false }" x-init="$watch('fullscreenModal', function(value) {
                                         if (value === true) {
@@ -59,39 +58,39 @@
                                                     </h1>
                                                     <div class="flex flex-col justify-self-end">
                                                         <label for="email">Email</label>
-                                                        <input type="email" id="email" name="email"
+                                                        <input type="email" id="email" name="email" readonly
                                                             class="p-2 border w-[469px]  border-[#787A91] rounded-md focus:outline-none">
                                                     </div>
                                                     <div class="flex flex-col justify-self-start">
                                                         <label for="nama">Nama Siswa</label>
                                                         <input type="text" id="nama" name="nama"
-                                                            value="" readonly disabled
+                                                            value="" readonly
                                                             class="p-2 border w-[469px] border-[#787A91] rounded-md focus:outline-none">
 
                                                     </div>
                                                     <div class="flex flex-col justify-self-end">
                                                         <label for="jurusan">Jurusan</label>
-                                                        <input type="text" id="jurusan" name="jurusan"
+                                                        <input type="text" id="jurusan" name="jurusan" readonly
                                                             class="p-2 border w-[469px]  border-[#787A91] rounded-md focus:outline-none">
                                                     </div>
                                                     <div class="flex flex-col justify-self-start">
                                                         <label for="kelas">Kelas</label>
-                                                        <input type="text" id="kelas" name="kelas"
+                                                        <input type="text" id="kelas" name="kelas" readonly
                                                             class="p-2 border w-[469px]  border-[#787A91] rounded-md focus:outline-none">
                                                     </div>
                                                     <div class="flex flex-col justify-self-end">
                                                         <label for="tgl_mulai">Tanggal Mulai</label>
-                                                        <input type="date" id="tgl_mulai" name="tgl_mulai"
+                                                        <input type="date" id="tgl_mulai" name="tgl_mulai" readonly
                                                             class="p-2 border w-[469px] border-[#787A91] rounded-md focus:outline-none">
                                                     </div>
                                                     <div class="flex flex-col justify-self-start">
                                                         <label for="tgl_selesai">Tanggal Selesai</label>
-                                                        <input type="date" id="tgl_selesai" name="tgl_selesai"
+                                                        <input type="date" id="tgl_selesai" name="tgl_selesai" readonly
                                                             class="p-2 border w-[469px] border-[#787A91] rounded-md focus:outline-none">
                                                     </div>
                                                     <div class="flex flex-col justify-self-end">
                                                         <label for="durasi_pkl">Durasi PKL</label>
-                                                        <input type="text" id="durasi_pkl" name="durasi_pkl"
+                                                        <input type="text" id="durasi_pkl" name="durasi_pkl" readonly
                                                             class="p-2 border w-[469px] border-[#787A91] rounded-md focus:outline-none">
                                                     </div>
                                                     </div>
@@ -102,10 +101,10 @@
                                 </template>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-sm hover:bg-[#DC3545] bg-[#DC3545]">Hapus</a>
+                        <a href="#" class="btn btn-sm text-white hover:bg-[#DC3545] bg-[#DC3545]">Hapus</a>
                     </td>
                 </tr>
-                <tr class="border-none">
+                <tr>
                     <th>2</th>
                     <td>Hidayati, S.Kom, M.Pd.T</td>
                     <td>Husnul Fikri Averus</td>
@@ -113,11 +112,11 @@
                     <td>PPLG</td>
                     <td>6 Bulan</td>
                     <td class="flex text-white gap-x-2">
-                        <a href="#" class="btn btn-sm hover:bg-[#3C79F5] bg-[#3C79F5]">Info</a>
-                        <a href="#" class="btn btn-sm hover:bg-[#DC3545] bg-[#DC3545]">Hapus</a>
+                        <a href="#" class="btn btn-sm text-white hover:bg-[#3C79F5] bg-[#3C79F5]">Info</a>
+                        <a href="#" class="btn btn-sm text-white hover:bg-[#DC3545] bg-[#DC3545]">Hapus</a>
                     </td>
                 </tr>
-                <tr class="bg-gray-200 border-none">
+                <tr>
                     <th>3</th>
                     <td></td>
                     <td></td>
@@ -126,7 +125,7 @@
                     <td></td>
                     <td></td>
                 </tr>
-                <tr class="border-none">
+                <tr>
                     <th>4</th>
                     <td></td>
                     <td></td>
@@ -135,7 +134,7 @@
                     <td></td>
                     <td></td>
                 </tr>
-                <tr class="bg-gray-200 border-none">
+                <tr>
                     <th>5</th>
                     <td></td>
                     <td></td>
@@ -144,7 +143,7 @@
                     <td></td>
                     <td></td>
                 </tr>
-                <tr class="border-none">
+                <tr>
                     <th>6</th>
                     <td></td>
                     <td></td>

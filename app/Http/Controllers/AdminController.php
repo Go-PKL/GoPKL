@@ -144,7 +144,6 @@ class AdminController extends Controller
     public function hapussiswa(Request $request)
     {
         $user = User::where('id', $request->id_user)->first();
-        // dd($user);
         $user->delete();
 
         return redirect()->to('/VerifSiswa')->with('success', 'Data anda berhasil dihapus.');
@@ -153,7 +152,6 @@ class AdminController extends Controller
     public function hapusguru(Request $request)
     {
         $user = User::where('id', $request->id_user)->first();
-        // dd($user);
         $user->delete();
 
         return redirect()->to('/VerifGuru')->with('success', 'Data anda berhasil dihapus.');
@@ -162,7 +160,6 @@ class AdminController extends Controller
     public function hapusperusahaan(Request $request)
     {
         $user = User::where('id', $request->id_user)->first();
-        // dd($user);
         $user->delete();
 
         return redirect()->to('/VerifPerusahaan')->with('success', 'Data anda berhasil dihapus.');

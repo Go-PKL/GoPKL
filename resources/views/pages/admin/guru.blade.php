@@ -31,7 +31,7 @@
                         @endphp
                         @if ($guru->user->hasRole('guru'))
                             <tr>
-                                <th>{{ $loop->iteration }}</th>
+                                <th>{{ $counter }}</th>
                                 <td>{{ $guru->user->email }}</td>
                                 <td>{{ $guru->nama }}</td>
                                 <td class="">
