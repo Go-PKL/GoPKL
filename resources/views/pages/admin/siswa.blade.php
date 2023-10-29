@@ -1,4 +1,3 @@
-<title>Siswa</title>
 @extends('layouts.admin.main')
 
 @php

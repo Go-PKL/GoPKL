@@ -1,4 +1,3 @@
-<title>Perusahaan</title>
 @extends('layouts.admin.main')
 
 @php
@@ -9,7 +8,7 @@
     <div>
         <div class="grid justify-end form-control p-7">
             <label class="label">
-                <span class="text-black label-text">Cari perusahaan :</span>
+                <span class="text-black label-text">Cari Perusahaan :</span>
             </label>
             <form action="{{ route('perusahaan') }}" method="GET">
                 <input type="text" placeholder="Masukkan data yang ingin anda cari"

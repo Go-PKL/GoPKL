@@ -97,9 +97,9 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/guru', [AdminController::class, 'index_guru'])->name('guru');
     Route::get('/perusahaan', [AdminController::class, 'index_perusahaan'])->name('perusahaan');
     Route::post('/terimasiswa', [AdminController::class, 'terimasiswa'])->name('terimasiswa');
-    Route::delete('/hapussiswa', [AdminController::class, 'hapussiswa'])->name('hapussiswa');
     Route::post('/terimaguru', [AdminController::class, 'terimaguru'])->name('terimaguru');
-    Route::delete('/hapusguru', [AdminController::class, 'hapusguru'])->name('hapusguru');
     Route::post('/terimaperusahaan', [AdminController::class, 'terimaperusahaan'])->name('terimaperusahaan');
+    Route::delete('/hapussiswa', [AdminController::class, 'hapussiswa'])->name('hapussiswa');
+    Route::delete('/hapusguru', [AdminController::class, 'hapusguru'])->name('hapusguru');
     Route::delete('/hapusperusahaan', [AdminController::class, 'hapusperusahaan'])->name('hapusperusahaan');
 });
