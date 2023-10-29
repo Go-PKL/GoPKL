@@ -1,3 +1,4 @@
+<title>Perusahaan</title>
 @extends('layouts.admin.main')
 
 @php

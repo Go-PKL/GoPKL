@@ -1,3 +1,4 @@
+<title>Guru</title>
 @extends('layouts.admin.main')
 
 @php
