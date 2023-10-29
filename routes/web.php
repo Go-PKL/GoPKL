@@ -96,10 +96,10 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/siswa', [AdminController::class, 'index_siswa'])->name('siswa');
     Route::get('/guru', [AdminController::class, 'index_guru'])->name('guru');
     Route::get('/perusahaan', [AdminController::class, 'index_perusahaan'])->name('perusahaan');
-    Route::post('/verifsiswa', [AdminController::class, 'verifsiswa'])->name('verifsiswa');
+    Route::post('/terimasiswa', [AdminController::class, 'terimasiswa'])->name('terimasiswa');
     Route::delete('/hapussiswa', [AdminController::class, 'hapussiswa'])->name('hapussiswa');
-    Route::post('/verifguru', [AdminController::class, 'verifguru'])->name('verifguru');
+    Route::post('/terimaguru', [AdminController::class, 'terimaguru'])->name('terimaguru');
     Route::delete('/hapusguru', [AdminController::class, 'hapusguru'])->name('hapusguru');
-    Route::post('/verifperusahaan', [AdminController::class, 'verifperusahaan'])->name('verifperusahaan');
+    Route::post('/terimaperusahaan', [AdminController::class, 'terimaperusahaan'])->name('terimaperusahaan');
     Route::delete('/hapusperusahaan', [AdminController::class, 'hapusperusahaan'])->name('hapusperusahaan');
 });

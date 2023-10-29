@@ -11,7 +11,10 @@
             <label class="label">
                 <span class="text-black label-text">Cari Perusahaan :</span>
             </label>
-            <input type="text" placeholder="Masukkan data yang ingin anda cari" class="text-sm input input-bordered w-72" />
+            <form action="{{ route('VerifPerusahaan') }}" method="GET">
+                <input type="text" placeholder="Masukkan data yang ingin anda cari"
+                    class="text-sm input input-bordered w-72" name="search" value="{{ old('cari') }}" />
+            </form>
         </div>
         <div class="overflow-x-auto p-7">
             <table class="table table-zebra">
@@ -46,7 +49,7 @@
                                 <td>{{ $perusahaan->alamat }}</td>
                                 <td>6 Bulan</td>
                                 <td class="flex gap-4">
-                                    <form action="{{ route('verifperusahaan') }}" method="post">
+                                    <form action="{{ route('terimaperusahaan') }}" method="post">
                                         @csrf
                                         <input type="hidden" value="{{ $perusahaan->user->id }}" name="id_user">
                                         <button name="terima" value="terima" class="btn btn-success btn-sm">terima</button>

@@ -10,7 +10,16 @@ class Perusahaan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','nama', 'jurusan', 'alamat', 'image'];
+    protected $fillable = ['user_id', 'nama', 'jurusan', 'alamat', 'image'];
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->where('nama', 'like', '%' . request('search') . '%')
+                ->orWhere('jurusan', 'like', '%' . request('search') . '%')
+                ->orWhere('alamat', 'like', '%' . request('search') . '%');
+        });
+    }
 
     public function user()
     {

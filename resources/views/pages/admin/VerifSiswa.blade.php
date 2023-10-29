@@ -11,10 +11,12 @@
             <label class="label">
                 <span class="text-black label-text">Cari Siswa :</span>
             </label>
-            <input type="text" placeholder="Masukkan data yang ingin anda cari" class="text-sm input input-bordered w-72" />
+            <form action="{{ route('VerifSiswa') }}" method="GET">
+                <input type="text" placeholder="Masukkan data yang ingin anda cari"
+                    class="text-sm input input-bordered w-72" name="search" value="{{ old('cari') }}" />
+            </form>
         </div>
         <div class="overflow-x-auto p-7">
-            <h1>siswa</h1>
             <table class="table table-zebra">
                 <!-- head -->
                 <thead>
@@ -50,7 +52,7 @@
                                 <td>{{ $item->jurusan->singkatan }}</td>
                                 <td>6 Bulan</td>
                                 <td class="flex gap-4">
-                                    <form action="{{ route('verifsiswa') }}" method="post">
+                                    <form action="{{ route('terimasiswa') }}" method="post">
                                         @csrf
                                         <input type="hidden" value="{{ $item->user->id }}" name="id_user">
                                         <button name="terima" value="terima" class="btn btn-success btn-sm">terima</button>

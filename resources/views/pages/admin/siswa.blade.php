@@ -11,7 +11,10 @@
             <label class="label">
                 <span class="text-black label-text">Cari Siswa :</span>
             </label>
-            <input type="text" placeholder="Masukkan data yang ingin anda cari" class="text-sm input input-bordered w-72" />
+            <form action="{{ route('siswa') }}" method="GET">
+                <input type="text" placeholder="Masukkan data yang ingin anda cari"
+                    class="text-sm input input-bordered w-72" name="search" value="{{ old('cari') }}" />
+            </form>
         </div>
         <div class="overflow-x-auto p-7">
             <table class="table table-zebra">
