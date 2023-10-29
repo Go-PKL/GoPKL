@@ -18,46 +18,59 @@ class AdminController extends Controller
      */
     public function index()
     {
-
-        $data =  Siswa::all();
+        $data =  Siswa::latest()->filter(request(['search']))->get();
         return view('pages.admin.VerifSiswa', compact('data'));
     }
 
     public function index_VerifGuru()
     {
-        $gurus = Guru::all();
+        $gurus = Guru::latest()->filter(request(['search']))->get();
         return view('pages.admin.VerifGuru', compact('gurus'));
     }
 
     public function index_VerifPerusahaan()
     {
-        $perusahaans = Perusahaan::all();
+        $perusahaans = Perusahaan::latest()->filter(request(['search']))->get();
         return view('pages.admin.VerifPerusahaan', compact('perusahaans'));
     }
 
     public function index_siswa()
     {
-        $siswas = Siswa::all();
+        $siswas = Siswa::latest()->filter(request(['search']))->get();
         return view('pages.admin.siswa', compact('siswas'));
     }
 
     public function index_guru()
     {
-        $gurus = Guru::all();
+        $gurus = Guru::latest()->filter(request(['search']))->get();
         return view('pages.admin.guru', compact('gurus'));
     }
 
     public function index_perusahaan()
     {
-        $perusahaans = Perusahaan::all();
+        $perusahaans = Perusahaan::latest()->filter(request(['search']))->get();
         return view('pages.admin.perusahaan', compact('perusahaans'));
     }
 
-    public function verifsiswa(Request $request)
+    public function terimasiswa(Request $request)
     {
         $user = User::where('id', $request->id_user)->first();
         $user->assignRole("siswa");
-        return redirect()->to('/siswa')->with('success', 'Data anda berhasil disimpan.');
+        return redirect()->to('/siswa')->with('Berhasil', 'Siswa berhasil diverifikasi.');
+    }
+
+    public function terimaguru(Request $request)
+    {
+        $user = User::where('id', $request->id_user)->first();
+        $user->assignRole("guru");
+        return redirect()->to('/guru')->with('Berhasil', 'Guru berhasil diverifikasi.');
+    }
+
+    public function terimaperusahaan(Request $request)
+    {
+        $user = User::where('id', $request->id_user)->first();
+        $user->assignRole("perusahaan");
+        return redirect()->to('/perusahaan')->with('Berhasil', 'Perusahaan berhasil diverifikasi.');
     }
 
 
@@ -130,10 +143,24 @@ class AdminController extends Controller
     public function hapussiswa(Request $request)
     {
         $user = User::where('id', $request->id_user)->first();
-        // dd($user);
         $user->delete();
 
-        // return view('pages.admin.siswa');
-        return redirect()->to('/VerifSiswa')->with('success', 'Data anda berhasil dihapus.');
+        return redirect()->to('/VerifSiswa')->with('Berhasil', 'Data anda berhasil dihapus.');
+    }
+
+    public function hapusguru(Request $request)
+    {
+        $user = User::where('id', $request->id_user)->first();
+        $user->delete();
+
+        return redirect()->to('/VerifGuru')->with('Berhasil', 'Data anda berhasil dihapus.');
+    }
+
+    public function hapusperusahaan(Request $request)
+    {
+        $user = User::where('id', $request->id_user)->first();
+        $user->delete();
+
+        return redirect()->to('/VerifPerusahaan')->with('Berhasil', 'Data anda berhasil dihapus.');
     }
 }

@@ -20,7 +20,7 @@ class PerusahaanSeeder extends Seeder
             'nama' => 'PT. ARG Solusi Teknologi',
             'jurusan' => 'PPLG, Pemasaran',
             'alamat' => 'Jalan Puti Bungsu, Padang Utara, Padang, Sumatera Barat',
-            'image' => 'image-post/FcuiiXSrMvbhbYrw8thBWUWIC0LSMSqfU2aGtXnj.jpg',
+            'image' => 'image-post/LogoARG.jfif',
         ]);
 
         Perusahaan::create([
@@ -28,7 +28,7 @@ class PerusahaanSeeder extends Seeder
             'nama' => 'CV. Mediatama Web Indonesia',
             'jurusan' => 'PPLG, AKL',
             'alamat' => 'Jalan Marapalam, Padang Timur, Padang, Sumatera Barat',
-            'image' => 'image-post/6Xr79qWSstEvipSm6Uzidk0gDqxmeNX8vnz0qCHD.png',
+            'image' => 'image-post/LogoMediatama.png',
         ]);
     }
 }

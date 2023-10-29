@@ -6,7 +6,10 @@
             <label class="label">
                 <span class="label-text text-black">Cari Perusahaan :</span>
             </label>
-            <input type="text" placeholder="Masukkan data yang ingin anda cari" class="input input-bordered w-72 text-sm" />
+            <form action="{{ route('VerifPerusahaan') }}" method="GET">
+                <input type="text" placeholder="Masukkan data yang ingin anda cari"
+                    class="input input-bordered w-72 text-sm" name="search" value="{{ old('cari') }}" />
+            </form>
         </div>
         <div class="overflow-x-auto p-7">
             <table class="table table-zebra">
@@ -28,9 +31,18 @@
                             <td>{{ $perusahaan->user->email }}</td>
                             <td>{{ $perusahaan->nama }}</td>
                             <td>{{ $perusahaan->alamat }}</td>
-                            <td class="">
-                                <button class="btn btn-success btn-sm">Terima</button>
-                                <button class="btn btn-error btn-sm">Tolak</button>
+                            <td class="flex gap-4">
+                                <form action="{{ route('terimaperusahaan') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" value="{{ $perusahaan->user->id }}" name="id_user">
+                                    <button name="terima" value="terima" class="btn btn-success btn-sm">terima</button>
+                                </form>
+                                <form action="{{ route('hapusperusahaan') }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-error btn-sm type="submit" value="{{ $perusahaan->user->id }}"
+                                        name="id_user" onclick="return confirm('Yakin?')">Tolak</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

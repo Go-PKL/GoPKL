@@ -22,9 +22,8 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
         $this->call(RoleSeeder::class);
-        $this->call(JurusanSeeder::class);
-        $this->call(JabatanSeeder::class);
 
         $roles = Role::all();
 
@@ -76,5 +75,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'perusahaan2@perusahaan.com',
             'password' => bcrypt('123'),
         ]);
+
+        $this->call(JurusanSeeder::class);
+        $this->call(JabatanSeeder::class);
+        $this->call(SiswaSeeder::class);
+        $this->call(GuruSeeder::class);
+        $this->call(PerusahaanSeeder::class);
     }
 }

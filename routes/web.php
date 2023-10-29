@@ -91,6 +91,10 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/siswa', 'index_siswa')->name('siswa');
     Route::get('/guru', 'index_guru')->name('guru');
     Route::get('/perusahaan', 'index_perusahaan')->name('perusahaan');
-    Route::post('/verifsiswa', 'verifsiswa')->name('verifsiswa');
+    Route::post('/terimasiswa', 'terimasiswa')->name('terimasiswa');
+    Route::post('/terimaguru', 'terimaguru')->name('terimaguru');
+    Route::post('/terimaperusahaan', 'terimaperusahaan')->name('terimaperusahaan');
     Route::delete('/hapussiswa', 'hapussiswa')->name('hapussiswa');
+    Route::delete('/hapusguru', 'hapusguru')->name('hapusguru');
+    Route::delete('/hapusperusahaan', 'hapusperusahaan')->name('hapusperusahaan');
 })->middleware('admin');

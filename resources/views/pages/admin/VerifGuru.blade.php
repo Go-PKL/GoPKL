@@ -6,7 +6,10 @@
             <label class="label">
                 <span class="label-text text-black">Cari Guru :</span>
             </label>
-            <input type="text" placeholder="Masukkan data yang ingin anda cari" class="input input-bordered w-72 text-sm" />
+            <form action="{{ route('VerifGuru') }}" method="GET">
+                <input type="text" placeholder="Masukkan data yang ingin anda cari"
+                    class="input input-bordered w-72 text-sm" name="search" value="{{ old('cari') }}" />
+            </form>
         </div>
         <div class="overflow-x-auto p-7">
             <table class="table table-zebra">
@@ -29,9 +32,18 @@
                             <td>{{ $guru->nama }}</td>
                             <td>{{ $guru->jabatan->nama }}</td>
                             <td>6 Bulan</td>
-                            <td class="">
-                                <button class="btn btn-success btn-sm">Terima</button>
-                                <button class="btn btn-error btn-sm">Tolak</button>
+                            <td class="flex gap-4">
+                                <form action="{{ route('terimaguru') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" value="{{ $guru->user->id }}" name="id_user">
+                                    <button name="terima" value="terima" class="btn btn-success btn-sm">terima</button>
+                                </form>
+                                <form action="{{ route('hapusguru') }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-error btn-sm type="submit" value="{{ $guru->user->id }}"
+                                        name="id_user" onclick="return confirm('Yakin?')">Tolak</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
