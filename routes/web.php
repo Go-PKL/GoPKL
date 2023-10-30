@@ -6,6 +6,7 @@ use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PermohonanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('pages.dashboard');
-})->middleware(['auth', 'verified']);
+})->middleware(['auth', 'verified', 'checkrole:siswa,guru,perusahaan']);
 
 Route::get('/select-role', function () {
     return view('auth.select-role');
@@ -29,7 +30,7 @@ Route::get('/select-role', function () {
 
 Route::get('/dashboard', function () {
     return view('pages.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', 'checkrole:siswa,guru,perusahaan'])->name('dashboard');
 
 Route::get('/persyaratan-pkl', function () {
     return view('pages.persyaratan-pkl');
@@ -102,4 +103,9 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::delete('/hapussiswa', [AdminController::class, 'hapussiswa'])->name('hapussiswa');
     Route::delete('/hapusguru', [AdminController::class, 'hapusguru'])->name('hapusguru');
     Route::delete('/hapusperusahaan', [AdminController::class, 'hapusperusahaan'])->name('hapusperusahaan');
+});
+
+//permohonan
+Route::group(['middleware' => ['auth', 'checkrole:siswa,guru,perusahaan']], function () {
+    Route::post('/permohonan/store', [PermohonanController::class, 'store'])->name('permohonan.store');
 });

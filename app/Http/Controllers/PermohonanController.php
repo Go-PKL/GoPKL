@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permohonan;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PermohonanController extends Controller
 {
@@ -34,7 +37,20 @@ class PermohonanController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'tgl_mulai' => 'required|date',
+            'tgl_selesai' => 'required|date',
+            'durasi_pkl' => 'required',
+        ]);
         
+        Permohonan::create([
+            'siswa_id' => auth()->user()->id,
+            'tgl_mulai' => $validatedData['tgl_mulai'],
+            'tgl_selesai' => $validatedData['tgl_selesai'],
+            'durasi_pkl' => $validatedData['durasi_pkl'],
+        ]);
+        
+        return redirect()->route('siswa.index')->with('success', 'Permohonan PKL Anda telah berhasil diajukan.');
     }
 
     /**

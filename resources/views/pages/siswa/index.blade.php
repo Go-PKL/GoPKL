@@ -43,9 +43,9 @@
                                             </button>
                                             <div class="relative flex flex-wrap items-center w-full h-full ">
                                                 <div class="bg-white w-screen h-[90%] absolute left-0 right-0 bottom-0">
-                                                    <form action="" method=""
+                                                    <form action="{{ route('permohonan.store') }}" method="POST"
                                                         class="grid items-center w-full h-full grid-cols-2 gap-x-[90px] gap-y-6 py-5 top-30">
-
+                                                        @csrf
                                                         <img class="w-[194px] h-[190px] m
                                                         x-10 rounded-[10px] justify-self-end"
                                                             src="{{ asset('storage/' . $perusahaan->image) }}"
