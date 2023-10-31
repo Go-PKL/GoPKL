@@ -24,8 +24,8 @@
                                             }
                                             @keydown.escape ="fullscreenModal=false">
                                     <button @click="fullscreenModal=true"
-                                        class="btn btn-xs font-semibold bg-[#3D655D] hover:bg-[#3D655D] hover:scale-105 duration-300 text-white">Cek
-                                        Pendaftaran</button>
+                                    class="btn btn-xs font-semibold bg-[#3D655D] hover:bg-[#3D655D] hover:scale-105 duration-300 text-white">Cek
+                                    Pendaftaran</button>
                                     <template x-teleport="body">
                                         <div x-show="fullscreenModal" x-transition:enter="transition ease-out duration-300"
                                             x-transition:enter-start="translate-y-full"
@@ -38,7 +38,7 @@
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="white" class="w-10 h-10">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M6 18L18 6M6 6l12 12" />
+                                                    d="M6 18L18 6M6 6l12 12" />
                                                 </svg>
                                             </button>
                                             <div class="relative flex flex-wrap items-center w-full h-full ">
@@ -46,6 +46,8 @@
                                                     <form action="{{ route('permohonan.store') }}" method="POST"
                                                         class="grid items-center w-full h-full grid-cols-2 gap-x-[90px] gap-y-6 py-5 top-30">
                                                         @csrf
+                                                        <input type="hidden" value="{{ $perusahaan->id }}" name="perusahaan_id">
+                                                        
                                                         <img class="w-[194px] h-[190px] m
                                                         x-10 rounded-[10px] justify-self-end"
                                                             src="{{ asset('storage/' . $perusahaan->image) }}"

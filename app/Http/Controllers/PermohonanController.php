@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Permohonan;
+use App\Models\Perusahaan;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,15 +43,23 @@ class PermohonanController extends Controller
             'tgl_selesai' => 'required|date',
             'durasi_pkl' => 'required',
         ]);
-        
-        Permohonan::create([
-            'siswa_id' => auth()->user()->id,
-            'tgl_mulai' => $validatedData['tgl_mulai'],
-            'tgl_selesai' => $validatedData['tgl_selesai'],
-            'durasi_pkl' => $validatedData['durasi_pkl'],
-        ]);
-        
-        return redirect()->route('siswa.index')->with('success', 'Permohonan PKL Anda telah berhasil diajukan.');
+
+        $siswa = Siswa::where('user_id', auth()->user()->id)->first();
+        $perusahaan = Perusahaan::where('id', $request->perusahaan_id)->first();
+
+        if ($siswa && $perusahaan) {
+            Permohonan::create([
+                'siswa_id' => $siswa->id,
+                'perusahaan_id' => $perusahaan->id,
+                'tgl_mulai' => $validatedData['tgl_mulai'],
+                'tgl_selesai' => $validatedData['tgl_selesai'],
+                'durasi_pkl' => $validatedData['durasi_pkl'],
+            ]);
+
+            return redirect()->route('siswa.index')->with('success', 'Permohonan PKL Anda telah berhasil diajukan.');
+        }
+
+        return redirect()->route('siswa.index')->with('error', 'Data siswa atau perusahaan tidak ditemukan.');
     }
 
     /**

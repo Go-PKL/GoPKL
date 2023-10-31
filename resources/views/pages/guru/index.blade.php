@@ -1,5 +1,10 @@
 <title>Pendaftaran PKL</title>
 @extends('layouts.user.main')
+
+@php
+    $counter = 0;
+@endphp
+
 @section('content')
     <div class="py-12 overflow-x-hidden">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -10,7 +15,7 @@
                         class="flex justify-center items-center gap-x-3 gap-y-5 w-[150px] h-[75px] md:w-[430px] md:h-[205px] rounded-[10px] text-black border border-[#B4B4B3]">
                         <div>
                             <img class="w-[124.24px] h-[124.24px] rounded-[10px]"
-                                src="{{ asset('storage/' . $perusahaan->image) }}" alt="Logo Perusahaan">
+                                src="{{ asset('storage/' . $perusahaan->image) }}" alt="Logo permohonan">
                         </div>
                         <div class="flex flex-col gap-2 pb-11">
                             <h1 class="flex flex-col text-xl font-bold">{{ $perusahaan->nama }}</h1>
@@ -42,93 +47,63 @@
                                                 </svg>
                                             </button>
                                             <div class="relative flex flex-wrap items-center w-full h-full ">
-                                                <div class="bg-white overflow-y-auto w-screen h-[90%] absolute left-0 right-0 bottom-0">
-                                                    <form action="" method=""
+                                                <div
+                                                    class="bg-white overflow-y-auto w-screen h-[90%] absolute left-0 right-0 bottom-0">
+                                                    <form action="{{ route('pembimbing.store') }}" method="POST"
                                                         class="grid items-center w-full h-full grid-cols-2 gap-x-[90px] gap-y-6 py-5 top-30">
-                                                        <img class="w-[194px] h-[190px] m
-                                                        x-10 rounded-[10px] justify-self-end"
+                                                        @csrf
+                                                        @foreach ($permohonans as $permohonan)
+                                                            <input type="hidden" value="{{ $permohonan->id }}"
+                                                                name="permohonan_id">
+                                                        @endforeach
+
+                                                        <img class="w-[194px] h-[190px] mx-10 rounded-[10px] justify-self-end"
                                                             src="{{ asset('storage/' . $perusahaan->image) }}"
-                                                            alt="Logo Perusahaan">
+                                                            alt="Logo permohonan">
                                                         <h1 class="mx-10 text-5xl font-bold capitalize justify-self-start">
                                                             {{ $perusahaan->nama }}
                                                         </h1>
-                                                        {{-- @foreach ($siswas as $siswa) --}}
-                                                            <div class="col-span-2 justify-self-center w-[1030px]">
-                                                                <table class="table table-zebra">
-                                                                    <!-- head -->
-                                                                    <thead>
-                                                                        <tr class="text-black border-b border-black">
-                                                                            <th></th>
-                                                                            <th>Nama</th>
-                                                                            <th>Kelas</th>
-                                                                            <th>Jurusan</th>
-                                                                            <th>Tanggal Mulai</th>
-                                                                            <th>Tanggal Selesai</th>
-                                                                            <th>Durasi PKL</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <th>1</th>
-                                                                            <td>Muhammad Luthfi</td>
-                                                                            <td>12</td>
-                                                                            <td>PPLG</td>
-                                                                            <td>2023-10-01</td>
-                                                                            <td>2024-03-31</td>
-                                                                            <td>6 Bulan</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>2</th>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>3</th>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>4</th>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>5</th>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>6</th>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        {{-- @endforeach --}}
-
+                                                        <div class="col-span-2 justify-self-center w-[1030px]">
+                                                            <table class="table table-zebra">
+                                                                <thead>
+                                                                    <tr class="text-black border-b border-black">
+                                                                        <th></th>
+                                                                        <th>Nama</th>
+                                                                        <th>Kelas</th>
+                                                                        <th>Jurusan</th>
+                                                                        <th>Tanggal Mulai</th>
+                                                                        <th>Tanggal Selesai</th>
+                                                                        <th>Durasi PKL</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach ($permohonans as $permohonan)
+                                                                        @php
+                                                                            $counter = $counter + 1;
+                                                                        @endphp
+                                                                        @if ($permohonan )
+                                                                            <tr>
+                                                                                <th>{{ $counter }}</th>
+                                                                                <td>{{ $permohonan->siswa->nama }}</td>
+                                                                                <td>{{ $permohonan->siswa->kelas }}</td>
+                                                                                <td>{{ $permohonan->siswa->jurusan->singkatan }}
+                                                                                </td>
+                                                                                <td>{{ $permohonan->tgl_mulai }}</td>
+                                                                                <td>{{ $permohonan->tgl_selesai }}</td>
+                                                                                <td>{{ $permohonan->durasi_pkl }}</td>
+                                                                            </tr>
+                                                                        @else
+                                                                            @php
+                                                                                $counter = $counter - 1;
+                                                                            @endphp
+                                                                        @endif
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                         <button type="submit"
-                                                            class="w-[1030px] bg-[#3D655D] col-span-2 py-2 justify-self-center rounded-md text-white hover:scale-105 duration-300">Bimbing</button>
+                                                            class="w-[1030px] bg-[#3D655D] col-span-2 py-2 justify-self-center rounded-md text-white hover:scale-105 duration-300">
+                                                            Bimbing</button>
                                                     </form>
                                                 </div>
                                             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
+use App\Models\Pembimbing;
 use App\Models\Perusahaan;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,7 +20,8 @@ class PerusahaanController extends Controller
     {
         $users = User::all();
         $perusahaans = Perusahaan::all();
-        return view('pages.perusahaan.index', compact('users','perusahaans'));
+        $pembimbings = Pembimbing::all();
+        return view('pages.perusahaan.index', compact('users','perusahaans','pembimbings'));
     }
 
     /**

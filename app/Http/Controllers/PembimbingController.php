@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
-use App\Models\Jabatan;
+use App\Models\Pembimbing;
 use App\Models\Permohonan;
-use App\Models\Perusahaan;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class GuruController extends Controller
+class PembimbingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +16,7 @@ class GuruController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        $perusahaans = Perusahaan::all();
-        $permohonans = Permohonan::all(); 
-        return view('pages.guru.index', compact('users', 'perusahaans', 'permohonans'));
+        //
     }
 
     /**
@@ -32,8 +26,7 @@ class GuruController extends Controller
      */
     public function create()
     {
-        $jabatans = Jabatan::all(); 
-        return view('pages.guru.create', compact('jabatans'));
+        //
     }
 
     /**
@@ -44,18 +37,19 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'nama' => 'required|string|max:255',
-            'jabatan' => 'required',
-        ]);
+        $guru = Guru::where('user_id', auth()->user()->id)->first();
+        $permohonan = Permohonan::where('id', $request->permohonan_id)->first();
 
-        Guru::create([
-            'nama' => $validatedData['nama'],
-            'jabatan_id' => $request->jabatan,
-            'user_id' => Auth::user()->id,
-        ]);
-    
-        return redirect()->to('/dashboard')->with('success', 'Data anda berhasil disimpan.');
+        if ($guru && $permohonan) {
+            Pembimbing::create([
+                'guru_id' => $guru->id,
+                'permohonan_id' => $permohonan->id,
+            ]);
+
+            return redirect()->route('guru.index')->with('success', 'Permohonan PKL Anda telah berhasil diajukan.');
+        }
+
+        return redirect()->route('guru.index')->with('error', 'Data siswa atau perusahaan tidak ditemukan.');
     }
 
     /**

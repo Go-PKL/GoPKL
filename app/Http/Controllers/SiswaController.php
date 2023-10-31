@@ -57,6 +57,7 @@ class SiswaController extends Controller
             'kelas' => $validatedData['kelas'],
             'jurusan_id' => $request->jurusan,
             'user_id' => Auth::user()->id,
+            // 'user_id' => auth()->user()->id,
         ]);
 
         return redirect()->to('/dashboard')->with('success', 'Data anda berhasil disimpan.');

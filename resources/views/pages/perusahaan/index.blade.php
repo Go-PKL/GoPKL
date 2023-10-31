@@ -16,66 +16,29 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>1</th>
-                    <td>Hidayati, S.Kom, M.Pd.T</td>
-                    <td>Muhammad Luthfi</td>
-                    <td>12</td>
-                    <td>PPLG</td>
-                    <td>6 Bulan</td>
-                    <td class="flex gap-x-2">
-                        <a href="#" class="btn btn-sm text-white hover:bg-[#198754] bg-[#198754]">Terima</a>
-                        <a href="#" class="btn btn-sm text-white hover:bg-[#DC3545] bg-[#DC3545]">Tolak</a>
-                    </td>
-                </tr>
-                <tr>
-                    <th>2</th>
-                    <td>Hidayati, S.Kom, M.Pd.T</td>
-                    <td>Husnul Fikri Averus</td>
-                    <td>12</td>
-                    <td>PPLG</td>
-                    <td>6 Bulan</td>
-                    <td class="flex text-white gap-x-2">
-                        <a href="#" class="btn btn-sm text-white hover:bg-[#198754] bg-[#198754]">Terima</a>
-                        <a href="#" class="btn btn-sm text-white hover:bg-[#DC3545] bg-[#DC3545]">Tolak</a>
-                    </td>
-                </tr>
-                <tr>
-                    <th>3</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th>4</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th>5</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th>6</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach ($pembimbings as $pembimbing)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td> {{ $pembimbing->guru->nama }}</td>
+                        <td> {{ $pembimbing->permohonan->siswa->nama }}</td>
+                        <td> {{ $pembimbing->permohonan->siswa->kelas }}</td>
+                        <td> {{ $pembimbing->permohonan->siswa->jurusan->singkatan }}</td>
+                        <td> {{ $pembimbing->permohonan->durasi_pkl }}</td>
+                        <td class="flex gap-4">
+                            <form action="" method="post">
+                                @csrf
+                                <input type="hidden" value="" name="id_user">
+                                <button name="terima" value="terima" class="btn btn-success btn-sm">terima</button>
+                            </form>
+                            <form action="" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-error btn-sm type="submit" value="" name="id_user"
+                                    onclick="return confirm('Yakin?')">Tolak</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

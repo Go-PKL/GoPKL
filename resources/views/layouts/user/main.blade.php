@@ -79,6 +79,28 @@
     <div class="bg-white dark:bg-gray-900">
         <!-- Page Navbar -->
         @include('layouts.user.navbar')
+        
+        <!-- Page Alert -->
+        @if (Session::has('success'))
+            <div class="p-3">
+                <div class="text-white rounded-md alert bg-primary">
+                    {{ Session::get('success') }}
+                </div>
+            </div>
+            <?php
+            header('refresh: 3');
+            ?>
+        @endif
+        @if (Session::has('error'))
+            <div class="p-3">
+                <div class="text-white rounded-md alert bg-error">
+                    {{ Session::get('error') }}
+                </div>
+            </div>
+            <?php
+            header('refresh: 3');
+            ?>
+        @endif
 
         <!-- Page Content -->
         @yield('content')
