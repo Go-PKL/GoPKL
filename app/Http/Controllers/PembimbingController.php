@@ -38,13 +38,18 @@ class PembimbingController extends Controller
     public function store(Request $request)
     {
         $guru = Guru::where('user_id', auth()->user()->id)->first();
-        $permohonan = Permohonan::where('id', $request->permohonan_id)->first();
+        $permohonan = Permohonan::get();
+        // dd($permohonan);
 
         if ($guru && $permohonan) {
-            Pembimbing::create([
-                'guru_id' => $guru->id,
-                'permohonan_id' => $permohonan->id,
-            ]);
+
+
+            foreach ($permohonan as $j) {
+                Pembimbing::create([
+                    'guru_id' => $guru->id,
+                    'permohonan_id' => $j->id,
+                ]);
+            }
 
             return redirect()->route('guru.index')->with('success', 'Permohonan PKL Anda telah berhasil diajukan.');
         }

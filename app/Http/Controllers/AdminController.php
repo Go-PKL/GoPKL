@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Guru;
 use App\Models\User;
 use App\Models\Siswa;
+use App\Models\Jabatan;
 use App\Models\Jurusan;
+use App\Models\Pembimbing;
+use App\Models\Permohonan;
 use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 
@@ -16,10 +19,10 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index_VerifSiswa()
     {
-        $data =  Siswa::latest()->filter(request(['search']))->get();
-        return view('pages.admin.VerifSiswa', compact('data'));
+        $siswas =  Siswa::latest()->filter(request(['search']))->get();
+        return view('pages.admin.VerifSiswa', compact('siswas'));
     }
 
     public function index_VerifGuru()
@@ -36,14 +39,16 @@ class AdminController extends Controller
 
     public function index_siswa()
     {
-        $siswas = Siswa::latest()->filter(request(['search']))->get();
-        return view('pages.admin.siswa', compact('siswas'));
+        $permohonans = Permohonan::latest()->filter(request(['search']))->get();
+        $jurusans = Jurusan::all();
+        return view('pages.admin.siswa', compact('permohonans', 'jurusans'));
     }
 
     public function index_guru()
     {
         $gurus = Guru::latest()->filter(request(['search']))->get();
-        return view('pages.admin.guru', compact('gurus'));
+        $jabatans = Jabatan::all();
+        return view('pages.admin.guru', compact('gurus', 'jabatans'));
     }
 
     public function index_perusahaan()
@@ -73,71 +78,63 @@ class AdminController extends Controller
         return redirect()->to('/perusahaan')->with('Berhasil', 'Perusahaan berhasil diverifikasi.');
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function updatesiswa(Request $request, $id)
     {
-        //
+        $permohonan = Permohonan::find($id);
+        $siswa = $permohonan->siswa;
+        $user = $permohonan->siswa->user;
+        $permohonan->update([
+            'tgl_mulai' => $request->tgl_mulai,
+            'tgl_selesai' => $request->tgl_selesai,
+            'durasi_pkl' => $request->durasi_pkl,
+        ]);
+
+        $user->update([
+            'email' => $request->email
+        ]);
+
+        $siswa->update([
+            'nama' => $request->nama,
+            'kelas' => $request->kelas,
+            'jurusan_id' => $request->jurusan_id,
+        ]);
+
+        return redirect()->to('/siswa')->with('success', 'Data siswa berhasil diubah');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function updateguru(Request $request, $id)
     {
-        //
+        $guru = Guru::find($id);
+        $user = $guru->user;
+
+        $user->update([
+            'email' => $request->email
+        ]);
+
+        $guru->update([
+            'nama' => $request->nama,
+            'jabatan_id' => $request->jabatan_id,
+        ]);
+
+        return redirect()->to('/guru')->with('success', 'Data siswa berhasil diubah');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function updateperusahaan(Request $request, $id)
     {
-        //
-    }
+        $perusahaan = Perusahaan::find($id);
+        $user = $perusahaan->user;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        $user->update([
+            'email' => $request->email
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        $perusahaan->update([
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'jurusan' => $request->jurusan,
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect()->to('/perusahaan')->with('success', 'Data siswa berhasil diubah');
     }
 
     public function hapussiswa(Request $request)
@@ -145,7 +142,7 @@ class AdminController extends Controller
         $user = User::where('id', $request->id_user)->first();
         $user->delete();
 
-        return redirect()->to('/VerifSiswa')->with('Berhasil', 'Data anda berhasil dihapus.');
+        return redirect()->to('/VerifSiswa')->with('success', 'Data siswa berhasil dihapus.');
     }
 
     public function hapusguru(Request $request)
@@ -153,7 +150,7 @@ class AdminController extends Controller
         $user = User::where('id', $request->id_user)->first();
         $user->delete();
 
-        return redirect()->to('/VerifGuru')->with('Berhasil', 'Data anda berhasil dihapus.');
+        return redirect()->to('/VerifGuru')->with('success', 'Data guru berhasil dihapus.');
     }
 
     public function hapusperusahaan(Request $request)
@@ -161,6 +158,6 @@ class AdminController extends Controller
         $user = User::where('id', $request->id_user)->first();
         $user->delete();
 
-        return redirect()->to('/VerifPerusahaan')->with('Berhasil', 'Data anda berhasil dihapus.');
+        return redirect()->to('/VerifPerusahaan')->with('success', 'Data perusahaan berhasil dihapus.');
     }
 }

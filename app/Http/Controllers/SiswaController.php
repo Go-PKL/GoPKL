@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
+use App\Models\Permohonan;
 use App\Models\Perusahaan;
 use App\Models\Siswa;
 use App\Models\User;
@@ -23,7 +24,11 @@ class SiswaController extends Controller
         $siswas = Siswa::where('user_id', Auth::user()->id)->first();
         $jurusans = Jurusan::all();
         $perusahaans = Perusahaan::all();
-        return view('pages.siswa.index', compact('users', 'siswas', 'jurusans', 'perusahaans'));
+        $permohonans = Permohonan::all();
+        // $perusahaans = Perusahaan::join('permohonans', 'perusahaans.id', '=', 'permohonans.perusahaan_id')->get();
+
+
+        return view('pages.siswa.index', compact('users', 'siswas', 'jurusans', 'perusahaans', 'permohonans'));
     }
 
     /**
