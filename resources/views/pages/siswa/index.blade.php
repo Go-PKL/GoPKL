@@ -23,21 +23,9 @@
                                                 document.body.classList.remove('overflow-hidden');
                                             }
                                             @keydown.escape ="fullscreenModal=false">
-                                    @php
-                                        $siswaSudahMendaftar = \App\Models\Permohonan::where('siswa_id', $siswas->id)
-                                            ->where('perusahaan_id', $perusahaan->id)
-                                            ->exists();
-                                    @endphp
-
-                                    @if ($siswaSudahMendaftar)
-                                        <button @click="fullscreenModal=true" disabled readonly
-                                            class="btn btn-xs font-semibold bg-[#3D655D] hover:bg-[#3D655D] hover:scale-105 duration-300 text-white">Sudah
-                                            Mendaftar</button>
-                                    @else
-                                        <button @click="fullscreenModal=true"
-                                            class="btn btn-xs font-semibold bg-[#3D655D] hover:bg-[#3D655D] hover:scale-105 duration-300 text-white">Cek
-                                            Pendaftaran</button>
-                                    @endif
+                                    <button @click="fullscreenModal=true"
+                                    class="btn btn-xs font-semibold bg-[#3D655D] hover:bg-[#3D655D] hover:scale-105 duration-300 text-white">Cek
+                                    Pendaftaran</button>
                                     <template x-teleport="body">
                                         <div x-show="fullscreenModal" x-transition:enter="transition ease-out duration-300"
                                             x-transition:enter-start="translate-y-full"

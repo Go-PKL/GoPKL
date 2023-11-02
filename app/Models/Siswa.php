@@ -15,8 +15,8 @@ class Siswa extends Model
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {
             return $query->where('nama', 'like', '%' . request('search') . '%')
-                ->orWhere('kelas', 'like', '%' . request('search') . '%');
-            // ->orWhere('singkatan', 'like', '%' . request('search') . '%');
+                ->orWhere('kelas', 'like', '%' . request('search') . '%')
+                ->orWhere('singkatan', 'like', '%' . request('search') . '%');
         });
     }
 
@@ -29,7 +29,7 @@ class Siswa extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    
+
     public function permohonan()
     {
         return $this->hasMany(Permohonan::class, 'permohonan_id');

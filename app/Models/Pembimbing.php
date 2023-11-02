@@ -11,6 +11,15 @@ class Pembimbing extends Model
 
     protected $fillable = ['permohonan_id', 'guru_id'];
 
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->where('email', 'like', '%' . $search . '%')
+                ->orWhere('nama', 'like', '%' . $search . '%')
+                ->orWhere('jabatan', 'like', '%' . $search . '%');
+        });
+    }
+
     public function permohonan()
     {
         return $this->belongsTo(Permohonan::class, 'permohonan_id');
@@ -20,5 +29,4 @@ class Pembimbing extends Model
     {
         return $this->belongsTo(Guru::class, 'guru_id');
     }
-
 }

@@ -31,13 +31,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data as $item)
+                    @foreach ($siswas as $siswa)
                         @php
                             $counter = $counter + 1;
                         @endphp
 
                         {{-- jika siswa --}}
-                        @if ($item->user->hasRole('siswa'))
+                        @if ($siswa->user->hasRole('siswa'))
                             @php
                                 $counter = $counter - 1;
                             @endphp
@@ -46,21 +46,21 @@
                         @else
                             <tr>
                                 <td>{{ $counter }}</td>
-                                <td>{{ $item->user->email }}</td>
-                                <td>{{ $item->nama }}</td>
-                                <td>{{ $item->kelas }}</td>
-                                <td>{{ $item->jurusan->singkatan }}</td>
+                                <td>{{ $siswa->user->email }}</td>
+                                <td>{{ $siswa->nama }}</td>
+                                <td>{{ $siswa->kelas }}</td>
+                                <td>{{ $siswa->jurusan->singkatan }}</td>
                                 <td>6 Bulan</td>
                                 <td class="flex gap-4">
                                     <form action="{{ route('terimasiswa') }}" method="post">
                                         @csrf
-                                        <input type="hidden" value="{{ $item->user->id }}" name="id_user">
+                                        <input type="hidden" value="{{ $siswa->user->id }}" name="id_user">
                                         <button name="terima" value="terima" class="btn btn-success btn-sm">terima</button>
                                     </form>
                                     <form action="{{ route('hapussiswa') }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-error btn-sm type="submit" value="{{ $item->user->id }}"
+                                        <button class="btn btn-error btn-sm type="submit" value="{{ $siswa->user->id }}"
                                             name="id_user" onclick="return confirm('Yakin?')">Tolak</button>
                                     </form>
                                 </td>

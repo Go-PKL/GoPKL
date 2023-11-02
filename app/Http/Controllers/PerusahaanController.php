@@ -21,7 +21,7 @@ class PerusahaanController extends Controller
         $users = User::all();
         $perusahaans = Perusahaan::all();
         $pembimbings = Pembimbing::all();
-        return view('pages.perusahaan.index', compact('users','perusahaans','pembimbings'));
+        return view('pages.perusahaan.index', compact('users', 'perusahaans', 'pembimbings'));
     }
 
     /**
@@ -48,7 +48,7 @@ class PerusahaanController extends Controller
             'alamat' => 'required|string',
             'image' => 'image|file',
         ]);
-    
+
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('image-post');
         }
@@ -60,7 +60,7 @@ class PerusahaanController extends Controller
             'image' => $validatedData['image'],
             'user_id' => Auth::user()->id,
         ]);
-    
+
         return redirect()->to('/dashboard')->with('success', 'Data anda berhasil disimpan.');
     }
 
