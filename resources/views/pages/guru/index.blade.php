@@ -81,9 +81,9 @@
                                                                         @php
                                                                             $counter = $counter + 1;
                                                                         @endphp
-                                                                        @if ($permohonan )
+                                                                        @if ($perusahaan->id == $permohonan->perusahaan->id)
                                                                             <tr>
-                                                                                <th>{{ $counter }}</th>
+                                                                                <th></th>
                                                                                 <td>{{ $permohonan->siswa->nama }}</td>
                                                                                 <td>{{ $permohonan->siswa->kelas }}</td>
                                                                                 <td>{{ $permohonan->siswa->jurusan->singkatan }}
