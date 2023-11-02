@@ -123,6 +123,7 @@ class AdminController extends Controller
     {
         $perusahaan = Perusahaan::find($id);
         $user = $perusahaan->user;
+        $jurusan = implode(", ", $request->jurusan);
 
         $user->update([
             'email' => $request->email
@@ -131,7 +132,7 @@ class AdminController extends Controller
         $perusahaan->update([
             'nama' => $request->nama,
             'alamat' => $request->alamat,
-            'jurusan' => $request->jurusan,
+            'jurusan' => $jurusan,
         ]);
 
         return redirect()->to('/perusahaan')->with('success', 'Data siswa berhasil diubah');

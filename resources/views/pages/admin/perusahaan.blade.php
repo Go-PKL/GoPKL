@@ -86,7 +86,7 @@
                                                                 </div>
 
                                                                 <div class="flex flex-col justify-self-start">
-                                                                    <label for="nama">Nama guru</label>
+                                                                    <label for="nama">Nama Perusahaan</label>
                                                                     <input type="text" id="nama" name="nama"
                                                                         value="{{ $perusahaan->nama }}" readonly
                                                                         class="p-2 border w-[469px] border-[#787A91] rounded-md focus:outline-none">
@@ -94,11 +94,56 @@
                                                                 </div>
 
                                                                 <div class="flex flex-col justify-self-end">
-                                                                    <label for="jurusan">Jabatan</label>
-                                                                    <input type="text" name="jurusan" id="jurusan"
-                                                                        value="{{ $perusahaan->jurusan }}"
-                                                                        class="p-2 border w-[469px] border-[#787A91] rounded-md focus:outline-none"
-                                                                        readonly>
+                                                                    <label for="jurusan">Jurusan</label>
+
+                                                                    @php
+                                                                        $jurusanArray = explode(', ', $perusahaan->jurusan);
+                                                                    @endphp
+
+                                                                    <div class="grid grid-cols-3 py-2 gap-x-16 gap-y-4">
+                                                                        <label class="flex gap-2">
+                                                                            <input type="checkbox" name="jurusan[]"
+                                                                                id="PPLG" value="PPLG"
+                                                                                {{ in_array('PPLG', $jurusanArray) ? 'checked' : '' }}
+                                                                                disabled>PPLG
+                                                                        </label>
+                                                                        <label class="flex gap-2">
+                                                                            <input type="checkbox" name="jurusan[]"
+                                                                                id="TJKT" value="TJKT"
+                                                                                {{ in_array('TJKT', $jurusanArray) ? 'checked' : '' }}
+                                                                                disabled>TJKT
+                                                                        </label>
+                                                                        <label class="flex gap-2">
+                                                                            <input type="checkbox" name="jurusan[]"
+                                                                                id="ULPW" value="ULPW"
+                                                                                {{ in_array('ULPW', $jurusanArray) ? 'checked' : '' }}
+                                                                                disabled>ULPW
+                                                                        </label>
+                                                                        <label class="flex gap-2">
+                                                                            <input type="checkbox" name="jurusan[]"
+                                                                                id="Pemasaran" value="Pemasaran"
+                                                                                {{ in_array('Pemasaran', $jurusanArray) ? 'checked' : '' }}
+                                                                                disabled>Pemasaran
+                                                                        </label>
+                                                                        <label class="flex gap-2">
+                                                                            <input type="checkbox" name="jurusan[]"
+                                                                                id="AKL" value="AKL"
+                                                                                {{ in_array('AKL', $jurusanArray) ? 'checked' : '' }}
+                                                                                disabled>AKL
+                                                                        </label>
+                                                                        <label class="flex gap-2">
+                                                                            <input type="checkbox" name="jurusan[]"
+                                                                                id="MPLB" value="MPLB"
+                                                                                {{ in_array('MPLB', $jurusanArray) ? 'checked' : '' }}
+                                                                                disabled>MPLB
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="flex flex-col justify-self-start">
+                                                                    <label for="nama">Alamat Perusahaan</label>
+                                                                    <textarea cols="30" rows="10" type="text" id="nama" name="nama"
+                                                                        class="p-2 border w-[469px] border-[#787A91] rounded-md focus:outline-none">{{ $perusahaan->alamat }}</textarea>
                                                                 </div>
 
                                                                 <button type="submit"
@@ -143,7 +188,8 @@
                                                     <div class="relative flex flex-wrap items-center w-full h-full ">
                                                         <div
                                                             class="bg-white w-screen h-[90%] absolute left-0 right-0 bottom-0">
-                                                            <form action="{{ route('updateperusahaan', $perusahaan->id) }}"
+                                                            <form
+                                                                action="{{ route('updateperusahaan', $perusahaan->id) }}"
                                                                 method="POST"
                                                                 class="grid items-center w-full h-full grid-cols-2 gap-x-[90px] gap-y-6 py-5 top-30">
                                                                 @method('PATCH')
@@ -171,38 +217,47 @@
                                                                 <div class="flex flex-col justify-self-end">
                                                                     <label for="jurusan">Jurusan</label>
 
+                                                                    @php
+                                                                        $jurusanArray = explode(', ', $perusahaan->jurusan);
+                                                                    @endphp
+
                                                                     <div class="grid grid-cols-3 py-2 gap-x-16 gap-y-4">
                                                                         <label class="flex gap-2">
                                                                             <input type="checkbox" name="jurusan[]"
-                                                                                id="PPLG" value="PPLG">PPLG
+                                                                                id="PPLG" value="PPLG"
+                                                                                {{ in_array('PPLG', $jurusanArray) ? 'checked' : '' }}>PPLG
                                                                         </label>
                                                                         <label class="flex gap-2">
                                                                             <input type="checkbox" name="jurusan[]"
-                                                                                id="TJKT" value="TJKT">TJKT
+                                                                                id="TJKT" value="TJKT"
+                                                                                {{ in_array('TJKT', $jurusanArray) ? 'checked' : '' }}>TJKT
                                                                         </label>
                                                                         <label class="flex gap-2">
                                                                             <input type="checkbox" name="jurusan[]"
-                                                                                id="ULPW" value="ULPW">ULPW
+                                                                                id="ULPW" value="ULPW"
+                                                                                {{ in_array('ULPW', $jurusanArray) ? 'checked' : '' }}>ULPW
                                                                         </label>
                                                                         <label class="flex gap-2">
                                                                             <input type="checkbox" name="jurusan[]"
-                                                                                id="Pemasaran" value="Pemasaran">Pemasaran
+                                                                                id="Pemasaran" value="Pemasaran"
+                                                                                {{ in_array('Pemasaran', $jurusanArray) ? 'checked' : '' }}>Pemasaran
                                                                         </label>
                                                                         <label class="flex gap-2">
                                                                             <input type="checkbox" name="jurusan[]"
-                                                                                id="AKL" value="AKL">AKL
+                                                                                id="AKL" value="AKL"
+                                                                                {{ in_array('AKL', $jurusanArray) ? 'checked' : '' }}>AKL
                                                                         </label>
                                                                         <label class="flex gap-2">
                                                                             <input type="checkbox" name="jurusan[]"
-                                                                                id="MPLB" value="MPLB">MPLB
+                                                                                id="MPLB" value="MPLB"
+                                                                                {{ in_array('MPLB', $jurusanArray) ? 'checked' : '' }}>MPLB
                                                                         </label>
                                                                     </div>
-
                                                                 </div>
 
                                                                 <div class="flex flex-col justify-self-start">
                                                                     <label for="nama">Alamat Perusahaan</label>
-                                                                    <textarea cols="30" rows="10" type="text" id="nama" name="nama"
+                                                                    <textarea cols="30" rows="10" type="text" id="alamat" name="alamat"
                                                                         class="p-2 border w-[469px] border-[#787A91] rounded-md focus:outline-none">{{ $perusahaan->alamat }}</textarea>
                                                                 </div>
 
