@@ -96,6 +96,8 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/siswa', [AdminController::class, 'index_siswa'])->name('siswa');
     Route::get('/guru', [AdminController::class, 'index_guru'])->name('guru');
     Route::get('/perusahaan', [AdminController::class, 'index_perusahaan'])->name('perusahaan');
+    Route::get('/pembimbing', [AdminController::class, 'index_pembimbing'])->name('pembimbing');
+    Route::post('/daftarpembimbing', [AdminController::class, 'daftarpembimbing'])->name('daftarpembimbing');
     Route::post('/terimasiswa', [AdminController::class, 'terimasiswa'])->name('terimasiswa');
     Route::post('/terimaguru', [AdminController::class, 'terimaguru'])->name('terimaguru');
     Route::post('/terimaperusahaan', [AdminController::class, 'terimaperusahaan'])->name('terimaperusahaan');
@@ -118,4 +120,5 @@ Route::group(['middleware' => ['auth', 'checkrole:siswa,guru,perusahaan,admin']]
 //pembimbing
 Route::group(['middleware' => ['auth', 'role:guru']], function () {
     Route::post('/pembimbing/store', [PembimbingController::class, 'store'])->name('pembimbing.store');
+    Route::post('/terima-siswa/{id}', [PembimbingController::class, 'terimaSiswa'])->name('terima-siswa');
 });

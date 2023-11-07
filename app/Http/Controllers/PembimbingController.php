@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 
 class PembimbingController extends Controller
 {
+    public function terimaSiswa($id)
+    {
+        $pembimbings = Pembimbing::find($id);
+        $pembimbings->update([
+            'status' => true,
+        ]);
+        // dd($data->perusahaan_id);
+        return redirect()->route('guru.index')->with('success', 'Data siswa berhasil diterima.');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -99,6 +109,6 @@ class PembimbingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }

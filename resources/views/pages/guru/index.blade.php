@@ -74,23 +74,36 @@
                                                                         <th>Tanggal Mulai</th>
                                                                         <th>Tanggal Selesai</th>
                                                                         <th>Durasi PKL</th>
+                                                                        <th>Penerimaan</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    @foreach ($permohonans as $permohonan)
+                                                                    @foreach ($pembimbings as $pembimbing)
                                                                         @php
                                                                             $counter = $counter + 1;
                                                                         @endphp
-                                                                        @if ($perusahaan->id == $permohonan->perusahaan->id)
+                                                                        @if ($perusahaan->id == $pembimbing->perusahaan_id)
                                                                             <tr>
                                                                                 <th></th>
-                                                                                <td>{{ $permohonan->siswa->nama }}</td>
-                                                                                <td>{{ $permohonan->siswa->kelas }}</td>
-                                                                                <td>{{ $permohonan->siswa->jurusan->singkatan }}
+                                                                                <td>{{ $pembimbing->permohonan->siswa->nama }}</td>
+                                                                                <td>{{ $pembimbing->permohonan->siswa->kelas }}</td>
+                                                                                <td>{{ $pembimbing->permohonan->siswa->jurusan->singkatan }}
                                                                                 </td>
-                                                                                <td>{{ $permohonan->tgl_mulai }}</td>
-                                                                                <td>{{ $permohonan->tgl_selesai }}</td>
-                                                                                <td>{{ $permohonan->durasi_pkl }}</td>
+                                                                                <td>{{ $pembimbing->permohonan->tgl_mulai }}</td>
+                                                                                <td>{{ $pembimbing->permohonan->tgl_selesai }}</td>
+                                                                                <td>{{ $pembimbing->permohonan->durasi_pkl }}</td>
+                                                                                <td class="flex gap-4">
+                                                                                    <form action="{{ route('terima-siswa', $pembimbing->id) }}" method="post">
+                                                                                        @csrf
+                                                                                        <button name="terima" value="terima" class="btn btn-success btn-sm">terima</button>
+                                                                                    </form>
+                                                                                    <form action="" method="POST">
+                                                                                        @csrf
+                                                                                        @method('DELETE')
+                                                                                        <button class="btn btn-error btn-sm type="submit" value=""
+                                                                                            name="id_user" onclick="return confirm('Yakin?')">Tolak</button>
+                                                                                    </form>
+                                                                                </td>
                                                                             </tr>
                                                                         @else
                                                                             @php
@@ -101,9 +114,6 @@
                                                                 </tbody>
                                                             </table>
                                                         </div>
-                                                        <button type="submit"
-                                                            class="w-[1030px] bg-[#3D655D] col-span-2 py-2 justify-self-center rounded-md text-white hover:scale-105 duration-300">
-                                                            Bimbing</button>
                                                     </form>
                                                 </div>
                                             </div>

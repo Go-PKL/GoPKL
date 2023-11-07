@@ -24,15 +24,20 @@
                                             }
                                             @keydown.escape ="fullscreenModal=false">
                                     @php
-                                        $siswaSudahMendaftar = \App\Models\Permohonan::where('siswa_id', $siswas->id)
+                                        $totalPendaftaranSiswa = \App\Models\Permohonan::where('siswa_id', $siswas->id)->count();
+                                        $totalPendaftaranKePerusahaan = \App\Models\Permohonan::where('siswa_id', $siswas->id)
                                             ->where('perusahaan_id', $perusahaan->id)
-                                            ->exists();
+                                            ->count();
                                     @endphp
 
-                                    @if ($siswaSudahMendaftar)
-                                        <button @click="fullscreenModal=true" disabled readonly
-                                            class="btn btn-xs font-semibold bg-[#3D655D] hover:bg-[#3D655D] hover:scale-105 duration-300 text-white">Sudah
+                                    @if ($totalPendaftaranKePerusahaan >= 1)
+                                        <button disabled readonly
+                                            class="btn btn-xs font-semibold bg-[#787A91] text-white">Sudah
                                             Mendaftar</button>
+                                    @elseif ($totalPendaftaranSiswa >= 2)
+                                        <button disabled readonly
+                                            class="btn btn-xs font-semibold bg-[#787A91] text-white">Batas Pendaftaran
+                                            Terpenuhi</button>
                                     @else
                                         <button @click="fullscreenModal=true"
                                             class="btn btn-xs font-semibold bg-[#3D655D] hover:bg-[#3D655D] hover:scale-105 duration-300 text-white">Cek
@@ -104,7 +109,7 @@
 
                                                         <div class="flex flex-col justify-self-start">
                                                             <label for="durasi_pkl">Durasi PKL</label>
-                                                            <select name="durasi_pkl" id="durasi_pkl"
+                                                            <select name="durasi_pkl" id="durasi_pkl_{{ $perusahaan->id }}"
                                                                 class="w-[469px] bg-white border-[#00000080] rounded-md select select-bordered focus:outline-none"
                                                                 required>
                                                                 <option disabled selected>Silahkan pilih durasi pkl

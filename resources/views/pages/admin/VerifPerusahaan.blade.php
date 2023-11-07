@@ -47,7 +47,6 @@
                                 <td>{{ $perusahaan->user->email }}</td>
                                 <td>{{ $perusahaan->nama }}</td>
                                 <td>{{ $perusahaan->alamat }}</td>
-                                <td>6 Bulan</td>
                                 <td class="flex gap-4">
                                     <form action="{{ route('terimaperusahaan') }}" method="post">
                                         @csrf

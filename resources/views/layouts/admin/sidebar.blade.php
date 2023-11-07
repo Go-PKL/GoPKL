@@ -31,6 +31,9 @@
                             </details>
                         </li>
                         <li>
+                            <div><i class="fas fa-users text-3xl"></i><a href="{{ route('pembimbing') }}">Pembimbing</a></div>
+                        </li>
+                        <li>
                             <div><i class="fas fa-users text-3xl"></i><a href="{{ route('siswa') }}">Siswa</a></div>
                         </li>
                         <li>
@@ -43,7 +46,7 @@
                         </li>
                     </div>
                 </div>
-                <div class="flex justify-center items-center pb-16">
+                <div class="flex justify-center items-center pb-6">
                     <form action="/logout" method="POST">
                         @csrf
                         <button type="submit" class="btn text-primary rounded-full font-bold">Log out</button>

@@ -142,7 +142,7 @@
 
                                                                 <div class="flex flex-col justify-self-start">
                                                                     <label for="nama">Alamat Perusahaan</label>
-                                                                    <textarea cols="30" rows="10" type="text" id="nama" name="nama"
+                                                                    <textarea cols="30" rows="10" type="text" id="nama" name="nama" readonly
                                                                         class="p-2 border w-[469px] border-[#787A91] rounded-md focus:outline-none">{{ $perusahaan->alamat }}</textarea>
                                                                 </div>
 

@@ -200,7 +200,7 @@
 
                                                                 <div class="flex flex-col justify-self-end">
                                                                     <label for="jurusan_id">Jurusan</label>
-                                                                    <select name="jurusan_id" id="jurusan_id"
+                                                                    <select name="jurusan_id" id="jurusan_id_{{ $permohonan->id }}"
                                                                         class="w-[469px] bg-white border-[#00000080] rounded-md select select-bordered focus:outline-none"
                                                                         required>
                                                                         <option
@@ -212,6 +212,11 @@
                                                                                 {{ $jurusan->nama }}</option>
                                                                         @endforeach
                                                                     </select>
+                                                                    <script>
+                                                                        $(document).ready(function() {
+                                                                            $('#jurusan_id_{{ $permohonan->id }}').select2();
+                                                                        });
+                                                                    </script>
                                                                 </div>
 
                                                                 <div class="flex flex-col justify-self-start">

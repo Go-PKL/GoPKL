@@ -170,7 +170,7 @@
 
                                                                 <div class="flex flex-col justify-self-end">
                                                                     <label for="jabatan_id">Jabatan</label>
-                                                                    <select name="jabatan_id" id="jabatan_id"
+                                                                    <select name="jabatan_id" id="jabatan_id_{{ $guru->id }}"
                                                                         class="w-[469px] bg-white border-[#00000080] rounded-md select select-bordered focus:outline-none"
                                                                         required>
                                                                         <option value="{{ $guru->jabatan->id }}">
@@ -181,6 +181,11 @@
                                                                                 {{ $jabatan->nama }}</option>
                                                                         @endforeach
                                                                     </select>
+                                                                    <script>
+                                                                        $(document).ready(function() {
+                                                                            $('#jabatan_id_{{ $guru->id }}').select2();
+                                                                        });
+                                                                    </script>
                                                                 </div>
 
                                                                 <button type="submit"

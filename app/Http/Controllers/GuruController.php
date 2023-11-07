@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Guru;
 use App\Models\Jabatan;
+use App\Models\Pembimbing;
 use App\Models\Permohonan;
 use App\Models\Perusahaan;
 use App\Models\User;
@@ -20,9 +21,13 @@ class GuruController extends Controller
     public function index()
     {
         $users = User::all();
+        $gurus = Guru::where('user_id', Auth::user()->id)->first();
         $perusahaans = Perusahaan::all();
-        $permohonans = Permohonan::all(); 
-        return view('pages.guru.index', compact('users', 'perusahaans', 'permohonans'));
+        $permohonans = Permohonan::all();   
+        // dd($permohonans);
+        $pembimbings = Pembimbing::all()->where('status', false);
+        // dd($pembimbings); 
+        return view('pages.guru.index', compact('users', 'gurus', 'perusahaans', 'permohonans', 'pembimbings'));
     }
 
     /**

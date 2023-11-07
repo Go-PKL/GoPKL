@@ -25,7 +25,6 @@
                         <th>Email</th>
                         <th>Nama</th>
                         <th>Jabatan</th>
-                        <th>Durasi PKL</th>
                         <th>Verifikasi</th>
                     </tr>
                 </thead>
@@ -48,7 +47,6 @@
                                 <td>{{ $guru->user->email }}</td>
                                 <td>{{ $guru->nama }}</td>
                                 <td>{{ $guru->jabatan->nama }}</td>
-                                <td>6 Bulan</td>
                                 <td class="flex gap-4">
                                     <form action="{{ route('terimaguru') }}" method="post">
                                         @csrf

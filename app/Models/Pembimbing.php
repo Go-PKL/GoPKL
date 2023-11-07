@@ -9,16 +9,16 @@ class Pembimbing extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['permohonan_id', 'guru_id'];
+    protected $fillable = ['permohonan_id', 'guru_id', 'perusahaan_id', 'status'];
 
-    public function scopeFilter($query, array $filters)
-    {
-        $query->when($filters['search'] ?? false, function ($query, $search) {
-            return $query->where('email', 'like', '%' . $search . '%')
-                ->orWhere('nama', 'like', '%' . $search . '%')
-                ->orWhere('jabatan', 'like', '%' . $search . '%');
-        });
-    }
+    // public function scopeFilter($query, array $filters)
+    // {
+    //     $query->when($filters['search'] ?? false, function ($query, $search) {
+    //         return $query->where('email', 'like', '%' . $search . '%')
+    //             ->orWhere('nama', 'like', '%' . $search . '%')
+    //             ->orWhere('jabatan', 'like', '%' . $search . '%');
+    //     });
+    // }
 
     public function permohonan()
     {

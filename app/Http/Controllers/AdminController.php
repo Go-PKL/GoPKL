@@ -57,25 +57,34 @@ class AdminController extends Controller
         return view('pages.admin.perusahaan', compact('perusahaans'));
     }
 
+    public function index_pembimbing()
+    {
+        $perusahaans = Perusahaan::latest()->filter(request(['search']))->get();
+        $gurus = Guru::all();
+        $permohonans = Permohonan::all();
+        return view('pages.admin.pembimbing', compact('perusahaans', 'gurus', 'permohonans'));
+    }
+
+
     public function terimasiswa(Request $request)
     {
         $user = User::where('id', $request->id_user)->first();
         $user->assignRole("siswa");
-        return redirect()->to('/siswa')->with('Berhasil', 'Siswa berhasil diverifikasi.');
+        return redirect()->to('/siswa')->with('success', 'Siswa berhasil diverifikasi.');
     }
 
     public function terimaguru(Request $request)
     {
         $user = User::where('id', $request->id_user)->first();
         $user->assignRole("guru");
-        return redirect()->to('/guru')->with('Berhasil', 'Guru berhasil diverifikasi.');
+        return redirect()->to('/guru')->with('success', 'Guru berhasil diverifikasi.');
     }
 
     public function terimaperusahaan(Request $request)
     {
         $user = User::where('id', $request->id_user)->first();
         $user->assignRole("perusahaan");
-        return redirect()->to('/perusahaan')->with('Berhasil', 'Perusahaan berhasil diverifikasi.');
+        return redirect()->to('/perusahaan')->with('success', 'Perusahaan berhasil diverifikasi.');
     }
 
     public function updatesiswa(Request $request, $id)
@@ -160,5 +169,23 @@ class AdminController extends Controller
         $user->delete();
 
         return redirect()->to('/VerifPerusahaan')->with('success', 'Data perusahaan berhasil dihapus.');
+    }
+
+    public function daftarpembimbing(Request $request)
+    {
+        $perusahaan = Perusahaan::find($request->perusahaan_id);
+        $permohonans = Permohonan::where('perusahaan_id', $perusahaan->id)->get();
+
+        if ($permohonans->isNotEmpty()) {
+            foreach ($permohonans as $permohonan) {
+                Pembimbing::create([
+                    'permohonan_id' => $permohonan->id,
+                    'guru_id' => $request->guru,
+                    'perusahaan_id' => $perusahaan->id,
+                ]);
+            }
+
+            return redirect()->to('/pembimbing')->with('success', 'Data pembimbing berhasil disimpan.');
+        }
     }
 }

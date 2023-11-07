@@ -26,7 +26,6 @@
                         <th>Nama</th>
                         <th>Kelas</th>
                         <th>Jurusan</th>
-                        <th>Durasi PKL</th>
                         <th>Verifikasi</th>
                     </tr>
                 </thead>
@@ -50,7 +49,6 @@
                                 <td>{{ $siswa->nama }}</td>
                                 <td>{{ $siswa->kelas }}</td>
                                 <td>{{ $siswa->jurusan->singkatan }}</td>
-                                <td>6 Bulan</td>
                                 <td class="flex gap-4">
                                     <form action="{{ route('terimasiswa') }}" method="post">
                                         @csrf
