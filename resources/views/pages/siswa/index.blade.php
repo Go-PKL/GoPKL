@@ -66,13 +66,16 @@
                                                         <input type="hidden" value="{{ $perusahaan->id }}"
                                                             name="perusahaan_id">
 
-                                                        <img class="w-[194px] h-[190px] m
+                                                        <div class="flex col-span-2 justify-center items-center">
+                                                            <img class="w-[194px] h-[190px] m
                                                         x-10 rounded-[10px] justify-self-end"
-                                                            src="{{ asset('storage/' . $perusahaan->image) }}"
-                                                            alt="Logo Perusahaan">
-                                                        <h1 class="mx-10 text-5xl font-bold capitalize justify-self-start">
-                                                            {{ $perusahaan->nama }}
-                                                        </h1>
+                                                                src="{{ asset('storage/' . $perusahaan->image) }}"
+                                                                alt="Logo Perusahaan">
+                                                            <h1
+                                                                class="mx-10 text-5xl font-bold capitalize justify-self-start">
+                                                                {{ $perusahaan->nama }}
+                                                            </h1>
+                                                        </div>
 
                                                         <div class="flex flex-col justify-self-end">
                                                             <label for="nama">Nama Siswa</label>
@@ -107,10 +110,11 @@
                                                                 class="textarea textarea-bordered w-[469px] border-[#787A91] rounded-md focus:outline-none bg-white">{{ $perusahaan->alamat }}</textarea>
                                                         </div>
 
-                                                        <div class="flex flex-col justify-self-start">
+                                                        <div class="flex flex-col justify-self-start w-full">
                                                             <label for="durasi_pkl">Durasi PKL</label>
                                                             <select name="durasi_pkl" id="durasi_pkl_{{ $perusahaan->id }}"
-                                                                class="w-[469px] bg-white border-[#00000080] rounded-md select select-bordered focus:outline-none"
+                                                                style="width: 469px"
+                                                                class="bg-white border-[#00000080] rounded-md select select-bordered focus:outline-none"
                                                                 required>
                                                                 <option disabled selected>Silahkan pilih durasi pkl
                                                                 </option>

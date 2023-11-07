@@ -55,6 +55,7 @@ require __DIR__ . '/auth.php';
 // siswa
 Route::group(['middleware' => ['auth', 'role:siswa']], function () {
     Route::get('/siswa/pendaftaran-pkl', [SiswaController::class, 'index'])->name('siswa.index');
+    Route::get('/siswa/hasil-pendaftaran', [SiswaController::class, 'index_hasil_pendaftaran_siswa'])->name('siswa.hasil-pendaftaran');
     Route::get('/siswa/{id}/show', [SiswaController::class, 'show'])->name('siswa.show');
     Route::get('/siswa/{id}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
     Route::patch('/siswa/{id}', [SiswaController::class, 'update'])->name('siswa.update');
@@ -64,10 +65,8 @@ Route::group(['middleware' => ['auth', 'role:siswa']], function () {
 
 //guru
 Route::group(['middleware' => ['auth', 'role:guru']], function () {
-    Route::get('guru/hasil-pendaftaran', function () {
-        return view('pages.guru.hasil-pendaftaran');
-    })->name('guru.hasil-pendaftaran');
     Route::get('/guru/pendaftaran-pkl', [GuruController::class, 'index'])->name('guru.index');
+    Route::get('/guru/hasil-pendaftaran', [GuruController::class, 'index_hasil_pendaftaran_guru'])->name('guru.hasil-pendaftaran');
     Route::get('/guru/{id}/show', [GuruController::class, 'show'])->name('guru.show');
     Route::get('/guru/{id}/edit', [GuruController::class, 'edit'])->name('guru.edit');
     Route::patch('/guru/{id}', [GuruController::class, 'update'])->name('guru.update');
@@ -81,6 +80,8 @@ Route::group(['middleware' => ['auth', 'role:perusahaan']], function () {
         return view('pages.perusahaan.hasil-pendaftaran');
     })->name('perusahaan.hasil-pendaftaran');
     Route::get('/perusahaan/pendaftaran-pkl', [PerusahaanController::class, 'index'])->name('perusahaan.index');
+    Route::post('/perusahaan/terima-siswa', [PerusahaanController::class, 'terimaSiswa'])->name('perusahaan.terima-siswa');
+    Route::post('/perusahaan/tolak-siswa', [PerusahaanController::class, 'tolakSiswa'])->name('perusahaan.tolak-siswa');
     Route::get('/perusahaan/{id}/show', [PerusahaanController::class, 'show'])->name('perusahaan.show');
     Route::get('/perusahaan/{id}/edit', [PerusahaanController::class, 'edit'])->name('perusahaan.edit');
     Route::patch('/perusahaan/{id}', [PerusahaanController::class, 'update'])->name('perusahaan.update');
@@ -121,4 +122,6 @@ Route::group(['middleware' => ['auth', 'checkrole:siswa,guru,perusahaan,admin']]
 Route::group(['middleware' => ['auth', 'role:guru']], function () {
     Route::post('/pembimbing/store', [PembimbingController::class, 'store'])->name('pembimbing.store');
     Route::post('/terima-siswa/{id}', [PembimbingController::class, 'terimaSiswa'])->name('terima-siswa');
+    Route::delete('/tolak-siswa/{id}', [PembimbingController::class, 'tolakSiswa'])->name('tolak-siswa');
+    Route::delete('/hapus-siswa/{id}', [PembimbingController::class, 'hapusSiswa'])->name('hapus-siswa');
 });

@@ -29,4 +29,9 @@ class Pembimbing extends Model
     {
         return $this->belongsTo(Guru::class, 'guru_id');
     }
+
+    public function penerimaan()
+    {
+        return $this->hasMany(Penerimaan::class);
+    }
 }

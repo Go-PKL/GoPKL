@@ -19,6 +19,22 @@ class PembimbingController extends Controller
         return redirect()->route('guru.index')->with('success', 'Data siswa berhasil diterima.');
     }
 
+    public function tolakSiswa($id)
+    {
+        $pembimbings = Pembimbing::find($id);
+        $pembimbings->delete();
+
+        return redirect()->route('guru.index')->with('success', 'Siswa berhasil ditolak.');
+    }
+
+    public function hapusSiswa($id)
+    {
+        $pembimbings = Pembimbing::find($id);
+        $pembimbings->delete();
+
+        return redirect()->route('guru.hasil-pendaftaran')->with('success', 'Siswa berhasil dihapus.');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -109,6 +125,5 @@ class PembimbingController extends Controller
      */
     public function destroy($id)
     {
-        
     }
 }

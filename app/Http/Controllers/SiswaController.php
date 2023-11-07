@@ -31,6 +31,13 @@ class SiswaController extends Controller
         return view('pages.siswa.index', compact('users', 'siswas', 'jurusans', 'perusahaans', 'permohonans'));
     }
 
+    public function index_hasil_pendaftaran_siswa()
+    {
+        $siswas = Siswa::where('user_id', Auth::user()->id)->first();
+
+        return view('pages.siswa.hasil_pendaftaran', compact('siswas'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

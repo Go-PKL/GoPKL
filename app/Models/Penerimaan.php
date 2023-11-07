@@ -11,4 +11,8 @@ class Penerimaan extends Model
 
     protected $fillable = ['pembimbing_id', 'perusahaan_id', 'keterangan', 'status'];
 
+    public function pembimbing()
+    {
+        return $this->belongsTo(Pembimbing::class, 'pembimbing_id');
+    }
 }

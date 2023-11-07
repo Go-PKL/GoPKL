@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
 use App\Models\Pembimbing;
+use App\Models\Penerimaan;
 use App\Models\Perusahaan;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,8 +20,10 @@ class PerusahaanController extends Controller
     public function index()
     {
         $users = User::all();
-        $perusahaans = Perusahaan::all();
-        $pembimbings = Pembimbing::all();
+        $perusahaans = Perusahaan::where('user_id', Auth::user()->id)->first();
+        $pembimbings = Pembimbing::whereHas('penerimaan', function ($query) {
+            $query->where('status', false);
+        })->get();
         return view('pages.perusahaan.index', compact('users', 'perusahaans', 'pembimbings'));
     }
 
@@ -62,6 +65,24 @@ class PerusahaanController extends Controller
         ]);
 
         return redirect()->to('/dashboard')->with('success', 'Data anda berhasil disimpan.');
+    }
+
+    public function terimaSiswa(Request $request)
+    {
+        $perusahaan = Perusahaan::where('user_id', Auth::user()->id)->first();
+        $pembimbing = Pembimbing::find($request->pembimbing_id);
+
+        if ($perusahaan) {
+            Penerimaan::create([
+                'perusahaan_id' => $perusahaan->id,
+                'pembimbing_id' => $pembimbing->id,
+                'status' => true,
+                'keterangan' => $request->keterangan,
+
+            ]);
+        }
+
+        return redirect()->route('perusahaan.index')->with('success', 'Data siswa berhasil diterima.');
     }
 
     /**

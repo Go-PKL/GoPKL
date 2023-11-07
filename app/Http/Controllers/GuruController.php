@@ -23,11 +23,19 @@ class GuruController extends Controller
         $users = User::all();
         $gurus = Guru::where('user_id', Auth::user()->id)->first();
         $perusahaans = Perusahaan::all();
-        $permohonans = Permohonan::all();   
+        $permohonans = Permohonan::all();
         // dd($permohonans);
         $pembimbings = Pembimbing::all()->where('status', false);
         // dd($pembimbings); 
         return view('pages.guru.index', compact('users', 'gurus', 'perusahaans', 'permohonans', 'pembimbings'));
+    }
+
+    public function index_hasil_pendaftaran_guru()
+    {
+
+        $pembimbings = Pembimbing::all()->where('status', true);
+        $perusahaans = Perusahaan::all();
+        return view('pages.guru.hasil-pendaftaran', compact('pembimbings', 'perusahaans'));
     }
 
     /**
@@ -37,7 +45,7 @@ class GuruController extends Controller
      */
     public function create()
     {
-        $jabatans = Jabatan::all(); 
+        $jabatans = Jabatan::all();
         return view('pages.guru.create', compact('jabatans'));
     }
 
@@ -59,7 +67,7 @@ class GuruController extends Controller
             'jabatan_id' => $request->jabatan,
             'user_id' => Auth::user()->id,
         ]);
-    
+
         return redirect()->to('/dashboard')->with('success', 'Data anda berhasil disimpan.');
     }
 
