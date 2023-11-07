@@ -7,6 +7,7 @@ use App\Models\Permohonan;
 use App\Models\Perusahaan;
 use App\Models\Siswa;
 use App\Models\User;
+use App\Models\Penerimaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -34,8 +35,9 @@ class SiswaController extends Controller
     public function index_hasil_pendaftaran_siswa()
     {
         $siswas = Siswa::where('user_id', Auth::user()->id)->first();
+        $penerimaans = Penerimaan::all();
 
-        return view('pages.siswa.hasil_pendaftaran', compact('siswas'));
+        return view('pages.siswa.hasil_pendaftaran', compact('siswas', 'penerimaans'));
     }
 
     /**

@@ -30,4 +30,9 @@ class Perusahaan extends Model
     {
         return $this->hasMany(Permohonan::class, 'perusahaan_id');
     }
+
+    public function penerimaan()
+    {
+        return $this->hasMany(Penerimaan::class, 'penerimaan_id');
+    }
 }

@@ -15,4 +15,9 @@ class Penerimaan extends Model
     {
         return $this->belongsTo(Pembimbing::class, 'pembimbing_id');
     }
+
+    public function perusahaan()
+    {
+        return $this->belongsTo(Perusahaan::class, 'perusahaan_id');
+    }
 }

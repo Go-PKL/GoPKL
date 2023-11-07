@@ -25,8 +25,8 @@ class GuruController extends Controller
         $perusahaans = Perusahaan::all();
         $permohonans = Permohonan::all();
         // dd($permohonans);
-        $pembimbings = Pembimbing::all()->where('status', false);
-        // dd($pembimbings); 
+        $pembimbings = Pembimbing::where('status', null)->get();
+        // dd($pembimbings);
         return view('pages.guru.index', compact('users', 'gurus', 'perusahaans', 'permohonans', 'pembimbings'));
     }
 

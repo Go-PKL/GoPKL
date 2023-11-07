@@ -15,14 +15,16 @@ class PembimbingController extends Controller
         $pembimbings->update([
             'status' => true,
         ]);
-        // dd($data->perusahaan_id);
+
         return redirect()->route('guru.index')->with('success', 'Data siswa berhasil diterima.');
     }
 
     public function tolakSiswa($id)
     {
         $pembimbings = Pembimbing::find($id);
-        $pembimbings->delete();
+        $pembimbings->update([
+            'status' => false,
+        ]);
 
         return redirect()->route('guru.index')->with('success', 'Siswa berhasil ditolak.');
     }
