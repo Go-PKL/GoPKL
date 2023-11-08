@@ -1,9 +1,9 @@
 @extends('layouts.user.main')
 @section('content')
-@foreach ($penerimaans as $penerimaan)
-@if ($siswas->id == $penerimaan->pembimbing->permohonan->siswa_id)
-<div class="grid grid-cols-3 m-5 place-content-center">
-                <div class="col-span-1 p-5 border border-gray-400 rounded-xl">
+    @foreach ($penerimaans as $penerimaan)
+        @if ($siswas->id == $penerimaan->pembimbing->permohonan->siswa_id)
+            <div class="grid m-5 place-content-center">
+                <div class="p-5 border border-gray-400 rounded-xl">
                     <div class="flex items-center mb-5 gap-x-2">
                         <img src="{{ asset('storage/' . $penerimaan->perusahaan->image) }}" alt="Image" width="100px" />
                         <div class="flex flex-col">

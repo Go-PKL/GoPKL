@@ -70,7 +70,7 @@ class AdminController extends Controller
     {
         $user = User::where('id', $request->id_user)->first();
         $user->assignRole("siswa");
-        return redirect()->to('/siswa')->with('success', 'Siswa berhasil diverifikasi.');
+        return redirect()->to('/VerifSiswa')->with('success', 'Siswa berhasil diverifikasi.');
     }
 
     public function terimaguru(Request $request)

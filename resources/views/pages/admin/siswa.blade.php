@@ -24,6 +24,7 @@
                         <th></th>
                         <th>Email</th>
                         <th>Nama</th>
+                        <th>Nama Perusahaan</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -37,6 +38,7 @@
                                 <th>{{ $counter }}</th>
                                 <td>{{ $permohonan->siswa->user->email }}</td>
                                 <td>{{ $permohonan->siswa->nama }}</td>
+                                <td>{{ $permohonan->perusahaan->nama }}</td>
                                 <td class="flex gap-1">
                                     {{-- Button Info --}}
                                     <div class="relative z-50 ">

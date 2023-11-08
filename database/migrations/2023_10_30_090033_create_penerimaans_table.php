@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('pembimbing_id')->constrained('pembimbings', 'id')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->foreignId('perusahaan_id')->constrained('perusahaans', 'id')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->string('keterangan')->nullable();
-            $table->boolean('status')->nullable();
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
