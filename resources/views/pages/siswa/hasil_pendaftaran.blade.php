@@ -1,8 +1,8 @@
 @extends('layouts.user.main')
 @section('content')
-    @foreach ($penerimaans as $penerimaan)
-        @if ($siswas->id == $penerimaan->pembimbing->permohonan->siswa_id)
-            <div class="grid m-5 place-content-center">
+    <div class="flex justify-around m-5 place-content-center">
+        @foreach ($penerimaans as $penerimaan)
+            @if ($siswas->id == $penerimaan->pembimbing->permohonan->siswa_id)
                 <div class="p-5 border border-gray-400 rounded-xl">
                     <div class="flex items-center mb-5 gap-x-2">
                         <img src="{{ asset('storage/' . $penerimaan->perusahaan->image) }}" alt="Image" width="100px" />
@@ -35,7 +35,7 @@
                         <div class="btn bg-[#DC3545] hover:bg-[#DC3545] text-white my-5 font-bold w-full">Anda Ditolak</div>
                     @endif
                 </div>
-            </div>
-        @endif
-    @endforeach
+            @endif
+        @endforeach
+    </div>
 @endsection

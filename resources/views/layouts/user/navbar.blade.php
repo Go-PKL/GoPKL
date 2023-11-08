@@ -17,7 +17,7 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('persyaratan-pkl')" :active="request()->routeIs('persyaratan-pkl')">
+                    <x-nav-link :href="route('persyaratan.index')" :active="request()->routeIs('persyaratan.index')">
                         {{ __('Persyaratan PKL') }}
                     </x-nav-link>
                 </div>

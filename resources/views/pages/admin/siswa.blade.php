@@ -38,7 +38,9 @@
                                 <th>{{ $counter }}</th>
                                 <td>{{ $permohonan->siswa->user->email }}</td>
                                 <td>{{ $permohonan->siswa->nama }}</td>
-                                <td>{{ $permohonan->perusahaan->nama }}</td>
+                                @if ($permohonan->perusahaan->user->hasRole('perusahaan'))
+                                    <td>{{ $permohonan->perusahaan->nama }}</td>
+                                @endif
                                 <td class="flex gap-1">
                                     {{-- Button Info --}}
                                     <div class="relative z-50 ">
@@ -202,7 +204,8 @@
 
                                                                 <div class="flex flex-col justify-self-end">
                                                                     <label for="jurusan_id">Jurusan</label>
-                                                                    <select name="jurusan_id" id="jurusan_id_{{ $permohonan->id }}"
+                                                                    <select name="jurusan_id"
+                                                                        id="jurusan_id_{{ $permohonan->id }}"
                                                                         class="w-[469px] bg-white border-[#00000080] rounded-md select select-bordered focus:outline-none"
                                                                         required>
                                                                         <option

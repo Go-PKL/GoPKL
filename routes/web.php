@@ -8,6 +8,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PembimbingController;
 use App\Http\Controllers\PermohonanController;
+use App\Http\Controllers\PersyaratanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -123,4 +124,9 @@ Route::group(['middleware' => ['auth', 'role:guru']], function () {
     Route::post('/terima-siswa/{id}', [PembimbingController::class, 'terimaSiswa'])->name('terima-siswa');
     Route::delete('/tolak-siswa/{id}', [PembimbingController::class, 'tolakSiswa'])->name('tolak-siswa');
     Route::delete('/hapus-siswa/{id}', [PembimbingController::class, 'hapusSiswa'])->name('hapus-siswa');
+});
+
+//persyaratan
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/persyaratan/index', [PersyaratanController::class, 'index'])->name('persyaratan.index');
 });

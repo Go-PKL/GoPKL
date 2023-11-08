@@ -51,6 +51,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'siswa3@siswa.com',
             'password' => bcrypt('123'),
         ]);
+        $siswaUsers = User::whereIn('id', [2, 3, 4])->get();
+
+        foreach ($siswaUsers as $user) {
+            $user->assignRole('siswa');
+        }
 
         User::create([
             'name' => 'guru1',
@@ -63,6 +68,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'guru2@guru.com',
             'password' => bcrypt('123'),
         ]);
+        $guruUsers = User::whereIn('id', [5, 6])->get();
+
+        foreach ($guruUsers as $user) {
+            $user->assignRole('guru');
+        }
 
         User::create([
             'name' => 'perusahaan1',
@@ -75,11 +85,17 @@ class DatabaseSeeder extends Seeder
             'email' => 'perusahaan2@perusahaan.com',
             'password' => bcrypt('123'),
         ]);
+        $perusahaanUsers = User::whereIn('id', [7, 8])->get();
+
+        foreach ($perusahaanUsers as $user) {
+            $user->assignRole('perusahaan');
+        }
 
         $this->call(JurusanSeeder::class);
         $this->call(JabatanSeeder::class);
         $this->call(SiswaSeeder::class);
         $this->call(GuruSeeder::class);
         $this->call(PerusahaanSeeder::class);
+        $this->call(PersyaratanSeeder::class);
     }
 }

@@ -31,12 +31,12 @@
                                     @endphp
 
                                     @if ($totalPendaftaranKePerusahaan >= 1)
-                                        <button disabled readonly
-                                            class="btn btn-xs font-semibold bg-[#787A91] text-white">Sudah
+                                        <button disabled readonly class="btn btn-xs font-semibold"
+                                            style="color: black">Sudah
                                             Mendaftar</button>
                                     @elseif ($totalPendaftaranSiswa >= 2)
-                                        <button disabled readonly
-                                            class="btn btn-xs font-semibold bg-[#787A91] text-white">Batas Pendaftaran
+                                        <button disabled readonly class="btn btn-xs font-semibold"
+                                            style="color: black">Batas Pendaftaran
                                             Terpenuhi</button>
                                     @else
                                         <button @click="fullscreenModal=true"
@@ -113,9 +113,8 @@
                                                         <div class="flex flex-col justify-self-start w-full">
                                                             <label for="durasi_pkl">Durasi PKL</label>
                                                             <select name="durasi_pkl" id="durasi_pkl_{{ $perusahaan->id }}"
-                                                                style="width: 469px"
-                                                                class="bg-white border-[#00000080] rounded-md select select-bordered focus:outline-none"
-                                                                required>
+                                                                style="width: 469px;"
+                                                                class="input rounded-md focus:outline-none" required>
                                                                 <option disabled selected>Silahkan pilih durasi pkl
                                                                 </option>
                                                                 <option>1 Bulan</option>
