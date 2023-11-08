@@ -21,10 +21,32 @@ class PerusahaanController extends Controller
     {
         $users = User::all();
         $perusahaans = Perusahaan::where('user_id', Auth::user()->id)->first();
-        $pembimbings = Pembimbing::whereHas('penerimaan', function ($query) {
-            $query->where('status', false);
-        })->get();
+        // $pembimbings = Pembimbing::whereHas('penerimaan', function ($query) {
+        //     $query->where('status', null);
+        // })->get();
+        // $pembimbings = Pembimbing::all()->where('status', true);
+        $pembimbings = Pembimbing::where('status', true)
+            ->where('status_penerimaan', false)
+            ->get();
+
+
+        // $pembimbings = Pembimbing::where('status', true)
+        //     ->whereHas('penerimaan', function ($query) {
+        //         $query->where('status', null);
+        //     })
+        //     ->get();
+
+        // dd($pembimbings);
+
         return view('pages.perusahaan.index', compact('users', 'perusahaans', 'pembimbings'));
+    }
+
+    public function index_hasil_pendaftaran_perusahaan()
+    {
+
+        $penerimaans = Penerimaan::all()->where('status', true);
+        $perusahaans = Perusahaan::where('user_id', Auth::user()->id)->first();
+        return view('pages.perusahaan.hasil-pendaftaran', compact('penerimaans', 'perusahaans'));
     }
 
     /**
@@ -80,9 +102,41 @@ class PerusahaanController extends Controller
                 'keterangan' => $request->keterangan,
 
             ]);
+            $pembimbing->update([
+                'status_penerimaan' => true,
+            ]);
         }
 
         return redirect()->route('perusahaan.index')->with('success', 'Data siswa berhasil diterima.');
+    }
+
+    public function tolakSiswa(Request $request)
+    {
+        $perusahaan = Perusahaan::where('user_id', Auth::user()->id)->first();
+        $pembimbing = Pembimbing::find($request->pembimbing_id);
+
+        if ($perusahaan) {
+            Penerimaan::create([
+                'perusahaan_id' => $perusahaan->id,
+                'pembimbing_id' => $pembimbing->id,
+                'status' => false,
+                'keterangan' => $request->keterangan,
+
+            ]);
+            $pembimbing->update([
+                'status_penerimaan' => true,
+            ]);
+        }
+
+        return redirect()->route('perusahaan.index')->with('success', 'Data siswa berhasil ditolak.');
+    }
+
+    public function hapusSiswa($id)
+    {
+        $penerimaans = Penerimaan::find($id);
+        $penerimaans->delete();
+
+        return redirect()->route('perusahaan.hasil-pendaftaran')->with('success', 'Siswa berhasil dihapus.');
     }
 
     /**

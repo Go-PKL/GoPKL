@@ -9,7 +9,7 @@ class Pembimbing extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['permohonan_id', 'guru_id', 'perusahaan_id', 'status'];
+    protected $fillable = ['permohonan_id', 'guru_id', 'perusahaan_id', 'status', 'status_penerimaan'];
 
     // public function scopeFilter($query, array $filters)
     // {
@@ -32,6 +32,6 @@ class Pembimbing extends Model
 
     public function penerimaan()
     {
-        return $this->hasMany(Penerimaan::class);
+        return $this->hasOne(Penerimaan::class, 'pembimbing_id');
     }
 }

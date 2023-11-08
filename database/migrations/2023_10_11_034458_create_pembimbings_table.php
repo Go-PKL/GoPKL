@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('guru_id')->constrained('gurus', 'id')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->foreignId('perusahaan_id')->constrained('perusahaans', 'id')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->boolean('status')->nullable();
+            $table->boolean('status_penerimaan')->default(false);
             $table->timestamps();
         });
     }

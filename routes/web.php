@@ -76,12 +76,11 @@ Route::group(['middleware' => ['auth', 'role:guru']], function () {
 
 //perusahaan
 Route::group(['middleware' => ['auth', 'role:perusahaan']], function () {
-    Route::get('perusahaan/hasil-pendaftaran', function () {
-        return view('pages.perusahaan.hasil-pendaftaran');
-    })->name('perusahaan.hasil-pendaftaran');
     Route::get('/perusahaan/pendaftaran-pkl', [PerusahaanController::class, 'index'])->name('perusahaan.index');
+    Route::get('/perusahaan/hasil-pendaftaran', [PerusahaanController::class, 'index_hasil_pendaftaran_perusahaan'])->name('perusahaan.hasil-pendaftaran');
     Route::post('/perusahaan/terima-siswa', [PerusahaanController::class, 'terimaSiswa'])->name('perusahaan.terima-siswa');
     Route::post('/perusahaan/tolak-siswa', [PerusahaanController::class, 'tolakSiswa'])->name('perusahaan.tolak-siswa');
+    Route::delete('/perusahaan/hapus-siswa/{id}', [PerusahaanController::class, 'hapusSiswa'])->name('perusahaan.hapus-siswa');
     Route::get('/perusahaan/{id}/show', [PerusahaanController::class, 'show'])->name('perusahaan.show');
     Route::get('/perusahaan/{id}/edit', [PerusahaanController::class, 'edit'])->name('perusahaan.edit');
     Route::patch('/perusahaan/{id}', [PerusahaanController::class, 'update'])->name('perusahaan.update');
