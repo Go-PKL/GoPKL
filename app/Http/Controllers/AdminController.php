@@ -41,6 +41,7 @@ class AdminController extends Controller
     {
         $permohonans = Permohonan::latest()->filter(request(['search']))->get();
         $jurusans = Jurusan::all();
+        $jurusans = Jurusan::all();
         return view('pages.admin.siswa', compact('permohonans', 'jurusans'));
     }
 

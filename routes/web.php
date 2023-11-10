@@ -6,6 +6,7 @@ use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PembimbingController;
 use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\PersyaratanController;
@@ -25,6 +26,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pages.dashboard');
 })->middleware(['auth', 'verified']);
+
+// Route::get('/pembimbing-pdf', function () {
+//     return view('pages.pdf.pembimbing_pdf');
+// });
+
+Route::get('/pembimbing-pdf', [PDFController::class, 'pembimbing']);
 
 Route::get('/select-role', function () {
     return view('auth.select-role');

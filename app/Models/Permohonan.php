@@ -9,7 +9,7 @@ class Permohonan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['siswa_id', 'perusahaan_id', 'tgl_mulai', 'tgl_selesai', 'durasi_pkl'];
+    protected $fillable = ['siswa_id', 'perusahaan_id', 'tgl_mulai', 'tgl_selesai', 'durasi_pkl', 'status'];
 
     public function scopeFilter($query, array $filters)
     {
@@ -32,5 +32,11 @@ class Permohonan extends Model
     public function perusahaan()
     {
         return $this->belongsTo(Perusahaan::class, 'perusahaan_id');
+    }
+
+    public function pembimbing()
+    {
+        return $this->hasMany(Pembimbing::class);
+    
     }
 }

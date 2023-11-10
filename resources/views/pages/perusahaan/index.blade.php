@@ -6,7 +6,6 @@
         <table class="table table-zebra">
             <thead>
                 <tr class="text-black border-b border-black">
-                    <th></th>
                     <th>Guru Pembimbing</th>
                     <th>Nama Siswa</th>
                     <th>Kelas</th>
@@ -19,7 +18,6 @@
                 @foreach ($pembimbings as $pembimbing)
                     @if ($pembimbing->perusahaan_id == $perusahaans->id)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
                             <td> {{ $pembimbing->guru->nama }}</td>
                             <td> {{ $pembimbing->permohonan->siswa->nama }}</td>
                             <td> {{ $pembimbing->permohonan->siswa->kelas }}</td>

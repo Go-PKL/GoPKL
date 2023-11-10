@@ -9,7 +9,7 @@ class Siswa extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'nama', 'kelas', 'jurusan_id'];
+    protected $fillable = ['user_id', 'nama', 'kelas', 'jurusan_id', 'status'];
 
     public function scopeFilter($query, array $filters)
     {

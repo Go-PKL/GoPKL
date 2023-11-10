@@ -25,14 +25,26 @@ class PerusahaanController extends Controller
         //     $query->where('status', null);
         // })->get();
         // $pembimbings = Pembimbing::all()->where('status', true);
+        // $pembimbings = Pembimbing::where('status', true)
+        //     ->where('status_penerimaan', false)->whereHas('permohonan', function ($query) {
+        //             $query->where('status', false);
+        //         })->get();
+
         $pembimbings = Pembimbing::where('status', true)
             ->where('status_penerimaan', false)
+            ->whereHas('permohonan', function ($query) use ($perusahaans) {
+                $query->where('status', false)
+                    ->whereDoesntHave('siswa', function ($q) {
+                        $q->where('status', true);
+                    })
+                    ->where('perusahaan_id', $perusahaans->id);
+            })
             ->get();
 
 
         // $pembimbings = Pembimbing::where('status', true)
         //     ->whereHas('penerimaan', function ($query) {
-        //         $query->where('status', null);
+        //         $query->where('status', false);
         //     })
         //     ->get();
 
@@ -102,6 +114,13 @@ class PerusahaanController extends Controller
                 'keterangan' => $request->keterangan,
 
             ]);
+
+            $siswa = $pembimbing->permohonan->siswa;
+            $siswa->update(['status' => true]);
+
+            $permohonan = $pembimbing->permohonan;
+            $permohonan->update(['status' => true]);
+            
             $pembimbing->update([
                 'status_penerimaan' => true,
             ]);
@@ -122,9 +141,6 @@ class PerusahaanController extends Controller
                 'status' => false,
                 'keterangan' => $request->keterangan,
 
-            ]);
-            $pembimbing->update([
-                'status_penerimaan' => true,
             ]);
         }
 

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('kelas');
             $table->unsignedBigInteger('jurusan_id');
             $table->foreign('jurusan_id')->references('id')->on('jurusans');
+            $table->boolean('status')->default(false);
+
             $table->timestamps();
         });
     }

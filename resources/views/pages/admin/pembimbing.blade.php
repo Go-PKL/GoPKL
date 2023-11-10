@@ -40,8 +40,8 @@
                                         @php
                                             $SudahDaftar = false;
                                             foreach ($gurus as $guru) {
-                                                $countPembimbing = \App\Models\Pembimbing::where('permohonan_id', $perusahaan->id)
-                                                    ->where('guru_id', $guru->id)
+                                                $countPembimbing = \App\Models\Pembimbing::where('guru_id', $guru->id)
+                                                    ->where('perusahaan_id', $perusahaan->id)
                                                     ->count();
 
                                                 if ($countPembimbing >= 1) {

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('tgl_mulai')->nullable();
             $table->date('tgl_selesai')->nullable();
             $table->string('durasi_pkl')->nullable();
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
