@@ -23,8 +23,30 @@
                         type="password" name="password" required placeholder="********">
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
 
-                    <button type="submit"
-                        class="bg-[#0F044C] rounded-md text-white mt-3 py-2 hover:scale-105 duration-300">{{ __('Masuk') }}</button>
+                    <div>
+                        <div class="mt-4 mb-1 h-full flex items-center">
+                            <div id="angkaPertama"
+                                class="w-[100px] border border-gray-200 rounded-md grid place-items-center py-1.5">
+                            </div>
+                            <div id="jenisAritmatika" class="w-[100px] grid place-items-center py-1.5">
+                            </div>
+                            <div id="angkaKedua"
+                                class="w-[100px] border border-gray-200 rounded-md grid place-items-center py-1.5">
+                            </div>
+                            <div class="w-[100px] grid place-items-center font-semibold py-1.5">
+                                =
+                            </div>
+                            <div>
+                                <input id="finalHasil" type="number"
+                                    class="block w-[80px] h-full text-center py-1.5 border border-gray-200 rounded-md"
+                                    placeholder="">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" id="tombolSubmit"
+                        class="bg-[#0F044C] rounded-md text-white mt-3 py-2 hover:scale-105 duration-300">Masuk</button>
                 </form>
                 <div class="block mt-4">
                     <label for="remember_me" class="inline-flex items-center">
@@ -45,8 +67,95 @@
             </div>
 
             <div class="md:block hidden w-1/2 rounded-r-2xl">
-                <img class="w-full h-[435px] rounded-r-2xl" src="/assets/images/background.jpg">
+                <img class="w-full h-[436px] rounded-r-2xl" src="/assets/images/background.jpg">
             </div>
         </div>
     </section>
+    <script>
+        // for debugging 
+        function jalanKanScript() {
+
+            const angkaPertama = document.getElementById('angkaPertama');
+            const jenisAritmatika = document.getElementById('jenisAritmatika');
+            const angkaKedua = document.getElementById('angkaKedua');
+            const finalHasil = document.getElementById('finalHasil');
+            const tombolSubmit = document.getElementById('tombolSubmit');
+
+            // medendapatkan random angka pertama
+
+            function getRandomData(param) {
+                return Math.floor(Math.random() * param);
+            }
+
+            function cekKondisiAritmatika(param = false) {
+                let isfinalHasilFill = finalHasil.value;
+                if (isfinalHasilFill && param) {
+                    //ada isi
+                    tombolSubmit.classList.remove('bg-gray-500', 'cursor-no-drop');
+                    tombolSubmit.classList.add(
+                        'active:bg-purple-600', 'hover:bg-[#0F044C]', 'focus:outline-none',
+                        'focus:shadow-outline-purple'
+                    );
+                    tombolSubmit.type = 'submit';
+
+                } else {
+                    tombolSubmit.classList.add('bg-gray-500', 'cursor-no-drop');
+                    tombolSubmit.classList.remove(
+                        'active:bg-purple-600', 'hover:bg-[#0F044C]', 'focus:outline-none',
+                        'focus:shadow-outline-purple'
+                    );
+                    tombolSubmit.type = 'button';
+                }
+            }
+            cekKondisiAritmatika();
+
+
+
+            let isfinalHasilFill = finalHasil.textContent;
+            if (isfinalHasilFill) {
+                tombolSubmit.classList
+            }
+
+
+            let countFirst = getRandomData(90);
+            // medendapatkan random angka kedua
+            let countSecond = getRandomData(10);
+            // medendapatkan random operator aritmatika
+            // const aritmatikaOperator = ['+', '-', 'X', '/'];
+            const aritmatikaOperator = ['+', '-'];
+            const RandomAritmatikaOperator = Math.floor(Math.random() * aritmatikaOperator.length);
+
+
+            // operasi aritmatika dan penyimoanan hasil akhir
+            let hasilAkhirTrue;
+            hasilAkhirTrue = aritmatikaOperator[RandomAritmatikaOperator] == '+' ? countFirst + countSecond :
+                aritmatikaOperator[RandomAritmatikaOperator] == '-' ? countFirst - countSecond : '';
+            // aritmatikaOperator[RandomAritmatikaOperator] == '/' ? countFirst / countSecond : '';
+            console.info(hasilAkhirTrue);
+
+            // memasukan ke tampilan
+            angkaPertama.textContent = countFirst;
+            jenisAritmatika.textContent = aritmatikaOperator[RandomAritmatikaOperator];
+            angkaKedua.textContent = countSecond;
+
+            // mendapatkan hasil user
+
+            finalHasil.addEventListener('change', (e) => jalan(e));
+            finalHasil.addEventListener('keyup', (e) => jalan(e));
+
+
+            function jalan(e) {
+                console.info('jalan')
+                if (e.target.value == hasilAkhirTrue) {
+
+                    cekKondisiAritmatika(true)
+                } else {
+                    cekKondisiAritmatika(false)
+                }
+
+            }
+
+        }
+        jalanKanScript();
+    </script>
 @endsection

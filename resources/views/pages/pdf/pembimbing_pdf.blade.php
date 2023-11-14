@@ -1,6 +1,3 @@
-@php
-    $counter = 0;
-@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +9,7 @@
     <style>
         * {
             font-family: 'Nunito Sans', sans-serif;
+            font-size: 14px;
         }
 
         #obat {
@@ -45,7 +43,7 @@
 
 <body>
 
-    <h2 style="text-align: center; padding-bottom: 20px;">Laporan Data Pembimbing Siswa PKL</h2>
+    <h2 style="text-align: center; padding-bottom: 20px; font-size: 16px;">Laporan Data Pembimbing Siswa PKL</h2>
 
     <table id="obat">
         <tr>
@@ -53,25 +51,46 @@
             <th>Nama Siswa</th>
             <th>Kelas</th>
             <th>Jurusan</th>
+            <th>Tanggal Mulai</th>
+            <th>Tanggal Selesai</th>
+            <th>Durasi PKL</th>
             <th>Guru Pembimbing</th>
         </tr>
-        @foreach ($pembimbings as $pembimbing)
-            @php
-                $counter = $counter + 1;
-            @endphp
-            @if ($pembimbing->status_penerimaan && $pembimbing->status)
-                <tr>
-                    <td>{{ $counter }}</td>
-                    <td>{{ $pembimbing->permohonan->siswa->nama }}</td>
-                    <td>{{ $pembimbing->permohonan->siswa->kelas }}</td>
-                    <td>{{ $pembimbing->permohonan->siswa->jurusan->singkatan }}</td>
-                    <td>{{ $pembimbing->guru->nama }}</td>
-                </tr>
-            @else
-                @php
-                    $counter = $counter - 1;
-                @endphp
-            @endif
+
+        @foreach ($penerimaans as $perusahaanId => $groupedPenerimaans)
+            <tr>
+                <td>{{ $perusahaanId }}</td>
+                <td>
+                    @php $uniqueSiswa = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.nama')->unique() @endphp
+                    @foreach ($uniqueSiswa as $namaSiswa)
+                        {{ $namaSiswa }} <br>
+                    @endforeach
+                </td>
+                <td>
+                    @php $uniqueKelas = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.kelas')->unique() @endphp
+                    {{ $uniqueKelas->implode(', ') }}
+                </td>
+                <td>
+                    @php $uniqueJurusan = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.jurusan.singkatan')->unique() @endphp
+                    {{ $uniqueJurusan->implode(', ') }}
+                </td>
+                <td>
+                    @php $uniqueTglMulai = $groupedPenerimaans->pluck('pembimbing.permohonan.tgl_mulai')->unique() @endphp
+                    {{ $uniqueTglMulai->implode(', ') }}
+                </td>
+                <td>
+                    @php $uniqueTglSelesai = $groupedPenerimaans->pluck('pembimbing.permohonan.tgl_selesai')->unique() @endphp
+                    {{ $uniqueTglSelesai->implode(', ') }}
+                </td>
+                <td>
+                    @php $uniqueDurasiPkl = $groupedPenerimaans->pluck('pembimbing.permohonan.durasi_pkl')->unique() @endphp
+                    {{ $uniqueDurasiPkl->implode(', ') }}
+                </td>
+                <td>
+                    @php $uniqueGuru = $groupedPenerimaans->pluck('pembimbing.guru.nama')->unique() @endphp
+                    {{ $uniqueGuru->implode(', ') }}
+                </td>
+            </tr>
         @endforeach
 </body>
 

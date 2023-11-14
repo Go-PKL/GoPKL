@@ -1,7 +1,19 @@
 <title>Hasil Pendaftaran</title>
 @extends('layouts.user.main')
 @section('content')
-    <div class="py-16 overflow-x-auto px-7">
+    <div class="overflow-x-auto px-7">
+        <div class="flex justify-end p-7 gap-x-4">
+            <form action="{{ route('pembimbing') }}" method="GET">
+                <label class="label">
+                    <span class="text-black label-text">Cari Perusahaan :</span>
+                </label>
+                <input type="text" placeholder="Masukkan data yang ingin anda cari"
+                class="text-sm input input-bordered w-80" name="search" value="{{ old('cari') }}" />
+            </form>
+            <div class="flex items-center justify-center pt-4">
+                <a href="{{ route('pembimbing-pdf') }}" class="font-bold text-white btn btn-info"><i class="fa-solid fa-print"></i>Cetak</a>
+            </div>
+        </div>
         <table class="table table-zebra">
             <thead>
                 <tr class="text-black border-b border-black">

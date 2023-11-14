@@ -27,12 +27,6 @@ Route::get('/', function () {
     return view('pages.dashboard');
 })->middleware(['auth', 'verified']);
 
-// Route::get('/pembimbing-pdf', function () {
-//     return view('pages.pdf.pembimbing_pdf');
-// });
-
-Route::get('/pembimbing-pdf', [PDFController::class, 'pembimbing']);
-
 Route::get('/select-role', function () {
     return view('auth.select-role');
 });
@@ -47,14 +41,14 @@ Route::get('/persyaratan-pkl', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/siswa/create', [SiswaController::class, 'create'])->name('siswa.create');
     Route::get('/guru/create', [GuruController::class, 'create'])->name('guru.create');
     Route::get('/perusahaan/create', [PerusahaanController::class, 'create'])->name('perusahaan.create');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/siswa/store', [SiswaController::class, 'store'])->name('siswa.store');
     Route::post('/guru/store', [GuruController::class, 'store'])->name('guru.store');
     Route::post('/perusahaan/store', [PerusahaanController::class, 'store'])->name('perusahaan.store');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';
@@ -133,7 +127,15 @@ Route::group(['middleware' => ['auth', 'role:guru']], function () {
     Route::delete('/hapus-siswa/{id}', [PembimbingController::class, 'hapusSiswa'])->name('hapus-siswa');
 });
 
+
 //persyaratan
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/persyaratan/index', [PersyaratanController::class, 'index'])->name('persyaratan.index');
+});
+
+
+//pdf
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/pembimbing-pdf', [PDFController::class, 'pembimbing'])->middleware('checkrole:perusahaan')->name('pembimbing-pdf');
+    Route::get('/penerimaan-pdf', [PDFController::class, 'penerimaan'])->middleware('checkrole:admin')->name('penerimaan-pdf');
 });
