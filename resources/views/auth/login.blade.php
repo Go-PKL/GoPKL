@@ -3,9 +3,6 @@
 @section('content')
     <section class="bg-lightblue min-h-screen flex items-center justify-center">
         <div class="bg-white flex flex-col md:flex md:flex-row rounded-2xl shadow-2xl max-w-3xl items-center">
-            <div class="md:hidden flex flex-col p-4">
-                <img class="w-52 h-56 rounded-2xl" src="/assets/images/background.jpg">
-            </div>
             <div class="md:w-1/2 px-8 md:px-16 py-2">
                 <h2 class="font-bold text-2xl text-black text-center">Selamat Datang !</h2>
                 <p class="text-sm text-[#00000080] text-center">Selamat Datang | Masukkan data anda</p>
@@ -67,7 +64,7 @@
             </div>
 
             <div class="md:block hidden w-1/2 rounded-r-2xl">
-                <img class="w-full h-[436px] rounded-r-2xl" src="/assets/images/background.jpg">
+                <img class="w-full h-[450px] rounded-r-2xl object-fill" src="/assets/images/background.jpg">
             </div>
         </div>
     </section>
