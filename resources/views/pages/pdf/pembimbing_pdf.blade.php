@@ -12,7 +12,7 @@
     <style>
         * {
             font-family: 'Nunito Sans', sans-serif;
-            font-size: 12px;
+            font-size: 10px;
         }
 
         #pdf {
@@ -24,7 +24,7 @@
         #pdf th {
             border: 1px solid #ddd;
             text-align: center;
-            padding: 8px;
+
         }
 
         #pdf tr:nth-child(even) {
@@ -72,13 +72,33 @@
                     <td>{{ $counter }}</td>
                     <td>
                         @php $uniqueSiswa = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.nama')->unique() @endphp
-                        @foreach ($uniqueSiswa as $namaSiswa)
-                            {{ $namaSiswa }} <br>
+                        @foreach ($uniqueSiswa as $index => $namaSiswa)
+                            @if ($index != 1)
+                                <p
+                                    style="padding-bottom: 20px; border: 2px solid transparent; border-bottom-color:#ddd; ">
+                                    {{ $namaSiswa }}
+                                </p>
+                            @else
+                                <p style="margin-top: 0px; ">
+                                    {{ $namaSiswa }}
+                                </p>
+                            @endif
                         @endforeach
                     </td>
                     <td>
                         @php $uniqueEmailSiswa = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.user.email')->unique() @endphp
-                        {{ $uniqueEmailSiswa->implode(', ') }}
+                        @foreach ($uniqueEmailSiswa as $index => $emailSiswa)
+                            @if ($index != 1)
+                                <p
+                                    style="padding-bottom: 20px; border: 2px solid transparent; border-bottom-color:#ddd; ">
+                                    {{ $emailSiswa }}
+                                </p>
+                            @else
+                                <p style="margin-top: 0px; ">
+                                    {{ $emailSiswa }}
+                                </p>
+                            @endif
+                        @endforeach
                     </td>
                     <td>
                         @php $uniqueKelas = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.kelas')->unique() @endphp
@@ -86,19 +106,63 @@
                     </td>
                     <td>
                         @php $uniqueJurusan = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.jurusan.singkatan')->unique() @endphp
-                        {{ $uniqueJurusan->implode(', ') }}
+                        @foreach ($uniqueJurusan as $index => $Jurusan)
+                            @if ($index != 1)
+                                <p
+                                    style="padding-bottom: 20px; border: 2px solid transparent; border-bottom-color:#ddd; ">
+                                    {{ $Jurusan }}
+                                </p>
+                            @else
+                                <p style="margin-top: 0px; ">
+                                    {{ $Jurusan }}
+                                </p>
+                            @endif
+                        @endforeach
                     </td>
                     <td>
                         @php $uniqueTglMulai = $groupedPenerimaans->pluck('pembimbing.permohonan.tgl_mulai')->unique() @endphp
-                        {{ $uniqueTglMulai->implode(', ') }}
+                        @foreach ($uniqueTglMulai as $index => $TglMulai)
+                            @if ($index != 1)
+                                <p
+                                    style="padding-bottom: 20px; border: 2px solid transparent; border-bottom-color:#ddd; ">
+                                    {{ $TglMulai }}
+                                </p>
+                            @else
+                                <p style="margin-top: 0px; ">
+                                    {{ $TglMulai }}
+                                </p>
+                            @endif
+                        @endforeach
                     </td>
                     <td>
                         @php $uniqueTglSelesai = $groupedPenerimaans->pluck('pembimbing.permohonan.tgl_selesai')->unique() @endphp
-                        {{ $uniqueTglSelesai->implode(', ') }}
+                        @foreach ($uniqueTglSelesai as $index => $TglSelesai)
+                            @if ($index != 1)
+                                <p
+                                    style="padding-bottom: 20px; border: 2px solid transparent; border-bottom-color:#ddd; ">
+                                    {{ $TglSelesai }}
+                                </p>
+                            @else
+                                <p style="margin-top: 0px; ">
+                                    {{ $TglSelesai }}
+                                </p>
+                            @endif
+                        @endforeach
                     </td>
                     <td>
                         @php $uniqueDurasiPkl = $groupedPenerimaans->pluck('pembimbing.permohonan.durasi_pkl')->unique() @endphp
-                        {{ $uniqueDurasiPkl->implode(', ') }}
+                        @foreach ($uniqueDurasiPkl as $index => $DurasiPkl)
+                            @if ($index != 1)
+                                <p
+                                    style="padding-bottom: 20px; border: 2px solid transparent; border-bottom-color:#ddd; ">
+                                    {{ $DurasiPkl }}
+                                </p>
+                            @else
+                                <p style="margin-top: 0px; ">
+                                    {{ $DurasiPkl }}
+                                </p>
+                            @endif
+                        @endforeach
                     </td>
                     <td>
                         @php $uniqueGuru = $groupedPenerimaans->pluck('pembimbing.guru.nama')->unique() @endphp

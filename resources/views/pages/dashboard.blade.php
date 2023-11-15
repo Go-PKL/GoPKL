@@ -152,14 +152,22 @@
                     <p class="font-bold">Husnul Fikri Averus</p>
                     <p>UI/UX</p>
                     <div class="flex gap-3 mt-2">
-                        <i
-                            class="p-1 duration-300 bg-white rounded-md text-success fa-brands fa-facebook hover:scale-150"></i>
-                        <i
-                            class="p-1 duration-300 bg-white rounded-md text-success fa-brands fa-instagram hover:scale-150"></i>
-                        <i
-                            class="p-1 duration-300 bg-white rounded-md text-success fa-brands fa-github hover:scale-150"></i>
-                        <i
-                            class="p-1 duration-300 bg-white rounded-md text-success fa-solid fa-envelope hover:scale-150"></i>
+                        <a href="https://www.facebook.com/husnulfkrialferues" target="_blank" rel="noopener noreferrer">
+                            <i
+                                class="bg-white p-1 rounded-md text-success fa-brands fa-facebook hover:scale-150 duration-300"></i>
+                        </a>
+                        <a href="https://www.instagram.com/fikri_averus/" target="_blank" rel="noopener noreferrer">
+                            <i
+                                class="bg-white p-1 rounded-md text-success fa-brands fa-instagram hover:scale-150 duration-300"></i>
+                        </a>
+                        <a href="https://github.com/chqrety" target="_blank" rel="noopener noreferrer">
+                            <i
+                                class="bg-white p-1 rounded-md text-success fa-brands fa-github hover:scale-150 duration-300"></i>
+                        </a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=fikriaverus23@gmail.com" target="_blank">
+                            <i
+                                class="bg-white p-1 rounded-md text-success fa-solid fa-envelope hover:scale-150 duration-300"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="flex flex-col items-center">
