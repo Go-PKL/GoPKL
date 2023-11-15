@@ -28,6 +28,7 @@ class PDFController extends Controller
         $permohonans = Permohonan::all();
         $penerimaans = Penerimaan::with('pembimbing.permohonan.siswa', 'pembimbing.guru')
             ->where('status', true)
+            ->where('perusahaan_id', $perusahaans->id) // Filter hanya penerimaan perusahaan yang login
             ->get()
             ->groupBy('perusahaan_id');
         $groupedPenerimaans = Penerimaan::with('pembimbing.permohonan.siswa', 'pembimbing.guru')

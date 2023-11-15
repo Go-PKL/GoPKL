@@ -12,32 +12,33 @@
     <style>
         * {
             font-family: 'Nunito Sans', sans-serif;
-            font-size: 14px;
+            font-size: 9px;
         }
 
-        #obat {
+        #pdf {
             border-collapse: collapse;
             width: 100%;
         }
 
-        #obat td,
-        #obat th {
+        #pdf td,
+        #pdf th {
             border: 1px solid #ddd;
-            padding: 8px;
+            text-align: center;
+            padding: 3px;
         }
 
-        #obat tr:nth-child(even) {
+        #pdf tr:nth-child(even) {
             background-color: #f2f2f2;
         }
 
-        #obat tr:hover {
+        #pdf tr:hover {
             background-color: #ddd;
         }
 
-        #obat th {
+        #pdf th {
             padding-top: 12px;
             padding-bottom: 12px;
-            text-align: left;
+            text-align: center;
             background-color: #00afee;
             color: white;
         }
@@ -48,15 +49,21 @@
 
     <h2 style="text-align: center; padding-bottom: 20px; font-size: 16px;">Laporan Data Penerimaan Siswa PKL</h2>
 
-    <table id="obat">
+    <table id="pdf">
         <tr>
             <th>No</th>
             <th>Nama Perusahaan</th>
+            <th>Email Perusahaan</th>
             <th>Alamat Perusahaan</th>
             <th>Nama Siswa</th>
+            <th>Email Siswa</th>
             <th>Kelas</th>
             <th>Jurusan</th>
+            <th>Tanggal Mulai</th>
+            <th>Tanggal Selesai</th>
+            <th>Durasi PKL</th>
             <th>Guru Pembimbing</th>
+            <th>Email Guru</th>
         </tr>
 
         @foreach ($penerimaans as $penerimaan => $groupedPenerimaans)
@@ -67,12 +74,17 @@
                 <tr>
                     <td>{{ $counter }}</td>
                     <td>{{ $groupedPenerimaans[0]->perusahaan->nama }}</td>
+                    <td>{{ $groupedPenerimaans[0]->perusahaan->user->email }}</td>
                     <td>{{ $groupedPenerimaans[0]->perusahaan->alamat }}</td>
                     <td>
                         @php $uniqueSiswa = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.nama')->unique() @endphp
                         @foreach ($uniqueSiswa as $namaSiswa)
                             {{ $namaSiswa }} <br>
                         @endforeach
+                    </td>
+                    <td>
+                        @php $uniqueEmailSiswa = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.user.email')->unique() @endphp
+                        {{ $uniqueEmailSiswa->implode(', ') }}
                     </td>
                     <td>
                         @php $uniqueKelas = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.kelas')->unique() @endphp
@@ -83,8 +95,24 @@
                         {{ $uniqueJurusan->implode(', ') }}
                     </td>
                     <td>
+                        @php $uniqueTglMulai = $groupedPenerimaans->pluck('pembimbing.permohonan.tgl_mulai')->unique() @endphp
+                        {{ $uniqueTglMulai->implode(', ') }}
+                    </td>
+                    <td>
+                        @php $uniqueTglSelesai = $groupedPenerimaans->pluck('pembimbing.permohonan.tgl_selesai')->unique() @endphp
+                        {{ $uniqueTglSelesai->implode(', ') }}
+                    </td>
+                    <td>
+                        @php $uniqueDurasiPkl = $groupedPenerimaans->pluck('pembimbing.permohonan.durasi_pkl')->unique() @endphp
+                        {{ $uniqueDurasiPkl->implode(', ') }}
+                    </td>
+                    <td>
                         @php $uniqueGuru = $groupedPenerimaans->pluck('pembimbing.guru.nama')->unique() @endphp
                         {{ $uniqueGuru->implode(', ') }}
+                    </td>
+                    <td>
+                        @php $uniqueEmailGuru = $groupedPenerimaans->pluck('pembimbing.guru.user.email')->unique() @endphp
+                        {{ $uniqueEmailGuru->implode(', ') }}
                     </td>
                 </tr>
             @else

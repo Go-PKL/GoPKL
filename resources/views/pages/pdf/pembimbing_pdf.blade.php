@@ -12,32 +12,33 @@
     <style>
         * {
             font-family: 'Nunito Sans', sans-serif;
-            font-size: 14px;
+            font-size: 12px;
         }
 
-        #obat {
+        #pdf {
             border-collapse: collapse;
             width: 100%;
         }
 
-        #obat td,
-        #obat th {
+        #pdf td,
+        #pdf th {
             border: 1px solid #ddd;
+            text-align: center;
             padding: 8px;
         }
 
-        #obat tr:nth-child(even) {
+        #pdf tr:nth-child(even) {
             background-color: #f2f2f2;
         }
 
-        #obat tr:hover {
+        #pdf tr:hover {
             background-color: #ddd;
         }
 
-        #obat th {
+        #pdf th {
             padding-top: 12px;
             padding-bottom: 12px;
-            text-align: left;
+            text-align: center;
             background-color: #00afee;
             color: white;
         }
@@ -48,16 +49,18 @@
 
     <h2 style="text-align: center; padding-bottom: 20px; font-size: 16px;">Laporan Data Pembimbing Siswa PKL</h2>
 
-    <table id="obat">
+    <table id="pdf">
         <tr>
             <th>No</th>
             <th>Nama Siswa</th>
+            <th>Email Siswa</th>
             <th>Kelas</th>
             <th>Jurusan</th>
             <th>Tanggal Mulai</th>
             <th>Tanggal Selesai</th>
             <th>Durasi PKL</th>
             <th>Guru Pembimbing</th>
+            <th>Email Guru</th>
         </tr>
 
         @foreach ($penerimaans as $penerimaan => $groupedPenerimaans)
@@ -72,6 +75,10 @@
                         @foreach ($uniqueSiswa as $namaSiswa)
                             {{ $namaSiswa }} <br>
                         @endforeach
+                    </td>
+                    <td>
+                        @php $uniqueEmailSiswa = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.user.email')->unique() @endphp
+                        {{ $uniqueEmailSiswa->implode(', ') }}
                     </td>
                     <td>
                         @php $uniqueKelas = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.kelas')->unique() @endphp
@@ -96,6 +103,10 @@
                     <td>
                         @php $uniqueGuru = $groupedPenerimaans->pluck('pembimbing.guru.nama')->unique() @endphp
                         {{ $uniqueGuru->implode(', ') }}
+                    </td>
+                    <td>
+                        @php $uniqueEmailGuru = $groupedPenerimaans->pluck('pembimbing.guru.user.email')->unique() @endphp
+                        {{ $uniqueEmailGuru->implode(', ') }}
                     </td>
                 </tr>
             @else
