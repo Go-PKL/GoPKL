@@ -31,11 +31,11 @@
                                     @endphp
 
                                     @if ($totalPendaftaranKePerusahaan >= 1)
-                                        <button disabled readonly class="btn btn-xs font-semibold"
+                                        <button disabled readonly class="font-semibold btn btn-xs"
                                             style="color: black">Sudah
                                             Mendaftar</button>
                                     @elseif ($totalPendaftaranSiswa >= 2)
-                                        <button disabled readonly class="btn btn-xs font-semibold"
+                                        <button disabled readonly class="font-semibold btn btn-xs"
                                             style="color: black">Batas Pendaftaran
                                             Terpenuhi</button>
                                     @else
@@ -66,7 +66,7 @@
                                                         <input type="hidden" value="{{ $perusahaan->id }}"
                                                             name="perusahaan_id">
 
-                                                        <div class="flex col-span-2 justify-center items-center">
+                                                        <div class="flex items-center justify-center col-span-2">
                                                             <img class="w-[194px] h-[190px] m
                                                         x-10 rounded-[10px] justify-self-end"
                                                                 src="{{ asset('storage/' . $perusahaan->image) }}"
@@ -110,11 +110,11 @@
                                                                 class="textarea textarea-bordered w-[469px] border-[#787A91] rounded-md focus:outline-none bg-white">{{ $perusahaan->alamat }}</textarea>
                                                         </div>
 
-                                                        <div class="flex flex-col justify-self-start w-full">
+                                                        <div class="flex flex-col w-full justify-self-start">
                                                             <label for="durasi_pkl">Durasi PKL</label>
                                                             <select name="durasi_pkl" id="durasi_pkl_{{ $perusahaan->id }}"
                                                                 style="width: 469px;"
-                                                                class="input rounded-md focus:outline-none" required>
+                                                                class="rounded-md input focus:outline-none" required>
                                                                 <option disabled selected>Silahkan pilih durasi pkl
                                                                 </option>
                                                                 <option>1 Bulan</option>

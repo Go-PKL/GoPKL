@@ -1,3 +1,6 @@
+@php
+    $counter = 0;
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,40 +60,49 @@
             <th>Guru Pembimbing</th>
         </tr>
 
-        @foreach ($penerimaans as $perusahaanId => $groupedPenerimaans)
-            <tr>
-                <td>{{ $perusahaanId }}</td>
-                <td>
-                    @php $uniqueSiswa = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.nama')->unique() @endphp
-                    @foreach ($uniqueSiswa as $namaSiswa)
-                        {{ $namaSiswa }} <br>
-                    @endforeach
-                </td>
-                <td>
-                    @php $uniqueKelas = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.kelas')->unique() @endphp
-                    {{ $uniqueKelas->implode(', ') }}
-                </td>
-                <td>
-                    @php $uniqueJurusan = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.jurusan.singkatan')->unique() @endphp
-                    {{ $uniqueJurusan->implode(', ') }}
-                </td>
-                <td>
-                    @php $uniqueTglMulai = $groupedPenerimaans->pluck('pembimbing.permohonan.tgl_mulai')->unique() @endphp
-                    {{ $uniqueTglMulai->implode(', ') }}
-                </td>
-                <td>
-                    @php $uniqueTglSelesai = $groupedPenerimaans->pluck('pembimbing.permohonan.tgl_selesai')->unique() @endphp
-                    {{ $uniqueTglSelesai->implode(', ') }}
-                </td>
-                <td>
-                    @php $uniqueDurasiPkl = $groupedPenerimaans->pluck('pembimbing.permohonan.durasi_pkl')->unique() @endphp
-                    {{ $uniqueDurasiPkl->implode(', ') }}
-                </td>
-                <td>
-                    @php $uniqueGuru = $groupedPenerimaans->pluck('pembimbing.guru.nama')->unique() @endphp
-                    {{ $uniqueGuru->implode(', ') }}
-                </td>
-            </tr>
+        @foreach ($penerimaans as $penerimaan => $groupedPenerimaans)
+            @php
+                $counter = $counter + 1;
+            @endphp
+            @if ($perusahaans->id)
+                <tr>
+                    <td>{{ $counter }}</td>
+                    <td>
+                        @php $uniqueSiswa = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.nama')->unique() @endphp
+                        @foreach ($uniqueSiswa as $namaSiswa)
+                            {{ $namaSiswa }} <br>
+                        @endforeach
+                    </td>
+                    <td>
+                        @php $uniqueKelas = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.kelas')->unique() @endphp
+                        {{ $uniqueKelas->implode(', ') }}
+                    </td>
+                    <td>
+                        @php $uniqueJurusan = $groupedPenerimaans->pluck('pembimbing.permohonan.siswa.jurusan.singkatan')->unique() @endphp
+                        {{ $uniqueJurusan->implode(', ') }}
+                    </td>
+                    <td>
+                        @php $uniqueTglMulai = $groupedPenerimaans->pluck('pembimbing.permohonan.tgl_mulai')->unique() @endphp
+                        {{ $uniqueTglMulai->implode(', ') }}
+                    </td>
+                    <td>
+                        @php $uniqueTglSelesai = $groupedPenerimaans->pluck('pembimbing.permohonan.tgl_selesai')->unique() @endphp
+                        {{ $uniqueTglSelesai->implode(', ') }}
+                    </td>
+                    <td>
+                        @php $uniqueDurasiPkl = $groupedPenerimaans->pluck('pembimbing.permohonan.durasi_pkl')->unique() @endphp
+                        {{ $uniqueDurasiPkl->implode(', ') }}
+                    </td>
+                    <td>
+                        @php $uniqueGuru = $groupedPenerimaans->pluck('pembimbing.guru.nama')->unique() @endphp
+                        {{ $uniqueGuru->implode(', ') }}
+                    </td>
+                </tr>
+            @else
+                @php
+                    $counter = $counter - 1;
+                @endphp
+            @endif
         @endforeach
 </body>
 

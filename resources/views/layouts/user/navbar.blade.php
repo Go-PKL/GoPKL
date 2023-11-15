@@ -154,9 +154,23 @@
                 </x-responsive-nav-link>
             @endrole
 
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Hasil Pendaftaran') }}
-            </x-responsive-nav-link>
+            @role('siswa')
+                <x-responsive-nav-link :href="route('siswa.hasil-pendaftaran')" :active="request()->routeIs('siswa.hasil-pendaftaran')">
+                    {{ __('Hasil Pendaftaran') }}
+                </x-responsive-nav-link>
+            @endrole
+
+            @role('guru')
+                <x-responsive-nav-link :href="route('guru.hasil-pendaftaran')" :active="request()->routeIs('guru.hasil-pendaftaran')">
+                    {{ __('Hasil Pendaftaran') }}
+                </x-responsive-nav-link>
+            @endrole
+
+            @role('perusahaan')
+                <x-responsive-nav-link :href="route('perusahaan.hasil-pendaftaran')" :active="request()->routeIs('perusahaan.hasil-pendaftaran')">
+                    {{ __('Hasil Pendaftaran') }}
+                </x-responsive-nav-link>
+            @endrole
         </div>
 
         <!-- Responsive Settings Options -->

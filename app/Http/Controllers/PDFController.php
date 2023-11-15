@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Pembimbing;
 use App\Models\Penerimaan;
 use App\Models\Permohonan;
+use App\Models\Perusahaan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PDFController extends Controller
 {
@@ -22,6 +24,7 @@ class PDFController extends Controller
     public function pembimbing(Request $request)
     {
         $pembimbings = Pembimbing::all();
+        $perusahaans = Perusahaan::where('user_id', Auth::user()->id)->first();
         $permohonans = Permohonan::all();
         $penerimaans = Penerimaan::with('pembimbing.permohonan.siswa', 'pembimbing.guru')
             ->where('status', true)
@@ -31,7 +34,7 @@ class PDFController extends Controller
             ->where('status', true)
             ->get()
             ->groupBy('perusahaan_id');
-        $pdf = PDF::loadView('pages.pdf.pembimbing_pdf', compact('pembimbings', 'permohonans', 'penerimaans', 'groupedPenerimaans'));
+        $pdf = PDF::loadView('pages.pdf.pembimbing_pdf', compact('pembimbings', 'permohonans', 'penerimaans', 'groupedPenerimaans', 'perusahaans'));
         $pdf->setPaper('A4', 'portrait');
         return $pdf->stream('pembimbing.pdf');
     }
