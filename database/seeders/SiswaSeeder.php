@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Siswa;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Faker\Factory as Faker;
 
 class SiswaSeeder extends Seeder
 {
@@ -16,25 +17,15 @@ class SiswaSeeder extends Seeder
      */
     public function run()
     {
-        Siswa::create([
-            'user_id' => '2',
-            'nama' => 'Husnul Fikri Averus',
-            'kelas' => '12',
-            'jurusan_id' => '1',
-        ]);
+        $faker = Faker::create();
 
-        Siswa::create([
-            'user_id' => '3',
-            'nama' => 'Muhammad Luthfi',
-            'kelas' => '12',
-            'jurusan_id' => '1',
-        ]);
-
-        Siswa::create([
-            'user_id' => '4',
-            'nama' => 'Ihsan Nul Amri',
-            'kelas' => '12',
-            'jurusan_id' => '3',
-        ]);
+        for ($i = 2; $i <= 31; $i++) {
+            Siswa::create([
+                'user_id' => $i,
+                'nama' => $faker->name,
+                'kelas' => '12',
+                'jurusan_id' => $faker->numberBetween(1, 6),
+            ]);
+        }
     }
 }

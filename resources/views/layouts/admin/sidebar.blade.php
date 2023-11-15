@@ -31,7 +31,8 @@
                             </details>
                         </li>
                         <li>
-                            <div><i class="fas fa-users text-3xl"></i><a href="{{ route('pembimbing') }}">Pembimbing</a></div>
+                            <div><i class="fas fa-school text-3xl"></i><a
+                                    href="{{ route('pembimbing') }}">Pembimbing</a></div>
                         </li>
                         <li>
                             <div><i class="fas fa-users text-3xl"></i><a href="{{ route('siswa') }}">Siswa</a></div>
@@ -57,18 +58,3 @@
         </div>
     </div>
 </div>
-
-{{-- <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var currentUrl = window.location.href;
-        var sidebarLinks = document.querySelectorAll(".menu a");
-
-        sidebarLinks.forEach(function(link) {
-            if (link.href === currentUrl) {
-                link.parentElement.style.opacity = "1"; // Halaman aktif
-            } else {
-                link.parentElement.style.opacity = "0.6"; // Halaman non-aktif
-            }
-        });
-    });
-</script> --}}

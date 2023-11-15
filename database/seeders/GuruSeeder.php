@@ -16,15 +16,63 @@ class GuruSeeder extends Seeder
     public function run()
     {
         Guru::create([
-            'user_id' => '5',
-            'nama' => 'Hidayati,M.Pd.T.,S.Kom.',
+            'user_id' => '32',
+            'nama' => 'Hidayati',
             'jabatan_id' => '2',
         ]);
 
         Guru::create([
-            'user_id' => '6',
-            'nama' => 'Drs. Rusmadi,M.Pd.',
+            'user_id' => '33',
+            'nama' => 'Juni Advan',
+            'jabatan_id' => '3',
+        ]);
+
+        Guru::create([
+            'user_id' => '34',
+            'nama' => 'Siti Zizi Fauziah',
+            'jabatan_id' => '4',
+        ]);
+
+        Guru::create([
+            'user_id' => '35',
+            'nama' => 'Asmarni',
+            'jabatan_id' => '5',
+        ]);
+
+        Guru::create([
+            'user_id' => '36',
+            'nama' => 'Nuraini',
+            'jabatan_id' => '6',
+        ]);
+
+        Guru::create([
+            'user_id' => '37',
+            'nama' => 'Erlin Nazar',
             'jabatan_id' => '2',
+        ]);
+
+        Guru::create([
+            'user_id' => '38',
+            'nama' => 'Widi Izra',
+            'jabatan_id' => '3',
+        ]);
+
+        Guru::create([
+            'user_id' => '39',
+            'nama' => 'Ernawaty',
+            'jabatan_id' => '4',
+        ]);
+
+        Guru::create([
+            'user_id' => '40',
+            'nama' => 'Afrida',
+            'jabatan_id' => '5',
+        ]);
+
+        Guru::create([
+            'user_id' => '41',
+            'nama' => 'Yenita',
+            'jabatan_id' => '6',
         ]);
     }
 }

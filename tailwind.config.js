@@ -43,7 +43,7 @@ module.exports = {
 
                     "info": "#3abff8",
 
-                    "success": "#36d399",
+                    "success": "#3CBA78",
 
                     "warning": "#FFBF00",
 
