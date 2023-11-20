@@ -3,7 +3,7 @@
 @section('content')
     <section class="grid w-full h-screen bg-gray-100 place-items-center">
         <div
-            class="bg-white rounded-2xl shadow-2xl max-w-[300px] min-w-[250px] md:max-w-[750px] md:min-w-[50%] lg:max-w-[65vw] 2xl:max-w-[45vw] 2xl:min-w-[40vw] h-[500px] md:h-[460px] xl:h-[500px] 2xl:h-[600px] grid grid-cols-1 md:grid-cols-2 overflow-hidden">
+            class="bg-white rounded-2xl shadow-2xl max-w-[300px] min-w-[250px] md:max-w-[750px] md:min-w-[50%] lg:max-w-[75vw] xl:w-[70vw] 2xl:max-w-[45vw] 2xl:min-w-[40vw] h-[500px] md:h-[460px] xl:h-[500px] 2xl:h-[600px] grid grid-cols-1 md:grid-cols-2 overflow-hidden">
             <div class="grid w-full h-full grid-cols-1 px-10 bg-white py-7">
                 <div class="text-center">
                     <h1 class="text-2xl font-semibold text-black capitalize">Selamat Datang !</h1>
@@ -14,7 +14,7 @@
                         @csrf
                         <div class="grid items-start w-full grid-cols-1 gap-y-4">
                             <div class="grid grid-cols-1">
-                                <label class="text-base text-black/80 " for="email">Email</label>
+                                <label class="text-base text-black/80" for="email">Email</label>
                                 <input type="email" name="email" id="email" required autofocus
                                     placeholder="contoh@gmail.com" class="w-full py-2 rounded-md focus:outline-none">
                                 <x-input-error :messages="$errors->get('email')" class="mt-2" />

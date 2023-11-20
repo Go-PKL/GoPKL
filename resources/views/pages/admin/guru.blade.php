@@ -13,7 +13,7 @@
             </label>
             <form action="{{ route('guru') }}" method="GET">
                 <input type="text" placeholder="Masukkan data yang ingin anda cari"
-                    class="text-sm input input-bordered w-72" name="search" value="{{ old('cari') }}" />
+                    class="input input-bordered w-40 text-sm md:w-60 lg:w-80" name="search" value="{{ old('cari') }}" />
             </form>
         </div>
         <div class="overflow-x-auto p-7">
@@ -37,9 +37,9 @@
                                 <th>{{ $counter }}</th>
                                 <td>{{ $guru->user->email }}</td>
                                 <td>{{ $guru->nama }}</td>
-                                <td class="flex gap-1">
+                                <td class="flex">
                                     {{-- Button Info --}}
-                                    <div class="relative z-50 ">
+                                    <div class="relative lg:z-50 ">
                                         <div x-data="{ fullscreenModal: false }" x-init="$watch('fullscreenModal', function(value) {
                                                     if (value === true) {
                                                         document.body.classList.add('overflow-hidden');
@@ -112,7 +112,7 @@
                                     </div>
 
                                     {{-- Button Edit --}}
-                                    <div class="relative z-50 ">
+                                    <div class="relative lg:z-50 ">
                                         <div x-data="{ fullscreenModal: false }" x-init="$watch('fullscreenModal', function(value) {
                                                     if (value === true) {
                                                         document.body.classList.add('overflow-hidden');
@@ -170,7 +170,8 @@
 
                                                                 <div class="flex flex-col justify-self-end">
                                                                     <label for="jabatan_id">Jabatan</label>
-                                                                    <select name="jabatan_id" id="jabatan_id_{{ $guru->id }}"
+                                                                    <select name="jabatan_id"
+                                                                        id="jabatan_id_{{ $guru->id }}"
                                                                         class="w-[469px] bg-white border-[#00000080] rounded-md select select-bordered focus:outline-none"
                                                                         required>
                                                                         <option value="{{ $guru->jabatan->id }}">

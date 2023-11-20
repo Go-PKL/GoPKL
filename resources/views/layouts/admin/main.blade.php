@@ -30,51 +30,44 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased">
-    <div class="bg-white dark:bg-gray-900">
-        <div class="flex flex-1">
-            @include('layouts.admin.sidebar')
+<body>
+    <div class="flex">
 
-            <div class="w-full flex flex-col justify-between">
-                <div>
-                    @if (Session::has('success'))
-                        <div class="p-3">
-                            <div class="text-white rounded-md alert bg-primary">
-                                {{ Session::get('success') }}
-                            </div>
+        @include('layouts.admin.sidebar')
+
+        <div class="flex flex-col justify-between w-full">
+            <div>
+                @if (Session::has('success'))
+                    <div class="p-3">
+                        <div class="text-white rounded-md alert bg-primary">
+                            {{ Session::get('success') }}
                         </div>
-                        <?php
-                        header('refresh: 1');
-                        ?>
-                    @endif
-
-                    @if (Session::has('error'))
-                        <div class="p-3">
-                            <div class="text-white rounded-md alert bg-error">
-                                {{ Session::get('error') }}
-                            </div>
-                        </div>
-                        <?php
-                        header('refresh: 3');
-                        ?>
-                    @endif
-
-                    <!-- Page Content -->
-                    <div>
-                        @yield('content')
                     </div>
-                </div>
+                    <?php
+                    header('refresh: 1');
+                    ?>
+                @endif
 
-                <!-- Page Footer -->
-                <div class="mt-10">
-                    @include('layouts.user.footer')
+                @if (Session::has('error'))
+                    <div class="p-3">
+                        <div class="text-white rounded-md alert bg-error">
+                            {{ Session::get('error') }}
+                        </div>
+                    </div>
+                    <?php
+                    header('refresh: 1');
+                    ?>
+                @endif
+                <!-- Page Content -->
+                <div class="relative overflow-auto">
+                    @yield('content')
                 </div>
             </div>
+            <!-- Page Footer -->
+            @include('layouts.user.footer')
         </div>
+
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
-
 </body>
 
 </html>

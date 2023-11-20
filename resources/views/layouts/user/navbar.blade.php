@@ -11,53 +11,53 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex md:ml-7 lg:ml-10">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Home') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex md:ml-7 lg:ml-10">
                     <x-nav-link :href="route('persyaratan.index')" :active="request()->routeIs('persyaratan.index')">
                         {{ __('Persyaratan PKL') }}
                     </x-nav-link>
                 </div>
                 @role('siswa')
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex md:ml-7 lg:ml-10">
                         <x-nav-link :href="route('siswa.index')" :active="request()->routeIs('siswa.index')">
                             {{ __('Pendaftaran PKL') }}
                         </x-nav-link>
                     </div>
                 @endrole
                 @role('guru')
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex md:ml-7 lg:ml-10">
                         <x-nav-link :href="route('guru.index')" :active="request()->routeIs('guru.index')">
                             {{ __('Pendaftaran PKL') }}
                         </x-nav-link>
                     </div>
                 @endrole
                 @role('perusahaan')
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex md:ml-7 lg:ml-10">
                         <x-nav-link :href="route('perusahaan.index')" :active="request()->routeIs('perusahaan.index')">
                             {{ __('Pendaftaran PKL') }}
                         </x-nav-link>
                     </div>
                 @endrole
                 @role('siswa')
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex md:ml-7 lg:ml-10">
                         <x-nav-link :href="route('siswa.hasil-pendaftaran')" :active="request()->routeIs('siswa.hasil-pendaftaran')">
                             {{ __('Hasil Pendaftaran') }}
                         </x-nav-link>
                     </div>
                 @endrole
                 @role('guru')
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex md:ml-7 lg:ml-10">
                         <x-nav-link :href="route('guru.hasil-pendaftaran')" :active="request()->routeIs('guru.hasil-pendaftaran')">
                             {{ __('Hasil Pendaftaran') }}
                         </x-nav-link>
                     </div>
                 @endrole
                 @role('perusahaan')
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex md:ml-7 lg:ml-10">
                         <x-nav-link :href="route('perusahaan.hasil-pendaftaran')" :active="request()->routeIs('perusahaan.hasil-pendaftaran')">
                             {{ __('Hasil Pendaftaran') }}
                         </x-nav-link>

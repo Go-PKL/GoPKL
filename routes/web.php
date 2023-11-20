@@ -10,6 +10,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PembimbingController;
 use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\PersyaratanController;
+use App\Http\Middleware\CheckDataCreate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +30,7 @@ Route::get('/', function () {
 
 Route::get('/select-role', function () {
     return view('auth.select-role');
-});
+})->middleware(CheckDataCreate::class);
 
 Route::get('/dashboard', function () {
     return view('pages.dashboard');
@@ -43,9 +44,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/siswa/create', [SiswaController::class, 'create'])->name('siswa.create');
-    Route::get('/guru/create', [GuruController::class, 'create'])->name('guru.create');
-    Route::get('/perusahaan/create', [PerusahaanController::class, 'create'])->name('perusahaan.create');
+
+    Route::get('/siswa/create', [SiswaController::class, 'create'])->name('siswa.create')->middleware(CheckDataCreate::class);
+    Route::get('/guru/create', [GuruController::class, 'create'])->name('guru.create')->middleware(CheckDataCreate::class);
+    Route::get('/perusahaan/create', [PerusahaanController::class, 'create'])->name('perusahaan.create')->middleware(CheckDataCreate::class);
     Route::post('/siswa/store', [SiswaController::class, 'store'])->name('siswa.store');
     Route::post('/guru/store', [GuruController::class, 'store'])->name('guru.store');
     Route::post('/perusahaan/store', [PerusahaanController::class, 'store'])->name('perusahaan.store');

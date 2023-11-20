@@ -13,7 +13,7 @@
             </label>
             <form action="{{ route('siswa') }}" method="GET">
                 <input type="text" placeholder="Masukkan data yang ingin anda cari"
-                    class="text-sm input input-bordered w-72" name="search" value="{{ old('cari') }}" />
+                    class="input input-bordered w-40 text-sm md:w-60 lg:w-80" name="search" value="{{ old('cari') }}" />
             </form>
         </div>
         <div class="overflow-x-auto p-7">
@@ -43,7 +43,7 @@
                                 @endif
                                 <td class="flex gap-1">
                                     {{-- Button Info --}}
-                                    <div class="relative z-50 ">
+                                    <div class="relative lg:z-50 ">
                                         <div x-data="{ fullscreenModal: false }" x-init="$watch('fullscreenModal', function(value) {
                                                     if (value === true) {
                                                         document.body.classList.add('overflow-hidden');
@@ -146,7 +146,7 @@
                                     </div>
 
                                     {{-- Button Edit --}}
-                                    <div class="relative z-50 ">
+                                    <div class="relative lg:z-50 ">
                                         <div x-data="{ fullscreenModal: false }" x-init="$watch('fullscreenModal', function(value) {
                                                     if (value === true) {
                                                         document.body.classList.add('overflow-hidden');

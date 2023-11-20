@@ -54,7 +54,7 @@ class AdminController extends Controller
 
     public function index_perusahaan()
     {
-        $perusahaans = Perusahaan::latest()->filter(request(['search']))->paginate(5);
+        $perusahaans = Perusahaan::latest()->filter(request(['search']))->paginate(10);
         return view('pages.admin.perusahaan', compact('perusahaans'));
     }
 

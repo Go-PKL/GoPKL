@@ -13,7 +13,7 @@
             </label>
             <form action="{{ route('VerifPerusahaan') }}" method="GET">
                 <input type="text" placeholder="Masukkan data yang ingin anda cari"
-                    class="text-sm input input-bordered w-72" name="search" value="{{ old('cari') }}" />
+                    class="input input-bordered w-32 text-sm md:w-52 lg:w-72" name="search" value="{{ old('cari') }}" />
             </form>
         </div>
         <div class="overflow-x-auto p-7">
