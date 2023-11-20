@@ -1,70 +1,80 @@
 <title>Masuk</title>
 @extends('layouts.template')
 @section('content')
-    <section class="flex items-center justify-center min-h-screen bg-lightblue">
-        <div class="flex flex-col items-center max-w-3xl bg-white shadow-2xl md:flex md:flex-row rounded-2xl">
-            <div class="px-8 py-2 md:w-1/2 md:px-16">
-                <h2 class="text-2xl font-bold text-center text-black">Selamat Datang !</h2>
-                <p class="text-sm text-[#00000080] text-center">Selamat Datang | Masukkan data anda</p>
-
-                <form method="POST" action="{{ route('login') }}" class="flex flex-col gap-1 mt-4">
-                    @csrf
-
-                    <x-input-label class="pt-2" for="email" :value="__('Email')" />
-                    <input class="p-2 border border-[#00000080] rounded-md focus:outline-none" id="email" type="email"
-                        name="email" required autofocus placeholder="contoh@gmail.com">
-                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
-
-                    <x-input-label class="pt-2" for="password" :value="__('Password')" />
-                    <input class="p-2 border border-[#00000080] rounded-md focus:outline-none w-full" id="password"
-                        type="password" name="password" required placeholder="********">
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
-
+    <section class="grid w-full h-screen bg-gray-100 place-items-center">
+        <div
+            class="bg-white rounded-2xl shadow-2xl max-w-[300px] min-w-[250px] md:max-w-[750px] md:min-w-[50%] lg:max-w-[65vw] 2xl:max-w-[45vw] 2xl:min-w-[40vw] h-[500px] md:h-[460px] xl:h-[500px] 2xl:h-[600px] grid grid-cols-1 md:grid-cols-2 overflow-hidden">
+            <div class="grid w-full h-full grid-cols-1 px-10 bg-white py-7">
+                <div class="text-center">
+                    <h1 class="text-2xl font-semibold text-black capitalize">Selamat Datang !</h1>
+                    <p class="text-black/80 text-[15px]">Hello | Silahkan masukan data anda</p>
+                </div>
+                <form action="{{ route('login') }}" method="POST">
                     <div>
-                        <div class="flex items-center h-full mt-4 mb-1">
-                            <div id="angkaPertama"
-                                class="w-[100px] border border-gray-200 rounded-md grid place-items-center py-1.5">
+                        @csrf
+                        <div class="grid items-start w-full grid-cols-1 gap-y-4">
+                            <div class="grid grid-cols-1">
+                                <label class="text-base text-black/80 " for="email">Email</label>
+                                <input type="email" name="email" id="email" required autofocus
+                                    placeholder="contoh@gmail.com" class="w-full py-2 rounded-md focus:outline-none">
+                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
                             </div>
-                            <div id="jenisAritmatika" class="w-[100px] grid place-items-center py-1.5">
+
+                            <div class="grid grid-cols-1">
+                                <label class="text-base text-black/80" for="password">Password</label>
+                                <input type="password" name="password" id="password" required placeholder="********"
+                                    class="w-full py-2 rounded-md focus:outline-none">
+                                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+
                             </div>
-                            <div id="angkaKedua"
-                                class="w-[100px] border border-gray-200 rounded-md grid place-items-center py-1.5">
+
+                            <div class="grid max-w-full grid-cols-5">
+                                <div id="angkaPertama"
+                                    class="grid w-full border border-gray-500 rounded-md place-items-center ">
+                                </div>
+                                <div id="jenisAritmatika" class="grid w-full py-1 place-items-center">
+                                </div>
+                                <div id="angkaKedua"
+                                    class="grid w-full border border-gray-500 rounded-md place-items-center ">
+                                </div>
+                                <div class="grid w-full py-1 font-semibold place-items-center">
+                                    =
+                                </div>
+                                <div>
+                                    <input id="finalHasil" type="number"
+                                        class="block w-full py-1 text-center rounded-md focus:outline-none">
+                                </div>
                             </div>
-                            <div class="w-[100px] grid place-items-center font-semibold py-1.5">
-                                =
+
+                            <div class="w-full">
+                                <button type="submit" id="tombolSubmit"
+                                    class="bg-[#0F044C] w-full rounded-md text-white py-2 hover:scale-105 transition-all duration-300">Masuk</button>
                             </div>
-                            <div>
-                                <input id="finalHasil" type="number"
-                                    class="block w-[80px] h-full text-center py-1.5 border border-gray-200 rounded-md"
-                                    placeholder="">
+
+                            <div class="block">
+                                <label for="remember_me" class="inline-flex items-center">
+                                    <input id="remember_me" type="checkbox" checked
+                                        class="text-indigo-600 border-gray-300 rounded shadow-sm focus:ring-indigo-500"
+                                        name="remember">
+                                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                                </label>
+                            </div>
+
+                            <div class="flex items-center justify-between text-xs">
+                                <p class="text-black/70">kamu belum memilki akun ?</p>
+                                @if (Route::has('register'))
+                                    <a class="py-2 px-3 md:px-5 bg-white text-[#000000] border rounded-md shadow-md hover:scale-110 duration-300"
+                                        href="{{ route('register') }}">Daftar
+                                    </a>
+                                @endif
                             </div>
                         </div>
-
                     </div>
-
-                    <button type="submit" id="tombolSubmit"
-                        class="bg-[#0F044C] rounded-md text-white mt-3 py-2 hover:scale-105 duration-300">Masuk</button>
                 </form>
-                <div class="block mt-4">
-                    <label for="remember_me" class="inline-flex items-center">
-                        <input id="remember_me" type="checkbox"
-                            class="text-indigo-600 border-gray-300 rounded shadow-sm focus:ring-indigo-500" name="remember">
-                        <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                    </label>
-                </div>
-
-                <div class="flex items-center justify-between mt-3 text-xs">
-                    <p class="text-[#00000080]">kamu belum memilki akun ?</p>
-                    @if (Route::has('register'))
-                        <a class="py-2 px-5 bg-white text-[#000000] border rounded-md shadow-md hover:scale-110 duration-300"
-                            href="{{ route('register') }}">Daftar
-                        </a>
-                    @endif
-                </div>
             </div>
 
-            <div class="hidden w-1/2 md:block rounded-r-2xl">
-                <img class="w-full h-[450px] rounded-r-2xl object-fill" src="/assets/images/background.jpg">
+            <div class="hidden w-full h-full bg-white md:block">
+                <img src="{{ asset('assets/images/background.jpg') }}" alt="gambar" class="w-full h-full ">
             </div>
         </div>
     </section>

@@ -40,6 +40,17 @@ class PerusahaanController extends Controller
                     ->where('perusahaan_id', $perusahaans->id);
             })
             ->get();
+        // dd($pembimbings);
+        $penerimaans = Penerimaan::whereHas('pembimbing', function ($query) use ($perusahaans) {
+            $query->where('status', true)
+                ->whereHas('permohonan', function ($query) use ($perusahaans) {
+                    $query->where('status', false)
+                        ->whereDoesntHave('siswa', function ($q) {
+                            $q->where('status', true);
+                        })->where('perusahaan_id', $perusahaans->id);
+                });
+        })
+            ->get();
 
 
         // $pembimbings = Pembimbing::where('status', true)
@@ -50,7 +61,7 @@ class PerusahaanController extends Controller
 
         // dd($pembimbings);
 
-        return view('pages.perusahaan.index', compact('users', 'perusahaans', 'pembimbings'));
+        return view('pages.perusahaan.index', compact('users', 'perusahaans', 'pembimbings', 'penerimaans'));
     }
 
     public function index_hasil_pendaftaran_perusahaan()
@@ -101,9 +112,11 @@ class PerusahaanController extends Controller
         return redirect()->to('/dashboard')->with('success', 'Data anda berhasil disimpan.');
     }
 
+
     public function terimaSiswa(Request $request)
     {
         $perusahaan = Perusahaan::where('user_id', Auth::user()->id)->first();
+
         $pembimbing = Pembimbing::find($request->pembimbing_id);
 
         if ($perusahaan) {
@@ -120,14 +133,40 @@ class PerusahaanController extends Controller
 
             $permohonan = $pembimbing->permohonan;
             $permohonan->update(['status' => true]);
-            
-            $pembimbing->update([
-                'status_penerimaan' => true,
-            ]);
+
+            $pembimbing->update(['status_penerimaan' => true]);
+
+            $siswaID = $pembimbing->permohonan->siswa_id;
+
+            $pembimbingLain = Pembimbing::whereHas('permohonan', function ($query) use ($siswaID, $perusahaan) {
+                $query->where('siswa_id', $siswaID)
+                    ->whereHas('perusahaan', function ($q) use ($perusahaan) {
+                        $q->where('id', '!=', $perusahaan->id);
+                    });
+            })->first();
+
+            $perusahaanLain = $pembimbingLain->perusahaan_id;
+
+            if ($pembimbingLain) {
+                Penerimaan::create([
+                    'perusahaan_id' => $perusahaanLain,
+                    'pembimbing_id' => $pembimbingLain->id,
+                    'status' => false,
+                    'keterangan' => 'Anda tidak lulus',
+                ]);
+
+                $pembimbingLain->update(['status_penerimaan' => true]);
+
+                $permohonan = $pembimbingLain->permohonan;
+                $permohonan->update(['status' => true]);
+
+                return redirect()->route('perusahaan.index')->with('success', 'Data siswa berhasil diterima.');
+            }
         }
 
-        return redirect()->route('perusahaan.index')->with('success', 'Data siswa berhasil diterima.');
+        return redirect()->route('perusahaan.index')->with('error', 'Siswa sudah diterima di perusahaan lain.');
     }
+
 
     public function tolakSiswa(Request $request)
     {

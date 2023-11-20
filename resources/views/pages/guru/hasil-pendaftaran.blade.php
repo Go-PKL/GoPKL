@@ -72,7 +72,7 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     @foreach ($pembimbings as $pembimbing)
-                                                                        @if ($perusahaan->id == $pembimbing->perusahaan_id)
+                                                                        @if ($perusahaan->id == $pembimbing->perusahaan_id && $pembimbing->guru_id == $gurus->id)
                                                                             <tr>
                                                                                 <td>{{ $pembimbing->permohonan->siswa->nama }}
                                                                                 </td>

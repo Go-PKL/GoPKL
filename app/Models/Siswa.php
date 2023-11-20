@@ -13,12 +13,20 @@ class Siswa extends Model
 
     public function scopeFilter($query, array $filters)
     {
-        $query->when($filters['search'] ?? false, function ($query, $search) {
-            return $query->where('nama', 'like', '%' . request('search') . '%')
-                ->orWhere('kelas', 'like', '%' . request('search') . '%')
-                ->orWhere('singkatan', 'like', '%' . request('search') . '%');
+        $query->when(isset($filters['search']), function ($query, $search) {
+            $query->where('nama', 'like', '%' . $search . '%')
+                ->orWhere('kelas', 'like', '%' . $search . '%')
+                ->orWhereHas('jurusan', function ($query) use ($search) {
+                    $query->where('nama', 'like', '%' . $search . '%');
+                    $query->where('singkatan', 'like', '%' . $search . '%');
+                })
+                ->orWhereHas('user', function ($query) use ($search) {
+                    $query->where('name', 'like', '%' . $search . '%')
+                        ->orWhere('email', 'like', '%' . $search . '%');
+                });
         });
     }
+
 
     public function jurusan()
     {

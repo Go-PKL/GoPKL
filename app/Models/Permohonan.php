@@ -14,13 +14,38 @@ class Permohonan extends Model
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {
-            return $query->where('email', 'like', '%' . $search . '%')
-                ->orWhere('nama', 'like', '%' . $search . '%')
-                ->orWhere('jurusan', 'like', '%' . $search . '%')
-                ->orWhere('kelas', 'like', '%' . $search . '%')
-                ->orWhere('tgl_masuk', 'like', '%' . $search . '%')
-                ->orWhere('tgl_keluar', 'like', '%' . $search . '%')
-                ->orWhere('durasi_pkl', 'like', '%' . $search . '%');
+            $query->where(function ($query) use ($search) {
+                $query->where('tgl_masuk', 'like', '%' . $search . '%')
+                    ->orWhere('tgl_keluar', 'like', '%' . $search . '%')
+                    ->orWhere('durasi_pkl', 'like', '%' . $search . '%')
+                    ->orWhereHas('user', function ($query) use ($search) {
+                        $query->where('name', 'like', '%' . $search . '%')
+                            ->orWhere('email', 'like', '%' . $search . '%');
+                    })
+                    ->orWhereHas('siswa', function ($query) use ($search) {
+                        $query->where('nama', 'like', '%' . $search . '%')
+                            ->orWhere('kelas', 'like', '%' . $search . '%')
+                            ->orWhereHas('jurusan', function ($query) use ($search) {
+                                $query->where('nama', 'like', '%' . $search . '%');
+                                $query->where('singkatan', 'like', '%' . $search . '%');
+                            })
+                            ->orWhereHas('user', function ($query) use ($search) {
+                                $query->where('name', 'like', '%' . $search . '%')
+                                    ->orWhere('email', 'like', '%' . $search . '%');
+                            });
+                    })
+                    ->orWhereHas('perusahaan', function ($query) use ($search) {
+                        $query->where(function ($query) use ($search) {
+                            $query->where('nama', 'like', '%' . $search . '%')
+                                ->orWhere('jurusan', 'like', '%' . $search . '%')
+                                ->orWhere('alamat', 'like', '%' . $search . '%')
+                                ->orWhereHas('user', function ($query) use ($search) {
+                                    $query->where('name', 'like', '%' . $search . '%')
+                                        ->orWhere('email', 'like', '%' . $search . '%');
+                                });
+                        });
+                    });
+            });
         });
     }
 
@@ -37,6 +62,5 @@ class Permohonan extends Model
     public function pembimbing()
     {
         return $this->hasMany(Pembimbing::class);
-    
     }
 }

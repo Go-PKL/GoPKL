@@ -35,35 +35,40 @@
         <div class="flex flex-1">
             @include('layouts.admin.sidebar')
 
-            <div class="w-full">
-                @if (Session::has('success'))
-                    <div class="p-3">
-                        <div class="text-white rounded-md alert bg-primary">
-                            {{ Session::get('success') }}
+            <div class="w-full flex flex-col justify-between">
+                <div>
+                    @if (Session::has('success'))
+                        <div class="p-3">
+                            <div class="text-white rounded-md alert bg-primary">
+                                {{ Session::get('success') }}
+                            </div>
                         </div>
-                    </div>
-                    <?php
-                    header('refresh: 1');
-                    ?>
-                @endif
+                        <?php
+                        header('refresh: 1');
+                        ?>
+                    @endif
 
-                @if (Session::has('error'))
-                    <div class="p-3">
-                        <div class="text-white rounded-md alert bg-error">
-                            {{ Session::get('error') }}
+                    @if (Session::has('error'))
+                        <div class="p-3">
+                            <div class="text-white rounded-md alert bg-error">
+                                {{ Session::get('error') }}
+                            </div>
                         </div>
-                    </div>
-                    <?php
-                    header('refresh: 3');
-                    ?>
-                @endif
+                        <?php
+                        header('refresh: 3');
+                        ?>
+                    @endif
 
-                <!-- Page Content -->
-                @yield('content')
+                    <!-- Page Content -->
+                    <div>
+                        @yield('content')
+                    </div>
+                </div>
 
                 <!-- Page Footer -->
-                @include('layouts.user.footer')
-
+                <div class="mt-10">
+                    @include('layouts.user.footer')
+                </div>
             </div>
         </div>
     </div>
