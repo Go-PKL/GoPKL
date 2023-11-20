@@ -1,56 +1,67 @@
 <title>Daftar</title>
 @extends('layouts.template')
 @section('content')
-    <section class="flex items-center justify-center min-h-screen">
-        <div class="flex flex-col items-center max-w-3xl bg-white shadow-2xl md:flex md:flex-row rounded-2xl">
-            <div class="flex flex-col p-4 md:hidden">
-                <img class="h-56 w-52 rounded-2xl" src="/assets/images/background.jpg">
-            </div>
-            <div class="px-8 py-2 md:w-1/2 md:px-14">
-                <h2 class="font-bold text-2xl text-[#000000] text-center">Hello !</h2>
-                <p class="text-sm text-[#00000080] text-center">Hello | Silahkan masukkan data anda</p>
-
-                <form method="POST" action="{{ route('register') }}" class="flex flex-col gap-1 mt-4 text-[#000000]">
-                    @csrf
-
-                    <x-input-label class="pt-2" for="name" :value="__('Username')" />
-                    <input id="name" class="p-2 border border-[#00000080] rounded-md focus:outline-none" type="text"
-                        name="name" required autofocus autocomplete="name" placeholder="go_pkl">
-                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
-
-                    <x-input-label class="pt-2" for="email" :value="__('Email')" />
-                    <input id="email" class="p-2 border border-[#00000080] rounded-md focus:outline-none" type="email"
-                        name="email" required autocomplete="username" placeholder="contoh@gmail.com">
-                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
-
-                    <x-input-label class="pt-2" for="password" :value="__('Password')" />
-                    <input id="password" class="p-2 border border-[#00000080] rounded-md focus:outline-none w-full"
-                        type="password" name="password" required autocomplete="new-password" placeholder="********">
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
-
-                    <x-input-label class="pt-2" for="password_confirmation" :value="__('Konfirmasi Password')" />
-                    <x-text-input id="password_confirmation"
-                        class="p-2 border border-[#00000080] rounded-md focus:outline-none w-full" type="password"
-                        name="password_confirmation" required autocomplete="new-password" placeholder="********" />
-                    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-
-
-                    <button type="submit"
-                        class="bg-[#0F044C] rounded-md text-white mt-3 py-2 hover:scale-105 duration-300">{{ __('Daftar') }}</button>
-                </form>
-
-                <div class="flex items-center justify-between mt-3 text-xs">
-                    <p class="text-[##00000080]">kamu sudah punya akun ?</p>
-                    @if (Route::has('register'))
-                        <a class="py-2 px-5 bg-white border text-[#000000] rounded-md shadow-md hover:scale-110 duration-300"
-                            href="{{ route('login') }}">Masuk
-                        </a>
-                    @endif
+    <section class="grid w-full h-screen bg-gray-100 place-items-center">
+        <div
+            class="bg-white rounded-2xl shadow-2xl max-w-[300px] min-w-[250px] md:max-w-[750px] md:min-w-[50%] lg:max-w-[65vw] 2xl:max-w-[45vw] 2xl:min-w-[40vw] h-[500px] 2xl:h-[600px] grid grid-cols-1 md:grid-cols-2 overflow-hidden">
+            <div class="grid w-full h-full grid-cols-1 px-10 py-4 bg-white">
+                <div class="text-center">
+                    <h1 class="text-2xl font-semibold text-black capitalize">Selamat Datang !</h1>
+                    <p class="text-black/80 text-[15px]">Hello | Silahkan masukan data anda</p>
                 </div>
-            </div>
+                <form action="{{ route('register') }}" method="POST">
+                    <div>
+                        @csrf
+                        <div class="grid items-start w-full grid-cols-1 gap-y-3">
+                            <div class="grid grid-cols-1">
+                                <label class="text-base text-black/80 " for="name">Username</label>
+                                <input type="text" name="name" id="name" required autofocus autocomplete="name"
+                                    placeholder="go_pkl" class="w-full rounded-md focus:outline-none">
+                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                            </div>
 
-            <div class="hidden w-1/2 md:block rounded-r-2xl">
-                <img class="w-full h-[494px] rounded-r-2xl" src="/assets/images/background.jpg">
+                            <div class="grid grid-cols-1">
+                                <label class="text-base text-black/80" for="email">Email</label>
+                                <input type="email" name="email" id="email" required autocomplete="username"
+                                    placeholder="contoh@gmail.com" class="w-full rounded-md focus:outline-none">
+                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                            </div>
+
+                            <div class="grid grid-cols-1">
+                                <label class="text-base text-black/80" for="password">Password</label>
+                                <input type="password" name="password" id="password" required autocomplete="new-password"
+                                    placeholder="********" class="w-full rounded-md focus:outline-none">
+                                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                            </div>
+
+                            <div class="grid grid-cols-1">
+                                <label class="text-base text-black/80" for="password_confirmation">Konfirmasi
+                                    Password</label>
+                                <input type="password" name="password_confirmation" id="password_confirmation" required
+                                    autocomplete="new-password" placeholder="********"
+                                    class="w-full rounded-md focus:outline-none">
+                                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                            </div>
+
+                            <div class="grid grid-cols-1">
+                                <button type="submit"
+                                    class="bg-[#0F044C] w-full rounded-md text-white py-2 hover:scale-105 transition-all duration-300">Daftar</button>
+                            </div>
+
+                            <div class="flex items-center justify-between text-xs">
+                                <p class="text-[##00000080]">kamu sudah punya akun ?</p>
+                                @if (Route::has('register'))
+                                    <a class="py-2 px-5 bg-white border text-[#000000] rounded-md shadow-md hover:scale-110 duration-300"
+                                        href="{{ route('login') }}">Masuk
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="hidden w-full h-full bg-white md:block">
+                <img src="{{ asset('assets/images/background.jpg') }}" alt="gambar" class="w-full h-full ">
             </div>
         </div>
     </section>

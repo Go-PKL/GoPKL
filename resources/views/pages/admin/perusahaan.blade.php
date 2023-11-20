@@ -28,13 +28,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($perusahaans as $perusahaan)
+                    @foreach ($perusahaans as $index => $perusahaan)
                         @php
                             $counter = $counter + 1;
                         @endphp
                         @if ($perusahaan->user->hasRole('perusahaan'))
                             <tr>
-                                <th>{{ $counter }}</th>
+                                <th>{{ $index + $perusahaans->firstItem() }}</th>
                                 <td>{{ $perusahaan->user->email }}</td>
                                 <td>{{ $perusahaan->nama }}</td>
                                 <td class="flex gap-1">
@@ -291,6 +291,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="">
+                {{ $perusahaans->links() }}
+            </div>
         </div>
     </div>
 @endsection

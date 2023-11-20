@@ -32,10 +32,10 @@ class GuruController extends Controller
 
     public function index_hasil_pendaftaran_guru()
     {
-
+        $gurus = Guru::where('user_id', Auth::user()->id)->first();
         $pembimbings = Pembimbing::all()->where('status', true);
         $perusahaans = Perusahaan::all();
-        return view('pages.guru.hasil-pendaftaran', compact('pembimbings', 'perusahaans'));
+        return view('pages.guru.hasil-pendaftaran', compact('gurus', 'pembimbings', 'perusahaans'));
     }
 
     /**

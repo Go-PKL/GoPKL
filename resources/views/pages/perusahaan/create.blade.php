@@ -1,81 +1,91 @@
 <title>Data Perusahaan</title>
 @extends('layouts.template')
 @section('content')
-    <section class="flex items-center justify-center min-h-screen">
-        <div class="flex flex-col items-center max-w-3xl bg-white shadow-2xl md:flex md:flex-row rounded-2xl">
-            {{-- <div class="flex flex-col p-4 md:hidden">
-                <img class="h-56 w-52 rounded-2xl" src="/assets/images/background.jpg">
-            </div> --}}
-            <div class="flex flex-col items-center justify-center py-4 w-52 md:hidden">
-                <div class="h-48 border-t w-52 border-x border-slate-800">
-
+    <section class="grid w-full h-screen bg-gray-100 justify-center items-start py-5 md:items-center overflow-auto">
+        <div
+            class="bg-white rounded-2xl shadow-2xl max-w-[300px] min-w-[250px] md:max-w-[750px] md:min-w-[50%] lg:max-w-[65vw] 2xl:max-w-[45vw] 2xl:min-w-[40vw] h-[430px] xl:h-[500px] 2xl:h-[600px] grid grid-cols-1 md:grid-cols-2 md:overflow-hidden">
+            <div
+                class="flex flex-col items-center justify-center w-full h-full rounded-2xl md:rounded-none gap-6 px-10 py-4 bg-white">
+                <div class="text-center">
+                    <h1 class="text-2xl font-semibold text-black capitalize">Hello {{ Auth::user()->name }}</h1>
+                    <p class="text-black/80 text-[15px]">Silahkan masukkan data berikut</p>
                 </div>
-                <input type="file" class="w-full bg-white rounded-none file-input file-input-xs" />
-            </div>
-            <div class="px-4 py-5 md:px-8">
 
+                <form action="{{ route('perusahaan.store') }}" method="POST">
+                    <div>
+                        @csrf
+                        <div class="grid items-start w-full grid-cols-1 gap-y-3">
+                            <div class="grid grid-cols-1">
+                                <label class="text-base text-black/80 " for="nama">Nama Perusahaan</label>
+                                <input type="text" name="nama" id="nama" required autofocus autocomplete="nama"
+                                    placeholder="PT. ARG Solusi Teknologi"
+                                    class="w-full py-2 rounded-md focus:outline-none">
+                            </div>
 
-                <form method="POST" action="{{ route('perusahaan.store') }}"
-                    class="grid grid-cols-2 justify-center items-center gap-1 m-4 text-[#000000]" autocomplete="off"
-                    enctype="multipart/form-data">
-                    @csrf
-                    <div class="px-4">
-                        <h2 class="font-bold text-2xl text-[#000000] text-center">Hello </h2>
-                        {{-- {{ Auth::user()->name }} --}}
-                        <p class="text-sm text-[#00000080] text-center">Silahkan masukkan data berikut</p>
+                            <div class="grid grid-cols-1">
+                                <x-input-label class="pt-2" for="jurusan" :value="__('Jurusan yang dibutuhkan')" />
+                                <div class="grid grid-cols-3 gap-4">
+                                    <div class="grid items-center grid-cols-2 md:grid-cols-3 xl:gap-x-32 gap-x-28">
+                                        <label class="flex gap-2">
+                                            <input type="checkbox" name="jurusan[]" id="PPLG" value="PPLG">PPLG
+                                        </label>
+                                        <label class="flex gap-2">
+                                            <input type="checkbox" name="jurusan[]" id="TJKT" value="TJKT">TJKT
+                                        </label>
+                                        <label class="flex gap-2">
+                                            <input type="checkbox" name="jurusan[]" id="ULPW" value="ULPW">ULPW
+                                        </label>
+                                        <label class="flex gap-2">
+                                            <input type="checkbox" name="jurusan[]" id="Pemasaran"
+                                                value="Pemasaran">Pemasaran
+                                        </label>
+                                        <label class="flex gap-2">
+                                            <input type="checkbox" name="jurusan[]" id="AKL" value="AKL">AKL
+                                        </label>
+                                        <label class="flex gap-2">
+                                            <input type="checkbox" name="jurusan[]" id="MPLB" value="MPLB">MPLB
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <x-input-label class="pt-2" for="nama" :value="__('Nama Perusahaan')" />
-                        <input id="nama" class="p-2 w-5/6 border border-[#00000080] rounded-md focus:outline-none"
-                            type="text" name="nama" required autofocus autocomplete="nama"
-                            placeholder="PT. ARG Solusi Teknologi">
+                            <div class="grid grid-cols-1">
+                                <label class="text-base text-black/80 " for="alamat">Alamat Perusahaan</label>
+                                <textarea name="alamat" id="alamat" required placeholder="Jl. Kel, Kec, Kota, Provinsi"
+                                    class="w-full py-2 bg-white rounded-md textarea textarea-bordered focus:outline-none"></textarea>
+                            </div>
 
-                        <x-input-label class="pt-2" for="jurusan" :value="__('Jurusan yang dibutuhkan')" />
-                        <div class="grid grid-cols-3 gap-4">
-                            <div class="grid items-center grid-cols-3 gap-x-32">
-                                <label class="flex gap-2">
-                                    <input type="checkbox" name="jurusan[]" id="PPLG" value="PPLG">PPLG
-                                </label>
-                                <label class="flex gap-2">
-                                    <input type="checkbox" name="jurusan[]" id="TJKT" value="TJKT">TJKT
-                                </label>
-                                <label class="flex gap-2">
-                                    <input type="checkbox" name="jurusan[]" id="ULPW" value="ULPW">ULPW
-                                </label>
-                                <label class="flex gap-2">
-                                    <input type="checkbox" name="jurusan[]" id="Pemasaran" value="Pemasaran">Pemasaran
-                                </label>
-                                <label class="flex gap-2">
-                                    <input type="checkbox" name="jurusan[]" id="AKL" value="AKL">AKL
-                                </label>
-                                <label class="flex gap-2">
-                                    <input type="checkbox" name="jurusan[]" id="MPLB" value="MPLB">MPLB
-                                </label>
+                            <div class="flex flex-col items-center py-5 justify-cente md:hidden">
+                                <div class="w-full h-52 border-x border-t rounded-t-[15px] border-[#00000080]">
+                                    <img class="w-full h-full img-preview rounded-t-[15px]">
+                                </div>
+                                <input type="file" id="image" name="image" onchange="previewImage()" required
+                                    class="file-input file-input-xs md:file-input-sm file-input-bordered text-xs md:text-sm rounded-b-[15px] rounded-t-none w-full bg-white" />
+                            </div>
+
+                            <div class="grid grid-cols-1">
+                                <button type="submit"
+                                    class="bg-[#0F044C] w-full rounded-md text-white py-2 hover:scale-105 transition-all duration-300">Selesai</button>
                             </div>
                         </div>
-
-                        <x-input-label class="pt-2" for="alamat" :value="__('Alamat')" />
-                        <textarea class="w-5/6 textarea textarea-bordered border-[#00000080] rounded-md focus:outline-none bg-white"
-                            name="alamat" id="alamat" placeholder="Jl. Kel, Kec, Kota, Provinsi"></textarea>
                     </div>
-
-                    <div class="items-center justify-center hidden px-8 py-5 md:flex md:flex-col">
-                        <div class="w-full h-52 border-x border-t rounded-t-[15px] border-[#00000080]">
-                            <img class="w-full h-full img-preview rounded-t-[15px]">
-                        </div>
-                        <input type="file" id="image" name="image" onchange="previewImage()" required
-                            class="file-input file-input-sm file-input-bordered text-sm rounded-b-[15px] rounded-t-none w-full bg-white" />
-                    </div>
-
-                    <button type="submit"
-                        class="w-3/4 bg-[#0F044C] rounded-md text-white mt-2 py-2 mx-4 hover:scale-105 duration-300">{{ __('Selesai') }}</button>
                 </form>
             </div>
+
+            <div class="items-center justify-center hidden px-12 py-5 md:flex md:flex-col">
+                <div class="w-full h-52 border-x border-t rounded-t-[15px] border-[#00000080]">
+                    <img class="w-full h-full img-preview2 rounded-t-[15px]"> <!-- Menambahkan elemen img-preview2 -->
+                </div>
+                <input type="file" id="image2" name="image" onchange="previewImage2()" required
+                    class="file-input file-input-sm file-input-bordered text-sm rounded-b-[15px] rounded-t-none w-full bg-white" />
+            </div>
+
         </div>
     </section>
     <script>
         function previewImage() {
             const image = document.querySelector('#image');
-            const imgPreview = document.querySelector('.img-preview')
+            const imgPreview = document.querySelector('.img-preview');
 
             imgPreview.style.display = 'block';
 
@@ -84,6 +94,20 @@
 
             oFReader.onload = function(oFREvent) {
                 imgPreview.src = oFREvent.target.result;
+            }
+        }
+
+        function previewImage2() {
+            const image2 = document.querySelector('#image2');
+            const imgPreview2 = document.querySelector('.img-preview2');
+
+            imgPreview2.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image2.files[0]);
+
+            oFReader.onload = function(oFREvent) {
+                imgPreview2.src = oFREvent.target.result;
             }
         }
     </script>

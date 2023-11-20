@@ -15,11 +15,18 @@ class Perusahaan extends Model
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {
-            return $query->where('nama', 'like', '%' . request('search') . '%')
-                ->orWhere('jurusan', 'like', '%' . request('search') . '%')
-                ->orWhere('alamat', 'like', '%' . request('search') . '%');
+            $query->where(function ($query) use ($search) {
+                $query->where('nama', 'like', '%' . $search . '%')
+                    ->orWhere('jurusan', 'like', '%' . $search . '%')
+                    ->orWhere('alamat', 'like', '%' . $search . '%')
+                    ->orWhereHas('user', function ($query) use ($search) {
+                        $query->where('name', 'like', '%' . $search . '%')
+                            ->orWhere('email', 'like', '%' . $search . '%');
+                    });
+            });
         });
     }
+
 
     public function user()
     {
