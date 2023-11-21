@@ -24,7 +24,7 @@ class SiswaController extends Controller
         $users = User::all();
         $siswas = Siswa::where('user_id', Auth::user()->id)->first();
         $jurusans = Jurusan::all();
-        $perusahaans = Perusahaan::all();
+        $perusahaans = Perusahaan::paginate(9);
         $permohonans = Permohonan::all();
         // $perusahaans = Perusahaan::join('permohonans', 'perusahaans.id', '=', 'permohonans.perusahaan_id')->get();
 

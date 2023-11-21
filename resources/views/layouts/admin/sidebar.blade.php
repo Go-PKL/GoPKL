@@ -60,7 +60,7 @@
                         <li>
                             <div><a class="flex space-x-3 items-center" href="{{ route('perusahaan') }}">
                                     <i class="fas fa-industry text-3xl"></i>
-                                    <span class="hidden lg:block">Pembimbing</span>
+                                    <span class="hidden lg:block">Perusahaan</span>
                                 </a></div>
                         </li>
                     </div>

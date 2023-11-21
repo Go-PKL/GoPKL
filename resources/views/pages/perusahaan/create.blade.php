@@ -3,7 +3,7 @@
 @section('content')
     <section class="grid w-full h-screen bg-gray-100 justify-center items-start py-5 md:items-center overflow-auto">
         <div
-            class="bg-white rounded-2xl shadow-2xl max-w-[300px] min-w-[250px] md:max-w-[750px] md:min-w-[50%] lg:max-w-[65vw] 2xl:max-w-[45vw] 2xl:min-w-[40vw] h-[430px] xl:h-[500px] 2xl:h-[600px] grid grid-cols-1 md:grid-cols-2 md:overflow-hidden">
+            class="bg-white rounded-2xl shadow-2xl w-[90vw] lg:w-[80vw] xl:w-[65vw] 2xl:w-[60vw] h-[500px] md:h-[460px] xl:h-[500px] 2xl:h-[600px] grid grid-cols-1 md:grid-cols-2 md:overflow-hidden">
             <div
                 class="flex flex-col items-center justify-center w-full h-full rounded-2xl md:rounded-none gap-6 px-10 py-4 bg-white">
                 <div class="text-center">

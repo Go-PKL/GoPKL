@@ -1,9 +1,9 @@
 @extends('layouts.user.main')
 @section('content')
-    <div class="flex justify-around m-5 place-content-center">
+    <div class="grid grid-cols-1 gap-2 md:grid-cols-2 m-5 justify-items-center">
         @foreach ($penerimaans as $penerimaan)
             @if ($siswas->id == $penerimaan->pembimbing->permohonan->siswa_id)
-                <div class="p-5 border border-gray-400 rounded-xl">
+                <div class="md:w-[350px] lg:w-[390px] h-[430px] p-5 border border-gray-400 rounded-xl">
                     <div class="flex items-center mb-5 gap-x-2">
                         <img src="{{ asset('storage/' . $penerimaan->perusahaan->image) }}" alt="Image" width="100px" />
                         <div class="flex flex-col">
