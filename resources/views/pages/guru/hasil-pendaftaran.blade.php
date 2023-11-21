@@ -4,17 +4,17 @@
     <div class="py-12 overflow-x-hidden">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div
-                class="grid grid-cols-3 text-sm text-gray-900 gap-x-28 gap-y-4 justify-items-center md:text-base dark:text-gray-100">
+                class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 text-sm text-gray-900 gap-x-6 xl:gap-x-28 gap-y-4 justify-items-center md:text-base dark:text-gray-100">
                 @foreach ($perusahaans as $perusahaan)
                     <div
-                        class="flex justify-center items-center px-5 gap-x-3 gap-y-5 w-[150px] h-[75px] md:w-[430px] md:h-[205px] rounded-[10px] text-black border border-[#B4B4B3]">
+                        class="flex justify-start items-center gap-x-3 gap-y-5 w-[310px] h-[160px] md:w-[360px] md:h-[175px] lg:w-[430px] lg:h-[205px] rounded-[10px] text-black border border-[#B4B4B3]">
                         <div class="flex justify-center items-center">
-                            <img class="w-[124.24px] h-[124.24px] rounded-[10px]"
+                            <img class="w-[100px] h-[100px] lg:w-[124.24px] lg:h-[124.24px] rounded-[10px] mx-2 md:mx-4"
                                 src="{{ asset('storage/' . $perusahaan->image) }}" alt="Logo Perusahaan">
                         </div>
-                        <div class="flex flex-col gap-2 justify-center items-start">
-                            <h1 class="flex flex-col text-xl font-bold">{{ $perusahaan->nama }}</h1>
-                            <p class="flex text-sm">{{ $perusahaan->jurusan }}</p>
+                        <div class="flex flex-col gap-2">
+                            <h1 class="flex flex-col text-base lg:text-xl font-bold">{{ $perusahaan->nama }}</h1>
+                            <p class="flex text-xs lg:text-sm">{{ $perusahaan->jurusan }}</p>
                             <div class="relative z-50 ">
                                 <div x-data="{ fullscreenModal: false }" x-init="$watch('fullscreenModal', function(value) {
                                             if (value === true) {
@@ -24,7 +24,7 @@
                                             }
                                             @keydown.escape ="fullscreenModal=false">
                                     <button @click="fullscreenModal=true"
-                                        class="btn btn-xs font-semibold bg-[#3C79F5] hover:bg-[#3C79F5] hover:scale-105 duration-300 text-white px-8">Info
+                                        class="font-medium uppercase rounded-md text-[11px] md:btn md:btn-xs bg-[#3C79F5] md:bg-[#3C79F5] px-8 md:px-8 hover:scale-105 duration-300 text-white md:text-white">Info
                                         PKL</button>
                                     <template x-teleport="body">
                                         <div x-show="fullscreenModal" x-transition:enter="transition ease-out duration-300"
@@ -34,7 +34,7 @@
                                             x-transition:leave-start="translate-y-0"
                                             x-transition:leave-end="translate-y-full"
                                             class="flex fixed z-[99] w-screen  inset-0 h-screen bg-black/40">
-                                            <button @click="fullscreenModal=false" class="absolute z-30 top-4 right-10 ">
+                                            <button @click="fullscreenModal=false" class="absolute z-30 top-2 right-2 ">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="white" class="w-10 h-10">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -43,24 +43,24 @@
                                             </button>
                                             <div class="relative flex flex-wrap items-center w-full h-full ">
                                                 <div
-                                                    class="bg-white overflow-y-auto w-screen h-[90%] absolute left-0 right-0 bottom-0">
+                                                    class="bg-white overflow-y-auto w-full h-[90%] absolute left-0 right-0 bottom-0">
                                                     <form action="" method=""
-                                                        class="grid items-center w-full h-full grid-cols-2 gap-y-6 gap-x-14 py-5 top-30">
-                                                        <div class="flex justify-center items-center col-span-2 gap-x-20">
-                                                            <img class="w-[190px] h-[190px] rounded-[10px]"
+                                                        class="grid items-center justify-center w-full h-full grid-cols-2 xl:gap-x-[90px] gap-x-[55px] gap-y-6 py-5 top-30">
+                                                        <div class="flex flex-col md:flex-row justify-center items-center gap-2 col-span-2">
+                                                            <img class="w-[100px] h-[100px] md:w-[130px] md:h-[130px] xl:w-[194px] xl:h-[190px] rounded-[10px]"
                                                                 src="{{ asset('storage/' . $perusahaan->image) }}"
                                                                 alt="Logo Perusahaan">
-                                                            <h1 class=" text-5xl font-bold capitalize">
+                                                            <h1 class="text-xl md:text-2xl xl:text-5xl font-bold capitalize">
                                                                 {{ $perusahaan->nama }}
                                                             </h1>
                                                         </div>
 
                                                         {{-- @foreach ($siswas as $siswa) --}}
-                                                        <div class="col-span-2 justify-self-center w-[1030px]">
-                                                            <table class="table">
+                                                        <div class="col-span-2 justify-self-center text-xs md:text-base overflow-x-auto w-[300px] md:w-[660px] xl:w-[1030px]">
+                                                            <table class="table table-zebra">
                                                                 <!-- head -->
                                                                 <thead>
-                                                                    <tr class="font-bold">
+                                                                    <tr class="text-black border-b border-black">
                                                                         <th>Nama</th>
                                                                         <th>Kelas</th>
                                                                         <th>Jurusan</th>

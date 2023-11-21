@@ -40,7 +40,7 @@
                                             Terpenuhi</button>
                                     @else
                                         <button @click="fullscreenModal=true"
-                                            class="font-semibold rounded-md text-[11px] md:btn md:btn-xs bg-gray-300 px-2 hover:scale-105 duration-300">Cek
+                                            class="font-medium uppercase rounded-md text-[11px] md:btn md:btn-xs bg-[#3D655D] md:bg-[#3D655D] px-2 hover:scale-105 duration-300 text-white md:text-white">Cek
                                             Pendaftaran</button>
                                     @endif
                                     <template x-teleport="body">

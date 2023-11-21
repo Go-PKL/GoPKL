@@ -22,7 +22,7 @@ class GuruController extends Controller
     {
         $users = User::all();
         $gurus = Guru::where('user_id', Auth::user()->id)->first();
-        $perusahaans = Perusahaan::all();
+        $perusahaans = Perusahaan::paginate(9);
         $permohonans = Permohonan::all();
         // dd($permohonans);
         $pembimbings = Pembimbing::where('status', null)->get();
